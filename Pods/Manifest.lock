@@ -1,0 +1,54 @@
+PODS:
+  - AFNetworkActivityLogger (3.0.0):
+    - AFNetworking/NSURLSession (~> 3.0)
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - JSONModel (1.2.0)
+  - Masonry (1.0.1)
+  - MBProgressHUD (0.9.2)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+
+DEPENDENCIES:
+  - AFNetworkActivityLogger (from `https://github.com/AFNetworking/AFNetworkActivityLogger.git`, branch `3_0_0`)
+  - AFNetworking (~> 3.0)
+  - JSONModel
+  - Masonry
+  - MBProgressHUD (~> 0.9.2)
+  - SDWebImage (~> 3.7)
+
+EXTERNAL SOURCES:
+  AFNetworkActivityLogger:
+    :branch: '3_0_0'
+    :git: https://github.com/AFNetworking/AFNetworkActivityLogger.git
+
+CHECKOUT OPTIONS:
+  AFNetworkActivityLogger:
+    :commit: abc565fe804f210dfda3b028c9a64e7c32e44600
+    :git: https://github.com/AFNetworking/AFNetworkActivityLogger.git
+
+SPEC CHECKSUMS:
+  AFNetworkActivityLogger: e77f68d014becb33c4306a23f56a64906ff72670
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+
+PODFILE CHECKSUM: 057bd58233fbc0be44ae5c529074de34834501a7
+
+COCOAPODS: 1.0.1
