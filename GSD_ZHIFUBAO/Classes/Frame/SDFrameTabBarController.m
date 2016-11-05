@@ -25,8 +25,6 @@
 #import "SDBasicViewContoller.h"
 #import "SDHomeViewController.h"
 #import "SDAssetsTableViewController.h"
-#import "SDServiceTableViewController.h"
-#import "SDDiscoverTableViewController.h"
 
 @implementation SDFrameTabBarController
 
@@ -39,14 +37,9 @@
 
 - (void)setupChildControllers
 {
-    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_HomeBar" rootViewControllerClass:[SDHomeViewController class] rootViewControllerTitle:@"支付宝"];
+    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_HomeBar" rootViewControllerClass:[SDHomeViewController class] rootViewControllerTitle:@"首页"];
     
-    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_PublicService" rootViewControllerClass:[SDServiceTableViewController class] rootViewControllerTitle:@"服务窗"];
-    
-    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_Discovery" rootViewControllerClass:[SDDiscoverTableViewController class] rootViewControllerTitle:@"发现"];
-    
-    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_Assets" rootViewControllerClass:[SDAssetsTableViewController class] rootViewControllerTitle:@"财富"];
-    
+    [self setupChildNavigationControllerWithClass:[SDBasicNavigationController class] tabBarImageName:@"TabBar_Assets" rootViewControllerClass:[SDAssetsTableViewController class] rootViewControllerTitle:@"我的"];
 }
 
 - (void)setupChildNavigationControllerWithClass:(Class)class tabBarImageName:(NSString *)name rootViewControllerClass:(Class)rootViewControllerClass rootViewControllerTitle:(NSString *)title

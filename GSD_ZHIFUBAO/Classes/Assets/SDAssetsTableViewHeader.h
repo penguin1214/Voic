@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bankCardLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *voicprintView;
+@property (weak, nonatomic) IBOutlet UIImageView *fingerprintView;
 @end

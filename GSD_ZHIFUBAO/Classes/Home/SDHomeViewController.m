@@ -112,23 +112,6 @@
     return _mainView;
 }
 
-
-- (void)setupMainView
-{
-//    SDHomeGridView *mainView = [[SDHomeGridView alloc] init];
-//    mainView.gridViewDelegate = self;
-//    mainView.showsVerticalScrollIndicator = NO;
-    
-//    [self setupDataArray];
-    NSLog(@"111111111");
-    // 模拟轮播图数据源
-//    mainView.scrollADImageURLStringsArray = @[@"http://ww3.sinaimg.cn/bmiddle/9d857daagw1er7lgd1bg1j20ci08cdg3.jpg",
-//                                              @"http://ww4.sinaimg.cn/bmiddle/763cc1a7jw1esr747i13xj20dw09g0tj.jpg",
-//                                              @"http://ww4.sinaimg.cn/bmiddle/67307b53jw1esr4z8pimxj20c809675d.jpg"];
-//    [self.view addSubview:mainView];
-//    _mainView = mainView;
-}
-
 - (void)setupDataArray
 {
 
@@ -142,7 +125,7 @@
         [temp addObject:model];
     }
     _dataArray = [temp copy];
-    NSLog(@"_dataArray%d",_dataArray.count);
+    NSLog(@"_dataArray%lu",(unsigned long)_dataArray.count);
 }
 
 #pragma mark - SDHomeGridViewDeleate 

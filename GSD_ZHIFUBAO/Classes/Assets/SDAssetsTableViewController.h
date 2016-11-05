@@ -21,7 +21,8 @@
  */
 
 #import "SDBasicTableViewController.h"
+#import "LogoutCell.h"
 
-@interface SDAssetsTableViewController : SDBasicTableViewController
+@interface SDAssetsTableViewController : SDBasicTableViewController <LogoutCellDelegate>
 
 @end

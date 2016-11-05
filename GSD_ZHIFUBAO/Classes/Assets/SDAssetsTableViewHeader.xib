@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
             <connections>
                 <outlet property="accountLabel" destination="Rzj-b4-Y9s" id="4lj-4M-ysx"/>
-                <outlet property="balanceLabel" destination="7iO-v7-xlm" id="8Ne-No-hw4"/>
-                <outlet property="bankCardLabel" destination="3aC-my-Fwl" id="ND3-Xu-Xv8"/>
                 <outlet property="iconView" destination="Opf-Hk-3b4" id="0yX-SU-pBf"/>
                 <outlet property="nameLabel" destination="DuB-UN-0LS" id="Zjs-pd-gcD"/>
             </connections>
@@ -26,14 +24,14 @@
                         <constraint firstAttribute="width" constant="50" id="iwV-ig-wsv"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高少东" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuB-UN-0LS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuB-UN-0LS">
                     <rect key="frame" x="78" y="12" width="137" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="137" id="Yld-LX-hSx"/>
                         <constraint firstAttribute="height" constant="23" id="cvX-3t-nop"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ppc_qr" translatesAutoresizingMaskIntoConstraints="NO" id="HhD-cP-2MK">
@@ -43,7 +41,7 @@
                         <constraint firstAttribute="width" constant="20" id="unG-qB-KSu"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15237166348" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rzj-b4-Y9s">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rzj-b4-Y9s">
                     <rect key="frame" x="78" y="39" width="137" height="23"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="23" id="VQa-Pf-N8R"/>
@@ -82,13 +80,20 @@
                         <constraint firstAttribute="width" constant="1" id="qLP-NB-ftj"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3W-DI-Nvx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doy-MG-Mh6" userLabel="voicprint_label">
+                    <rect key="frame" x="133" y="81" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="8So-s3-8sc"/>
+                        <constraint firstAttribute="height" constant="20" id="ksF-Lf-CVw"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="声纹" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3W-DI-Nvx">
                     <rect key="frame" x="10" y="73" width="50" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="blo-rJ-fcB"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="815.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iO-v7-xlm">
@@ -101,14 +106,14 @@
                     <color key="textColor" red="0.33549904336734693" green="0.33549904336734693" blue="0.33549904336734693" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行卡" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82y-lw-Faa">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="指纹" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82y-lw-Faa">
                     <rect key="frame" x="169" y="73" width="60" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="GsK-Th-kKt"/>
                         <constraint firstAttribute="width" constant="60" id="QEa-UK-1yH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -145,6 +150,13 @@
                         <action selector="rightButtonClicked" destination="43L-4n-3Ve" eventType="touchUpInside" id="hqJ-n3-2LR"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfU-rQ-G0z" userLabel="fingerprint_label">
+                    <rect key="frame" x="292" y="81" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="lJj-uX-otq"/>
+                        <constraint firstAttribute="width" constant="20" id="znd-Z2-2qx"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -189,6 +201,10 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="7iO-v7-xlm"/>
+                    <exclude reference="3aC-my-Fwl"/>
+                </mask>
                 <mask key="constraints">
                     <exclude reference="JLo-hk-zmR"/>
                     <exclude reference="hAa-s8-Khn"/>
@@ -196,10 +212,10 @@
             </variation>
             <connections>
                 <outlet property="accountLabel" destination="Rzj-b4-Y9s" id="ei6-op-PkY"/>
-                <outlet property="balanceLabel" destination="7iO-v7-xlm" id="fDE-6j-sG4"/>
-                <outlet property="bankCardLabel" destination="3aC-my-Fwl" id="0gh-xY-ub8"/>
+                <outlet property="fingerprintView" destination="rfU-rQ-G0z" id="gH9-G8-3ha"/>
                 <outlet property="iconView" destination="Opf-Hk-3b4" id="40c-AN-r6j"/>
                 <outlet property="nameLabel" destination="DuB-UN-0LS" id="TaP-pE-uhV"/>
+                <outlet property="voicprintView" destination="doy-MG-Mh6" id="BTa-rA-VtJ"/>
             </connections>
             <point key="canvasLocation" x="253" y="-151"/>
         </view>

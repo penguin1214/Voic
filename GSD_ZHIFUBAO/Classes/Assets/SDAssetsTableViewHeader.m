@@ -26,6 +26,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+//    self = [super initWithFrame:frame];
     SDAssetsTableViewHeader *header = [[[NSBundle mainBundle] loadNibNamed:@"SDAssetsTableViewHeader" owner:self options:nil] lastObject];
     if (frame.size.width != 0) {
         header.frame = frame;
@@ -34,6 +35,7 @@
 }
 
 - (IBAction)rightTopButtonClicked {
+    NSLog(@"right button");
 }
 
 - (IBAction)leftButtonClicked {

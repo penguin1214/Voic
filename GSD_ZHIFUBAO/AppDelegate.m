@@ -23,6 +23,7 @@
 #import "AppDelegate.h"
 #import "SDFrameTabBarController.h"
 #import "SDGridItemCacheTool.h"
+#import <SMS_SDK/SMSSDK.h>
 
 @interface AppDelegate ()
 
@@ -37,6 +38,8 @@
     self.window.rootViewController = [[SDFrameTabBarController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [SMSSDK registerApp:kSMSAPPKEY withSecret:kSMSSECRETKEY];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationbar"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
