@@ -13,4 +13,9 @@
 #define kSMSAPPKEY @"17d8855d365c0"
 #define kSMSSECRETKEY @"3540ce9547648646f22737626bc9af0f"
 
+//XF
+#define kXFAPPID                @"57ba8983"
+
+#define kModelSugar             @"oiwrjfds"
+
 #endif /* KeyMacro_h */

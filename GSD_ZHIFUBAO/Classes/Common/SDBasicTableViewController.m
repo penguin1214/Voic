@@ -22,6 +22,7 @@
 
 #import "SDBasicTableViewController.h"
 #import "SDBasicTableViewControllerCell.h"
+#import "MBProgressHUD.h"
 
 @implementation SDBasicTableViewController
 
@@ -125,4 +126,25 @@
     
 }
 
+#pragma mark - toast
+
+-(void)toast:(NSString *)title
+{
+    int seconds = 3;
+    [self toast:title seconds:seconds];
+}
+
+-(void)toast:(NSString *)title seconds:(int)seconds
+{
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.detailsLabelText = title;
+    HUD.mode = MBProgressHUDModeText;
+    
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        sleep(seconds);
+    } completionBlock:^{
+        [HUD removeFromSuperview];
+    }];
+}
 @end

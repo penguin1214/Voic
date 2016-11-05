@@ -39,6 +39,13 @@ typedef enum : NSUInteger {
 
 // 如果需要刷新，子类须重写此方法
 - (void)pullDownRefreshOperation;
+
+#pragma mark - toast
+
+-(void)toast:(NSString *)title;
+
+-(void)toast:(NSString *)title seconds:(int)seconds;
+
 @end
 
 

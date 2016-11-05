@@ -24,6 +24,8 @@
 #import "SDFrameTabBarController.h"
 #import "SDGridItemCacheTool.h"
 #import <SMS_SDK/SMSSDK.h>
+#import "iflyMSC/iFlySetting.h"
+#import "iflyMSC/IFlySpeechUtility.h"
 
 @interface AppDelegate ()
 
@@ -34,6 +36,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //设置log等级，此处log为默认在documents目录下的msc.log文件
+    [IFlySetting setLogFile:LVL_ALL];
+    
+    //输出在console的log开关
+    [IFlySetting showLogcat:YES];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [paths objectAtIndex:0];
+    //设置msc.log的保存路径
+    [IFlySetting setLogFilePath:cachePath];
+    
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",kXFAPPID];
+    [IFlySpeechUtility createUtility:initString];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[SDFrameTabBarController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];

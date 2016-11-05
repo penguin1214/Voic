@@ -37,6 +37,10 @@
     return _authToken.length != 0;
 }
 
+- (BOOL)checkVoicePrintExist{
+    return _voiceID.length != 0;
+}
+
 -(void)logOut{
     self.authToken = @"";
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kProfileUserID];

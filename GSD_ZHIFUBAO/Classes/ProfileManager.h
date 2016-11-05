@@ -19,6 +19,8 @@
 
 - (BOOL)checkLogin;
 
+- (BOOL)checkVoicePrintExist;
+
 - (void)logOut;
 
 - (NSString*)getUserID;
