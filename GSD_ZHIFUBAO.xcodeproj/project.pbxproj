@@ -32,6 +32,7 @@
 		2F069A591DCCE591004215C9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A581DCCE591004215C9 /* MessageUI.framework */; };
 		2F069A5B1DCCE59C004215C9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A5A1DCCE59C004215C9 /* JavaScriptCore.framework */; };
 		2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */; };
+		2F1D91501DCE0DDF00EA1601 /* VoiceModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */; };
 		2F3013CE1DCD8C1D00E8B5F7 /* LogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3013CD1DCD8C1D00E8B5F7 /* LogoutCell.xib */; };
 		2F3013D01DCDC67B00E8B5F7 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3013CF1DCDC67B00E8B5F7 /* iflyMSC.framework */; };
 		2F3013D21DCDC6B200E8B5F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3013D11DCDC6B200E8B5F7 /* AVFoundation.framework */; };
@@ -165,6 +166,8 @@
 		2F069A5A1DCCE59C004215C9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		2F069A5E1DCD7B6C004215C9 /* LogoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutCell.h; sourceTree = "<group>"; };
 		2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutCell.m; sourceTree = "<group>"; };
+		2F1D914E1DCE0DDF00EA1601 /* VoiceModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModelController.h; sourceTree = "<group>"; };
+		2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModelController.m; sourceTree = "<group>"; };
 		2F3013CD1DCD8C1D00E8B5F7 /* LogoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoutCell.xib; sourceTree = "<group>"; };
 		2F3013CF1DCDC67B00E8B5F7 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		2F3013D11DCDC6B200E8B5F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -442,6 +445,31 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		2F1D91451DCE0A7400EA1601 /* VoiceModel */ = {
+			isa = PBXGroup;
+			children = (
+				2F1D91471DCE0A8900EA1601 /* Controller */,
+				2F1D91461DCE0A8200EA1601 /* View */,
+			);
+			name = VoiceModel;
+			sourceTree = "<group>";
+		};
+		2F1D91461DCE0A8200EA1601 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2F1D91471DCE0A8900EA1601 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2F1D914E1DCE0DDF00EA1601 /* VoiceModelController.h */,
+				2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		2F3013DF1DCDCA1700E8B5F7 /* XFVoice */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +507,13 @@
 				2F3013E91DCDCAFF00E8B5F7 /* UIPopoverListView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		2F8D46681DCF717500E613E3 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Command;
 			sourceTree = "<group>";
 		};
 		486C14221B79FA9200447104 /* Tool */ = {
@@ -693,6 +728,7 @@
 		9929038B1B1EC75B00290346 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2F8D46681DCF717500E613E3 /* Command */,
 				9958FBA21B23441300BC9E92 /* AddItem */,
 				9958FB9E1B23043E00BC9E92 /* Scan */,
 				9958FB9D1B23042A00BC9E92 /* Host */,
@@ -834,6 +870,7 @@
 		99AFE9CB1B200CC10049E73B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2F1D91451DCE0A7400EA1601 /* VoiceModel */,
 				2F3013DF1DCDCA1700E8B5F7 /* XFVoice */,
 				990759C31B2140770042DD52 /* YuEBao */,
 				990759DB1B2217870042DD52 /* Host */,
@@ -1085,6 +1122,7 @@
 				990759D11B21F0AA0042DD52 /* SDHomeGridViewListItemViewButton.m in Sources */,
 				485E948B1B3AC44A00688546 /* AppDelegate.m in Sources */,
 				9969DE1C1B1ED2E900723888 /* SDHomeGridViewListItemView.m in Sources */,
+				2F1D91501DCE0DDF00EA1601 /* VoiceModelController.m in Sources */,
 				9904C7591B1F2F3800E2717D /* TADotView.m in Sources */,
 				9969DE3C1B1ED60400723888 /* MKAnnotationView+WebCache.m in Sources */,
 				9969DE491B1ED60400723888 /* UIImageView+WebCache.m in Sources */,

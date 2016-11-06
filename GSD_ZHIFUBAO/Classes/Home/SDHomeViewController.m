@@ -50,7 +50,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self setupMainView];
+    //    [self setupMainView];
     [self.view addSubview:[self mainView]];
 }
 
@@ -60,8 +60,8 @@
     _mainView = nil;
 }
 
-- (void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
+//    Called to notify the view controller that its view has just laid out its subviews.
     [super viewDidLayoutSubviews];
     CGFloat tabbarHeight = [[self.tabBarController tabBar] sd_height];
     CGFloat headerY = 0;
@@ -80,41 +80,59 @@
     [self.view addSubview:header];
     _headerView = header;
     
-    UIButton *scan = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, header.sd_width * 0.5, header.sd_height)];
-    [scan setImage:[UIImage imageNamed:@"home_scan"] forState:UIControlStateNormal];
-    [scan addTarget:self action:@selector(scanButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [header addSubview:scan];
+    UIButton* addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, header.sd_width * 0.5, header.sd_height)];
+    [addBtn setImage:[UIImage imageNamed:@"home_scan"] forState:UIControlStateNormal];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [header addSubview:addBtn];
     
-    UIButton *pay = [[UIButton alloc] initWithFrame:CGRectMake(scan.sd_width, 0, header.sd_width * 0.5, header.sd_height)];
-    [pay setImage:[UIImage imageNamed:@"home_pay"] forState:UIControlStateNormal];
-    [header addSubview:pay];
+    UIButton *commandBtn = [[UIButton alloc] initWithFrame:CGRectMake(addBtn.sd_width, 0, header.sd_width * 0.5, header.sd_height)];
+    [commandBtn setImage:[UIImage imageNamed:@"home_pay"] forState:UIControlStateNormal];
+    [commandBtn addTarget:self action:@selector(commandBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [header addSubview:commandBtn];
+    
+    //    UIButton *scan = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, header.sd_width * 0.5, header.sd_height)];
+    //    [scan setImage:[UIImage imageNamed:@"home_scan"] forState:UIControlStateNormal];
+    //    [scan addTarget:self action:@selector(scanButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [header addSubview:scan];
+    
+    //    UIButton *pay = [[UIButton alloc] initWithFrame:CGRectMake(scan.sd_width, 0, header.sd_width * 0.5, header.sd_height)];
+    //    [pay setImage:[UIImage imageNamed:@"home_pay"] forState:UIControlStateNormal];
+    //    [header addSubview:pay];
 }
 
-- (void)scanButtonClicked
-{
-    SDBasicViewContoller *desVc = [[SDScanViewController alloc] init];
-    [self.navigationController pushViewController:desVc animated:YES];
+- (void)addBtnClicked {
+    NSLog(@"add button clicked");
 }
 
+- (void)commandBtnClicked {
+    NSLog(@"command button clicked");
+}
+
+//- (void)scanButtonClicked
+//{
+//    SDBasicViewContoller *desVc = [[SDScanViewController alloc] init];
+//    [self.navigationController pushViewController:desVc animated:YES];
+//}
+//
 -(SDHomeGridView*)mainView{
     if (!_mainView) {
         _mainView = [[SDHomeGridView alloc] init];
         _mainView.gridViewDelegate = self;
         _mainView.showsVerticalScrollIndicator = NO;
-
+        
         [self setupDataArray];
         _mainView.gridModelsArray = _dataArray;
         // 模拟轮播图数据源
         _mainView.scrollADImageURLStringsArray = @[@"http://ww3.sinaimg.cn/bmiddle/9d857daagw1er7lgd1bg1j20ci08cdg3.jpg",
-                                                  @"http://ww4.sinaimg.cn/bmiddle/763cc1a7jw1esr747i13xj20dw09g0tj.jpg",
-                                                  @"http://ww4.sinaimg.cn/bmiddle/67307b53jw1esr4z8pimxj20c809675d.jpg"];
+                                                   @"http://ww4.sinaimg.cn/bmiddle/763cc1a7jw1esr747i13xj20dw09g0tj.jpg",
+                                                   @"http://ww4.sinaimg.cn/bmiddle/67307b53jw1esr4z8pimxj20c809675d.jpg"];
     }
     return _mainView;
 }
 
 - (void)setupDataArray
 {
-
+    
     NSArray *itemsArray = [SDGridItemCacheTool itemsArray];
     NSMutableArray *temp = [NSMutableArray array];
     for (NSDictionary *itemDict in itemsArray) {
@@ -128,7 +146,7 @@
     NSLog(@"_dataArray%lu",(unsigned long)_dataArray.count);
 }
 
-#pragma mark - SDHomeGridViewDeleate 
+#pragma mark - SDHomeGridViewDeleate
 
 - (void)homeGrideView:(SDHomeGridView *)gridView selectItemAtIndex:(NSInteger)index
 {

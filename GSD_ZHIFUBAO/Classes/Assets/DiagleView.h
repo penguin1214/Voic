@@ -31,7 +31,7 @@
 
 @property(nonatomic) UIImageView    *backGroundView;  //录音小窗口
 
-@property(nonatomic) UIView         *whiteView; //整个界面的白色背景
+@property(nonatomic) UIView         *mainView; //整个界面的白色背景
 
 
 

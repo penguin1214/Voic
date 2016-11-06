@@ -39,6 +39,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>VBFPopFlatButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -47,7 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3ED8DD9FEE8780C9573D19CC45C9DEE0</key>
+		<key>32B268BDDC4D6234C1C612790B35C1D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>50E929B1627D9EEB82107260895A478B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E30F794A4F7117604D6DAA72324935A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A9A83F63385AA43314397B8DD375464B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B0D7DEAC83AB63EE09B4CBCF8D20FB9F</key>
+		<key>E37F3D4D05940F0A6EF086D596D61DF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

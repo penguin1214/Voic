@@ -31,6 +31,7 @@
 #import "iFlyNvpViewController.h"
 #import "TrainViewController.h"
 #import "Reachability.h"
+#import "VoiceModelController.h"
 
 @interface SDAssetsTableViewController () {
     IFlyISVRecognizer* isvRec;
@@ -90,6 +91,7 @@
 @implementation SDAssetsTableViewController
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 
     if ([[ProfileManager sharedInstance] checkLogin]) {
@@ -143,6 +145,9 @@
     self.sectionsNumber = 2;
     ivppwdt = PWDT_NUM_CODE;
     
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"VoiceModelController" object:nil];
+    
     self.cellClass = [SDAssetsTableViewControllerCell class];
     
     //generate voice id
@@ -155,7 +160,6 @@
     }
     
     isvRec = [IFlyISVRecognizer sharedInstance];
-//    isvRec.delegate = self;
     [isvRec setParameter:TRAIN_SST forKey:KEY_SST];
 
     [self setupModel];
@@ -163,10 +167,10 @@
     [self setUpFooter];
     
     //check wheather voice model exists.
-    int err;
-    BOOL ret;
-    ret=[isvRec sendRequest:QUERY authid:voiceID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
-    [self processRequestResult:QUERY ret:ret err:err];
+//    int err;
+//    BOOL ret;
+//    ret=[isvRec sendRequest:QUERY authid:voiceID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
+//    [self processRequestResult:QUERY ret:ret err:err];
     
     NSLog(@"view loaded");
 }
@@ -186,9 +190,9 @@
 - (void)setupModel
 {
     // section 0 的model
-    SDAssetsTableViewControllerCellModel *model01 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"声纹模型" iconImageName:@"20000032Icon" destinationControllerClass:[SDYuEBaoTableViewController class]];
+    SDAssetsTableViewControllerCellModel *model01 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"声纹" iconImageName:@"20000032Icon" destinationControllerClass:[VoiceModelController class]];
 
-    SDAssetsTableViewControllerCellModel *model02 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"指纹" iconImageName:@"20000059Icon" destinationControllerClass:[SDBasicTableViewController class]];
+    SDAssetsTableViewControllerCellModel *model02 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"指纹" iconImageName:@"20000059Icon" destinationControllerClass:[SDYuEBaoTableViewController class]];
     
     // section 1 的model
     SDAssetsTableViewControllerCellModel *model11 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"个人设置" iconImageName:@"20000118Icon" destinationControllerClass:[SDBasicTableViewController class]];
@@ -275,7 +279,7 @@
     if( [requestMode isEqualToString:QUERY] ){
         if( err != 0 ){
             NSLog(@"查询错误，错误码：%d",err);
-            
+            //处理返回值
             if (err == kErrModelNotExist) {
                 NSLog(@"模型不存在");
                 [[ProfileManager sharedInstance] setVoiceID:@""];
@@ -290,20 +294,37 @@
             }
         }
     }else if(  [requestMode isEqualToString:DEL]){
-//        if( err != 0 ){
-//            NSLog(@"删除错误，错误码：%d",err);
-//            [resultShow setText:[NSString stringWithFormat:@"删除出错！错误码:%d",err]];
-//        }else{
-//            if( ret == NO ){
-//                NSLog(@"模型不存在");
-//                [resultShow setText:@"模型不存在"];
-//            }else{
-//                NSLog(@"删除成功");
-//                [resultShow setText:@"删除成功！"];
-//            }
-//        }
+        if( err != 0 ){
+            NSLog(@"删除错误，错误码：%d",err);
+            //处理返回值
+            if (err == kErrModelNotExist) {
+                NSLog(@"模型不存在");
+                [[ProfileManager sharedInstance] setVoiceID:@""];
+            }
+        }else{
+            if( ret == NO ){
+                NSLog(@"模型不存在");
+                [self toast:@"模型不存在"];
+            }else{
+                NSLog(@"删除成功");
+                [self toast:@"删除成功"];
+            }
+        }
     }
 }
+
+//删除模型
+-(void)deleteButtonHandler:(id)sender
+{
+    if( [self netConnectAble] == NO )
+    {
+        [self toast:@"not internet connection"];
+        return;
+    }
+
+    [self startRequestNumCode:DEL];
+}
+
 #pragma mark train or verify model
 //声纹默认参数设置
 - (void)defaultSetparam:(NSString *)auth_id withpdwt:(int) pwdt withptxt:(NSString *) ptxt trainorverify:(NSString*)sst
@@ -405,6 +426,7 @@
     return YES;
     
 }
+
 #pragma mark - delegate 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -432,4 +454,35 @@
 - (void)reloadView {
     [self viewWillAppear:YES];
 }
+
+- (void)deleteVoiceModel {
+    if( [self netConnectAble] == NO )
+    {
+        [self toast:@"not internet connection"];
+        return;
+    }
+    
+    [self startRequestNumCode:DEL];
+}
+
+- (void)recvNotif:(NSNotification*)notify {
+    static int index;
+    NSLog(@"recv bcast %d", index++);
+    
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString *name = [dict objectForKey:@"NotifyName"];
+    
+    if ([name  isEqual: @"deleteModel"]) {
+        if( [self netConnectAble] == NO )
+        {
+            [self toast:@"not internet connection"];
+            return;
+        }
+        
+        [self startRequestNumCode:DEL];
+ 
+    }
+}
+
 @end
