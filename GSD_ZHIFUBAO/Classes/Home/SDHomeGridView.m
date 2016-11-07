@@ -45,7 +45,7 @@
     SDHomeGridViewListItemView *_currentPressedView;
 //    SDCycleScrollView *_cycleScrollADView;
     UIView *_cycleScrollADViewBackgroundView;
-    UIButton *_moreItemButton;
+//    UIButton *_moreItemButton;
     CGRect _currentPresssViewFrame;
 }
 
@@ -113,12 +113,12 @@
         [_itemsArray addObject:item];
     }];
     
-    UIButton *more = [[UIButton alloc] init];
-    [more setImage:[UIImage imageNamed:@"tf_home_more"] forState:UIControlStateNormal];
-    [more addTarget:self action:@selector(moreItemButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:more];
-    [_itemsArray addObject:more];
-    _moreItemButton = more;
+//    UIButton *more = [[UIButton alloc] init];
+//    [more setImage:[UIImage imageNamed:@"tf_home_more"] forState:UIControlStateNormal];
+//    [more addTarget:self action:@selector(moreItemButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:more];
+//    [_itemsArray addObject:more];
+//    _moreItemButton = more;
     
     long rowCount = [self rowCountWithItemsCount:gridModelsArray.count];
     
@@ -224,7 +224,7 @@
     
     
     [_itemsArray enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
-        if (button == _moreItemButton) return;
+//        if (button == _moreItemButton) return;
         if (CGRectContainsPoint(button.frame, point) && button != longPressed.view) {
             [_itemsArray removeObject:_placeholderButton];
             [_itemsArray insertObject:_placeholderButton atIndex:idx];

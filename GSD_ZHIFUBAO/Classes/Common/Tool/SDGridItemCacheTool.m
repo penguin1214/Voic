@@ -32,12 +32,12 @@
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kItemsArrayCacheKey];
 }
+
 + (void)saveItemsArray:(NSArray *)array
 {
     [[NSUserDefaults standardUserDefaults] setObject:[array copy] forKey:kItemsArrayCacheKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
 
 + (NSArray *)addItemsArray
 {

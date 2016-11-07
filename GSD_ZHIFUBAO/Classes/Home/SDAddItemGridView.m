@@ -209,6 +209,7 @@
 
 - (void)deleteView:(SDHomeGridViewListItemView *)view
 {
+//    将item添加到home
     [_itemsArray removeObject:view];
     [view removeFromSuperview];
     NSMutableArray *temp = [NSMutableArray new];
@@ -216,10 +217,11 @@
     [temp addObject:@{view.itemModel.title : view.itemModel.imageResString}];
     [SDGridItemCacheTool saveItemsArray:[temp copy]];
     
-    [self saveItemsSettingCache];
-    [UIView animateWithDuration:0.4 animations:^{
-        [self setupSubViewsFrame];
-    }];
+//      将item从additem中删除
+//    [self saveItemsSettingCache];
+//    [UIView animateWithDuration:0.4 animations:^{
+//        [self setupSubViewsFrame];
+//    }];
 }
 
 - (void)saveItemsSettingCache

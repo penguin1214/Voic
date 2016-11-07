@@ -39,4 +39,6 @@
 
 -(void)setVoiceID:(NSString *)voiceID;
 
+-(void)setGridItems:(NSArray*)gridItems;
+
 @end

@@ -68,9 +68,13 @@
             //data:
             NSString* _user_id = [data objectForKey:kResponseUserIDKey];
             NSString* _auth_token = [data objectForKey:kResponseUserAuthToken];
+            NSArray* _grid_items = [data objectForKey:kResponseUserGridItems];
+            
             [[ProfileManager sharedInstance] setUserID:_user_id];
             [[ProfileManager sharedInstance] setAuthToken:_auth_token];
             [[ProfileManager sharedInstance] setUserPhone:phone];
+            [[ProfileManager sharedInstance] setGridItems:_grid_items];
+            
             success(YES);
         }else{
             [self toast:message];

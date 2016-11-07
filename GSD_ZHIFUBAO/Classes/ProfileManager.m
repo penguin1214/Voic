@@ -8,6 +8,7 @@
 
 #import "ProfileManager.h"
 #import "UserDefaultUtil.h"
+#import "SDGridItemCacheTool.h"
 
 @implementation ProfileManager
 
@@ -89,6 +90,10 @@
 
 -(NSString*)getVoiceID{
     return [UserDefaultUtil getObjectBykey:kProfileVoiceID];
+}
+
+-(void)setGridItems:(NSArray*)gridItems {
+    [SDGridItemCacheTool saveItemsArray:gridItems];
 }
 
 @end

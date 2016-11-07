@@ -29,6 +29,7 @@
 #import "SDScanViewController.h"
 #import "SDAddItemViewController.h"
 #import "SDGridItemCacheTool.h"
+#import "AddItemViewController.h"
 
 #define kHomeHeaderViewHeight 110
 
@@ -102,18 +103,25 @@
 
 - (void)addBtnClicked {
     NSLog(@"add button clicked");
+    //    SDBasicViewContoller *desVc = [[SDScanViewController alloc] init];
+    //    [self.navigationController pushViewController:desVc animated:YES];
+    
+//    needed code!!!!+++++++++++++++
+//    SDAddItemViewController *addVc = [[SDAddItemViewController alloc] init];
+//    addVc.title = @"添加设备";
+//    [self.navigationController pushViewController:addVc animated:YES];
+
+    //test code
+    AddItemViewController *addVc = [[AddItemViewController alloc] init];
+    addVc.title = @"添加设备";
+    [self.navigationController pushViewController:addVc animated:YES];
+    
 }
 
 - (void)commandBtnClicked {
     NSLog(@"command button clicked");
 }
 
-//- (void)scanButtonClicked
-//{
-//    SDBasicViewContoller *desVc = [[SDScanViewController alloc] init];
-//    [self.navigationController pushViewController:desVc animated:YES];
-//}
-//
 -(SDHomeGridView*)mainView{
     if (!_mainView) {
         _mainView = [[SDHomeGridView alloc] init];
@@ -122,17 +130,15 @@
         
         [self setupDataArray];
         _mainView.gridModelsArray = _dataArray;
-        // 模拟轮播图数据源
-        _mainView.scrollADImageURLStringsArray = @[@"http://ww3.sinaimg.cn/bmiddle/9d857daagw1er7lgd1bg1j20ci08cdg3.jpg",
-                                                   @"http://ww4.sinaimg.cn/bmiddle/763cc1a7jw1esr747i13xj20dw09g0tj.jpg",
-                                                   @"http://ww4.sinaimg.cn/bmiddle/67307b53jw1esr4z8pimxj20c809675d.jpg"];
+//        // 模拟轮播图数据源
+//        _mainView.scrollADImageURLStringsArray = @[@"http://ww3.sinaimg.cn/bmiddle/9d857daagw1er7lgd1bg1j20ci08cdg3.jpg",
+//                                                   @"http://ww4.sinaimg.cn/bmiddle/763cc1a7jw1esr747i13xj20dw09g0tj.jpg",
+//                                                   @"http://ww4.sinaimg.cn/bmiddle/67307b53jw1esr4z8pimxj20c809675d.jpg"];
     }
     return _mainView;
 }
 
-- (void)setupDataArray
-{
-    
+- (void)setupDataArray {
     NSArray *itemsArray = [SDGridItemCacheTool itemsArray];
     NSMutableArray *temp = [NSMutableArray array];
     for (NSDictionary *itemDict in itemsArray) {
@@ -146,7 +152,7 @@
     NSLog(@"_dataArray%lu",(unsigned long)_dataArray.count);
 }
 
-#pragma mark - SDHomeGridViewDeleate
+#pragma mark - SDHomeGridViewDelegate
 
 - (void)homeGrideView:(SDHomeGridView *)gridView selectItemAtIndex:(NSInteger)index
 {
@@ -159,7 +165,7 @@
 - (void)homeGrideViewmoreItemButtonClicked:(SDHomeGridView *)gridView
 {
     SDAddItemViewController *addVc = [[SDAddItemViewController alloc] init];
-    addVc.title = @"添加更多";
+    addVc.title = @"添加设备到首页";
     [self.navigationController pushViewController:addVc animated:YES];
 }
 
