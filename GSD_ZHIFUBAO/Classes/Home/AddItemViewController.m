@@ -11,6 +11,7 @@
 #import "SDHomeGridItemModel.h"
 #import "SDGridItemCacheTool.h"
 #import "AddItemView.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface AddItemViewController ()
 
@@ -59,6 +60,7 @@
     if (!_mainView) {
         _mainView = [[AddItemView alloc] initWithFrame:self.view.bounds];
     }
+    _mainView.delegate = self;
     return _mainView;
 }
 
@@ -120,5 +122,40 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)toast:(NSString *)title
+{
+    int seconds = 3;
+    [self toast:title seconds:seconds];
+}
+
+-(void)toast:(NSString *)title seconds:(int)seconds
+{
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.detailsLabelText = title;
+    HUD.mode = MBProgressHUDModeText;
+    
+    //指定距离中心点的X轴和Y轴的位置，不指定则在屏幕中间显示
+    //    HUD.yOffset = 100.0f;
+    //    HUD.xOffset = 100.0f;
+    
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        sleep(seconds);
+    } completionBlock:^{
+        [HUD removeFromSuperview];
+    }];
+}
+
+#pragma mark - delegate
+
+- (void)popViewController {
+    [self toast:@"已添加"];
+    [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
+}
+
+- (void)popUpController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

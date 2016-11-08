@@ -8,6 +8,14 @@
 
 #import "BaseView.h"
 
+@protocol AddItemViewDelegate <NSObject>
+
+- (void)popViewController;
+
+@end
+
 @interface AddItemView : BaseView
+
+@property (weak) id <AddItemViewDelegate> delegate;
 
 @end

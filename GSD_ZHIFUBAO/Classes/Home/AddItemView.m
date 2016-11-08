@@ -134,11 +134,12 @@
     NSMutableArray *temp = [NSMutableArray new];
     temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
     [temp addObject:@{_vTitleText.text : _vImageStrText.text}];
-//    i12
 /*
  检测重复
  */
-    [SDGridItemCacheTool saveItemsArray:[temp copy]];
+    
+//    [SDGridItemCacheTool saveItemsArray:[temp copy]];
+    [self.delegate popViewController];
 }
 
 @end

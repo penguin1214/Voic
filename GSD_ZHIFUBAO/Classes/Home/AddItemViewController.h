@@ -7,7 +7,8 @@
 //
 
 #import "SDBasicViewContoller.h"
+#import "AddItemView.h"
 
-@interface AddItemViewController : SDBasicViewContoller
+@interface AddItemViewController : SDBasicViewContoller <AddItemViewDelegate>
 
 @end
