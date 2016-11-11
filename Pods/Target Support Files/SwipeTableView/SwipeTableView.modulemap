@@ -1,0 +1,6 @@
+framework module SwipeTableView {
+  umbrella header "SwipeTableView-umbrella.h"
+
+  export *
+  module * { export * }
+}

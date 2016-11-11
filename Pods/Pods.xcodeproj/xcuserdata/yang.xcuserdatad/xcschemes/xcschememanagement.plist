@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwipeTableView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>VBFPopFlatButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,22 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>32B268BDDC4D6234C1C612790B35C1D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>43082DD02EA093BE1A0C2043A71510C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>50E929B1627D9EEB82107260895A478B</key>
+		<key>81DF0206DED5075C625D4EC5E4AA583A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E30F794A4F7117604D6DAA72324935A</key>
+		<key>8F1D8DFB8CC4F196B9B9B05338AC525C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E37F3D4D05940F0A6EF086D596D61DF4</key>
+		<key>AAC04C54048F90BB659AF01C4B9FEA16</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DBF3DAD7F1E5BBB6D3CF42AD4F5E46AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,6 +98,11 @@
 			<true/>
 		</dict>
 		<key>EC6F97C53DE595FFAC3E3D12D37C5F15</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F739A35EF3F44E009165A772D1178F98</key>
 		<dict>
 			<key>primary</key>
 			<true/>

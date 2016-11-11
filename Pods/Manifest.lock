@@ -23,6 +23,7 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - SwipeTableView (0.2.3)
   - VBFPopFlatButton (0.0.7):
     - pop
 
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD (~> 0.9.2)
   - SDWebImage (~> 3.7)
+  - SwipeTableView
   - VBFPopFlatButton
 
 EXTERNAL SOURCES:
@@ -53,8 +55,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SwipeTableView: 2fb754e59d8806f242f78369ec6aa5f42d9932ab
   VBFPopFlatButton: 39e48ab56277f3d056734a9b5ec5d0cc60d69778
 
-PODFILE CHECKSUM: dd9c75c6b8ce7215b65077a80d8c8946e88b28f1
+PODFILE CHECKSUM: fa1abc7e676e27a1c558865bb9a50eb33873d88d
 
 COCOAPODS: 1.0.1

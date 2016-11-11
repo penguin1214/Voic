@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DBF3DAD7F1E5BBB6D3CF42AD4F5E46AB'
-               BlueprintName = 'VBFPopFlatButton'
+               BlueprintIdentifier = '81DF0206DED5075C625D4EC5E4AA583A'
+               BlueprintName = 'SwipeTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'VBFPopFlatButton.framework'>
+               BuildableName = 'SwipeTableView.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
