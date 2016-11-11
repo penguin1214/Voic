@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.parentViewController.view setBackgroundColor:[UIColor hexColor:@"ededed"]];
     [self.view addSubview:[self mainView]];
     
     
@@ -61,6 +62,10 @@
         _mainView = [[AddItemView alloc] initWithFrame:self.view.bounds];
     }
     _mainView.delegate = self;
+    _mainView.statusNumMenu.delegate = self;
+    _mainView.statusNumMenu.dataSource = self;
+    _mainView.iconPicker.delegate = self;
+    _mainView.iconPicker.dataSource = self;
     return _mainView;
 }
 
@@ -156,6 +161,30 @@
 
 - (void)popUpController {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - MKDropdownMenu Delegate & Datasource
+
+- (NSInteger)numberOfComponentsInDropdownMenu:(MKDropdownMenu *)dropdownMenu {
+    return 1;
+}
+
+- (NSInteger)dropdownMenu:(MKDropdownMenu *)dropdownMenu numberOfRowsInComponent:(NSInteger)component {
+    return 3;
+}
+
+- (NSString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu titleForComponent:(NSInteger)component {
+    return @"test";
+}
+
+#pragma mark - AKPickerView Delegate & Datasource
+
+- (NSUInteger)numberOfItemsInPickerView:(AKPickerView *)pickerView {
+    return 5;
+}
+
+- (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item {
+    return @"icon";
 }
 
 @end

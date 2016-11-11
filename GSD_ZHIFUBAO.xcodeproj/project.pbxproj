@@ -54,6 +54,10 @@
 		2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EE21DD0AB04001C3351 /* AddItemView.m */; };
 		2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */; };
 		2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB21DCF80CA007A0FDD /* UserEntity.m */; };
+		2FE5CE871DD590C60048C6B4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */; };
+		2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */; };
+		2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */; };
+		2FE5CE901DD590EC0048C6B4 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */; };
 		485E948B1B3AC44A00688546 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E948A1B3AC44A00688546 /* AppDelegate.m */; };
 		486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 486C14241B79FAF000447104 /* SDGridItemCacheTool.m */; };
 		66694C150644C581AD707C17 /* Pods_GSD_ZHIFUBAO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C070A893F1F90E6B9467E9 /* Pods_GSD_ZHIFUBAO.framework */; };
@@ -205,6 +209,13 @@
 		2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		2FD77EB11DCF80CA007A0FDD /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntity.h; sourceTree = "<group>"; };
 		2FD77EB21DCF80CA007A0FDD /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntity.m; sourceTree = "<group>"; };
+		2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		2FE5CE881DD590EC0048C6B4 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		2FE5CE8A1DD590EC0048C6B4 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
+		2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		485E94891B3AC44A00688546 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GSD_ZHIFUBAO/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		485E948A1B3AC44A00688546 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = GSD_ZHIFUBAO/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		486C14231B79FAF000447104 /* SDGridItemCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDGridItemCacheTool.h; sourceTree = "<group>"; };
@@ -412,6 +423,12 @@
 				2F069A3A1DCCE457004215C9 /* NSString+MD5.m */,
 				2F069A3B1DCCE457004215C9 /* UIColor+hexColor.h */,
 				2F069A3C1DCCE457004215C9 /* UIColor+hexColor.m */,
+				2FE5CE881DD590EC0048C6B4 /* UIFont+FontAwesome.h */,
+				2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */,
+				2FE5CE8A1DD590EC0048C6B4 /* NSString+FontAwesome.h */,
+				2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */,
+				2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */,
+				2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -539,6 +556,14 @@
 			name = Entity;
 			sourceTree = "<group>";
 		};
+		2FE5CE851DD590AF0048C6B4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		486C14221B79FA9200447104 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,7 +680,7 @@
 		992903551B1EBDBC00290346 /* GSD_ZHIFUBAO */ = {
 			isa = PBXGroup;
 			children = (
-				2F069A0B1DCCE1E2004215C9 /* PrefixHeader.pch */,
+				2FE5CE851DD590AF0048C6B4 /* Resources */,
 				485E94891B3AC44A00688546 /* AppDelegate.h */,
 				485E948A1B3AC44A00688546 /* AppDelegate.m */,
 				9929037C1B1EBDE500290346 /* Classes */,
@@ -667,6 +692,7 @@
 		992903561B1EBDBC00290346 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F069A0B1DCCE1E2004215C9 /* PrefixHeader.pch */,
 				AA3C233C1CEDCB0C0076C35D /* image */,
 				992903631B1EBDBC00290346 /* Images.xcassets */,
 				992903571B1EBDBC00290346 /* Info.plist */,
@@ -1078,6 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99AFE9E41B2033970049E73B /* SDAssetsTableViewHeader.xib in Resources */,
+				2FE5CE871DD590C60048C6B4 /* FontAwesome.ttf in Resources */,
 				2F3013CE1DCD8C1D00E8B5F7 /* LogoutCell.xib in Resources */,
 				990759CE1B2141820042DD52 /* SDYuEBaoTableViewCellContentView.xib in Resources */,
 				992903641B1EBDBC00290346 /* Images.xcassets in Resources */,
@@ -1199,6 +1226,7 @@
 				99AFE9DB1B201A480049E73B /* SDAssetsTableViewControllerCell.m in Sources */,
 				9904C7581B1F2F3800E2717D /* TAAnimatedDotView.m in Sources */,
 				486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */,
+				2FE5CE901DD590EC0048C6B4 /* UIImage+FontAwesome.m in Sources */,
 				9904C75A1B1F2F3800E2717D /* TAPageControl.m in Sources */,
 				992903591B1EBDBC00290346 /* main.m in Sources */,
 				99A732611B241BDC0033E878 /* SDAddItemGridView.m in Sources */,
@@ -1206,6 +1234,7 @@
 				9929038A1B1EC0ED00290346 /* SDBasicViewContoller.m in Sources */,
 				2F069A291DCCE328004215C9 /* RegPhoneView.m in Sources */,
 				99A7325D1B24190B0033E878 /* SDAddItemViewController.m in Sources */,
+				2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */,
 				9904C75B1B1F2F3800E2717D /* SDCollectionViewCell.m in Sources */,
 				2F069A241DCCE2E2004215C9 /* RequestPackUtil.m in Sources */,
 				2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */,
@@ -1214,6 +1243,7 @@
 				2F3013F11DCDCB1500E8B5F7 /* AlertView.m in Sources */,
 				2F069A3D1DCCE457004215C9 /* NSString+MD5.m in Sources */,
 				9969DE161B1ECFD900723888 /* SDHomeGridItemModel.m in Sources */,
+				2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */,
 				9904C7561B1F2F3800E2717D /* NSData+SDDataCache.m in Sources */,
 				9969DE3E1B1ED60400723888 /* SDImageCache.m in Sources */,
 				9969DE451B1ED60400723888 /* UIButton+WebCache.m in Sources */,

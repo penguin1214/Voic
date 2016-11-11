@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '81DF0206DED5075C625D4EC5E4AA583A'
+               BlueprintIdentifier = 'C2A815E0FD0702FB6F300259A66174A4'
                BlueprintName = 'SwipeTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SwipeTableView.framework'>

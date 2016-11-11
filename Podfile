@@ -12,5 +12,7 @@ pod 'MBProgressHUD', '~> 0.9.2'
 pod 'AFNetworkActivityLogger', :git => 'https://github.com/AFNetworking/AFNetworkActivityLogger.git', :branch => '3_0_0'
 pod 'VBFPopFlatButton'
 pod 'SwipeTableView'
+pod 'AKPickerView'
+pod 'MKDropdownMenu'
 
 end

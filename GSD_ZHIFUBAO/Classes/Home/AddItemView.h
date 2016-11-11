@@ -7,6 +7,8 @@
 //
 
 #import "BaseView.h"
+#import "MKDropdownMenu.h"
+#import "AKPickerView.h"
 
 @protocol AddItemViewDelegate <NSObject>
 
@@ -15,6 +17,9 @@
 @end
 
 @interface AddItemView : BaseView
+
+@property (nonatomic, strong) MKDropdownMenu* statusNumMenu;
+@property (nonatomic, strong) AKPickerView* iconPicker;
 
 @property (weak) id <AddItemViewDelegate> delegate;
 

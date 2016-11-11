@@ -8,7 +8,9 @@
 
 #import "SDBasicViewContoller.h"
 #import "AddItemView.h"
+#import "MKDropdownMenu.h"
+#import "AKPickerView.h"
 
-@interface AddItemViewController : SDBasicViewContoller <AddItemViewDelegate>
+@interface AddItemViewController : SDBasicViewContoller <AddItemViewDelegate, MKDropdownMenuDelegate, MKDropdownMenuDataSource, AKPickerViewDelegate, AKPickerViewDataSource>
 
 @end
