@@ -30,13 +30,14 @@
     self.view.backgroundColor = [UIColor hexColor:@"ededed"];
     
     UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didFinishSetting:)];
+    
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
     _allVC = [NSMutableArray array];
     
     for (int i = 0; i < (_tabNum+1); i++ ) {
         SetDetailTableViewController* vc = [[SetDetailTableViewController alloc]initWithNibName:nil bundle:nil];
-        vc.title = [NSString stringWithFormat:@"设备%@", @(_tabNum+1)];
+        vc.title = [NSString stringWithFormat:@"状态%@", @(i+1)];
         [_allVC addObject:vc];
     }
     
