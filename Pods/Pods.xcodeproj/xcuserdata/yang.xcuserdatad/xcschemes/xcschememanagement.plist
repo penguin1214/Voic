@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Color-Picker-for-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JSONModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -40,6 +45,11 @@
 			<false/>
 		</dict>
 		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NKOColorPickerView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,17 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19BE3D30ED1FFED678486F9075C35BFF</key>
+		<key>1FC3E878B0A96EAC23CAF04BFE28B34B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>32AB47EE8234FB2C3A98FC01C1598E96</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>39A2BF187E868B430491710542A4DCEA</key>
+		<key>34C20EA7D289101D383599338B9A4DFE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1B6B94718AB48825CC9C08A3FCFE428</key>
+		<key>A01DCF3DD7042226A8E0B3D83E06E9C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A9A83F63385AA43314397B8DD375464B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1CD1F1DE0F273D90638723EA7A09124</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +133,16 @@
 			<true/>
 		</dict>
 		<key>ED9D783F3FD93AD4F476501BB743D2E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F473370D04535578EE0F5793E23A49BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC4C8D138C4E9EC8054666D77BE0528B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

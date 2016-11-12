@@ -18,10 +18,12 @@ PODS:
     - AFNetworking/NSURLSession
   - AKPickerView (0.2.7)
   - AXStretchableHeaderTabViewController (0.2.0)
+  - Color-Picker-for-iOS (2.0.2)
   - JSONModel (1.2.0)
   - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
   - MKDropdownMenu (1.1)
+  - NKOColorPickerView (0.5)
   - pop (1.0.9)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -34,10 +36,12 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - AKPickerView
   - AXStretchableHeaderTabViewController
+  - Color-Picker-for-iOS (~> 2.0)
   - JSONModel
   - Masonry
   - MBProgressHUD (~> 0.9.2)
   - MKDropdownMenu
+  - NKOColorPickerView
   - SDWebImage (~> 3.7)
   - VBFPopFlatButton
 
@@ -56,14 +60,16 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AKPickerView: 125372e36fcc372216127600a541f14dcdbb7993
   AXStretchableHeaderTabViewController: 37c56211c98d3e823ecf7493d68f5ee8fa7028e1
+  Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MKDropdownMenu: 244eccf44965d52822395da7bdc7fb5ecd7d297c
+  NKOColorPickerView: 895ca86fe5bd16f27c311ce8f5888907efee29ad
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   VBFPopFlatButton: 39e48ab56277f3d056734a9b5ec5d0cc60d69778
 
-PODFILE CHECKSUM: 2ab1ffd8c5605ba2f661865adc56f09eb7c52ff9
+PODFILE CHECKSUM: d023ecd82ef4ba7ce1ec65c7273a7a4dee8d4b21
 
 COCOAPODS: 1.0.1

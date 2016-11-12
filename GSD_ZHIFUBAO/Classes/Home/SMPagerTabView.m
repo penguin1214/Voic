@@ -291,14 +291,14 @@
 }
 - (UIColor *)tabButtonTitleColorForSelected {
     if (!_tabButtonTitleColorForSelected) {
-        self.tabButtonTitleColorForSelected = [UIColor redColor];
+        self.tabButtonTitleColorForSelected = [UIColor blueColor];
     }
     return _tabButtonTitleColorForSelected;
 }
 - (UIView *)selectedLine {
     if (!_selectedLine) {
         self.selectedLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.tabView.height - 2, self.selectedLineWidth, 2)];
-        _selectedLine.backgroundColor = [UIColor redColor];
+        _selectedLine.backgroundColor = [UIColor blueColor];
         [self addSubview:_selectedLine];
     }
     return _selectedLine;

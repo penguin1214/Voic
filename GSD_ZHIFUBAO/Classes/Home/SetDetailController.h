@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseController.h"
 #import "SMPagerTabView.h"
+#import "SetDetailTableViewController.h"
 
-@interface SetDetailController : UIViewController <SMPagerTabViewDelegate>
+@interface SetDetailController : BaseController <SMPagerTabViewDelegate>
+
+- (void)setTabNumber:(NSInteger)tabNum;
 
 @end

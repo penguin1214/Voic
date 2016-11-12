@@ -140,6 +140,7 @@
     //    [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
     
     SetDetailController* setDetailController = [[SetDetailController alloc] init];
+    [setDetailController setTabNumber:_nStat];
     [self.navigationController pushViewController:setDetailController animated:YES];
 }
 

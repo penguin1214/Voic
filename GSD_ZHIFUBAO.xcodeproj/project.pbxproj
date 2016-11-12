@@ -55,6 +55,8 @@
 		2F9B892E1DD6B79B00B68A0C /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */; };
 		2F9B892F1DD6B79B00B68A0C /* SMPagerTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892D1DD6B79B00B68A0C /* SMPagerTabView.m */; };
 		2F9B89321DD6B7ED00B68A0C /* SetDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */; };
+		2F9B89351DD6D5E100B68A0C /* SetDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B89341DD6D5E100B68A0C /* SetDetailView.m */; };
+		2F9B89381DD6D62900B68A0C /* SetDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B89371DD6D62900B68A0C /* SetDetailTableViewController.m */; };
 		2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */; };
 		2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB21DCF80CA007A0FDD /* UserEntity.m */; };
 		2FE5CE871DD590C60048C6B4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */; };
@@ -215,6 +217,10 @@
 		2F9B892D1DD6B79B00B68A0C /* SMPagerTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPagerTabView.m; sourceTree = "<group>"; };
 		2F9B89301DD6B7ED00B68A0C /* SetDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDetailController.h; sourceTree = "<group>"; };
 		2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDetailController.m; sourceTree = "<group>"; };
+		2F9B89331DD6D5E100B68A0C /* SetDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDetailView.h; sourceTree = "<group>"; };
+		2F9B89341DD6D5E100B68A0C /* SetDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDetailView.m; sourceTree = "<group>"; };
+		2F9B89361DD6D62900B68A0C /* SetDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDetailTableViewController.h; sourceTree = "<group>"; };
+		2F9B89371DD6D62900B68A0C /* SetDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDetailTableViewController.m; sourceTree = "<group>"; };
 		2FD77EAF1DCF80CA007A0FDD /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		2FD77EB11DCF80CA007A0FDD /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntity.h; sourceTree = "<group>"; };
@@ -934,6 +940,8 @@
 				2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */,
 				2F9B89301DD6B7ED00B68A0C /* SetDetailController.h */,
 				2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */,
+				2F9B89361DD6D62900B68A0C /* SetDetailTableViewController.h */,
+				2F9B89371DD6D62900B68A0C /* SetDetailTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -945,6 +953,8 @@
 				99A732601B241BDC0033E878 /* SDAddItemGridView.m */,
 				2F7D0EE11DD0AB04001C3351 /* AddItemView.h */,
 				2F7D0EE21DD0AB04001C3351 /* AddItemView.m */,
+				2F9B89331DD6D5E100B68A0C /* SetDetailView.h */,
+				2F9B89341DD6D5E100B68A0C /* SetDetailView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1259,6 +1269,7 @@
 				9904C7581B1F2F3800E2717D /* TAAnimatedDotView.m in Sources */,
 				486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */,
 				2FE5CE901DD590EC0048C6B4 /* UIImage+FontAwesome.m in Sources */,
+				2F9B89351DD6D5E100B68A0C /* SetDetailView.m in Sources */,
 				9904C75A1B1F2F3800E2717D /* TAPageControl.m in Sources */,
 				992903591B1EBDBC00290346 /* main.m in Sources */,
 				99A732611B241BDC0033E878 /* SDAddItemGridView.m in Sources */,
@@ -1268,6 +1279,7 @@
 				99A7325D1B24190B0033E878 /* SDAddItemViewController.m in Sources */,
 				2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */,
 				9904C75B1B1F2F3800E2717D /* SDCollectionViewCell.m in Sources */,
+				2F9B89381DD6D62900B68A0C /* SetDetailTableViewController.m in Sources */,
 				2F069A241DCCE2E2004215C9 /* RequestPackUtil.m in Sources */,
 				2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */,
 				2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */,
