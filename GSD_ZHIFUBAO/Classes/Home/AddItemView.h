@@ -12,7 +12,7 @@
 
 @protocol AddItemViewDelegate <NSObject>
 
-- (void)popViewController;
+- (void)didClickedAddBtnWithDeviceName:(NSString*)name;
 
 @end
 
@@ -22,5 +22,7 @@
 @property (nonatomic, strong) AKPickerView* iconPicker;
 
 @property (weak) id <AddItemViewDelegate> delegate;
+
+- (void)setPickerTitle:(NSString*)title;
 
 @end

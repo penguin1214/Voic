@@ -52,12 +52,16 @@
 		2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3013F81DCDCCA100E8B5F7 /* DiagleView.m */; };
 		2F7D0EE01DD0A8B3001C3351 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */; };
 		2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EE21DD0AB04001C3351 /* AddItemView.m */; };
+		2F9B892E1DD6B79B00B68A0C /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */; };
+		2F9B892F1DD6B79B00B68A0C /* SMPagerTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892D1DD6B79B00B68A0C /* SMPagerTabView.m */; };
+		2F9B89321DD6B7ED00B68A0C /* SetDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */; };
 		2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */; };
 		2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB21DCF80CA007A0FDD /* UserEntity.m */; };
 		2FE5CE871DD590C60048C6B4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */; };
 		2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */; };
 		2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */; };
 		2FE5CE901DD590EC0048C6B4 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */; };
+		2FEBCD531DD5EDB8002D4B04 /* UIView+STFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */; };
 		485E948B1B3AC44A00688546 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E948A1B3AC44A00688546 /* AppDelegate.m */; };
 		486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 486C14241B79FAF000447104 /* SDGridItemCacheTool.m */; };
 		66694C150644C581AD707C17 /* Pods_GSD_ZHIFUBAO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C070A893F1F90E6B9467E9 /* Pods_GSD_ZHIFUBAO.framework */; };
@@ -205,6 +209,12 @@
 		2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 		2F7D0EE11DD0AB04001C3351 /* AddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemView.h; sourceTree = "<group>"; };
 		2F7D0EE21DD0AB04001C3351 /* AddItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemView.m; sourceTree = "<group>"; };
+		2F9B892A1DD6B79B00B68A0C /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
+		2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
+		2F9B892C1DD6B79B00B68A0C /* SMPagerTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPagerTabView.h; sourceTree = "<group>"; };
+		2F9B892D1DD6B79B00B68A0C /* SMPagerTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPagerTabView.m; sourceTree = "<group>"; };
+		2F9B89301DD6B7ED00B68A0C /* SetDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetDetailController.h; sourceTree = "<group>"; };
+		2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetDetailController.m; sourceTree = "<group>"; };
 		2FD77EAF1DCF80CA007A0FDD /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		2FD77EB11DCF80CA007A0FDD /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntity.h; sourceTree = "<group>"; };
@@ -216,6 +226,8 @@
 		2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
 		2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
+		2FEBCD511DD5EDB8002D4B04 /* UIView+STFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+STFrame.h"; sourceTree = "<group>"; };
+		2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+STFrame.m"; sourceTree = "<group>"; };
 		485E94891B3AC44A00688546 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GSD_ZHIFUBAO/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		485E948A1B3AC44A00688546 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = GSD_ZHIFUBAO/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		486C14231B79FAF000447104 /* SDGridItemCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDGridItemCacheTool.h; sourceTree = "<group>"; };
@@ -429,6 +441,8 @@
 				2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */,
 				2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */,
 				2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */,
+				2FEBCD511DD5EDB8002D4B04 /* UIView+STFrame.h */,
+				2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -543,6 +557,17 @@
 			children = (
 			);
 			name = Command;
+			sourceTree = "<group>";
+		};
+		2F9B89291DD6B78C00B68A0C /* PagerView */ = {
+			isa = PBXGroup;
+			children = (
+				2F9B892A1DD6B79B00B68A0C /* UIViewAdditions.h */,
+				2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */,
+				2F9B892C1DD6B79B00B68A0C /* SMPagerTabView.h */,
+				2F9B892D1DD6B79B00B68A0C /* SMPagerTabView.m */,
+			);
+			name = PagerView;
 			sourceTree = "<group>";
 		};
 		2FD77EAE1DCF80BE007A0FDD /* Entity */ = {
@@ -817,6 +842,7 @@
 		9958FBA21B23441300BC9E92 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
+				2F9B89291DD6B78C00B68A0C /* PagerView */,
 				99A7325E1B24192B0033E878 /* Views */,
 				99A7325A1B2418E30033E878 /* Controllers */,
 			);
@@ -906,6 +932,8 @@
 				99A7325C1B24190B0033E878 /* SDAddItemViewController.m */,
 				2F7D0EDE1DD0A8B3001C3351 /* AddItemViewController.h */,
 				2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */,
+				2F9B89301DD6B7ED00B68A0C /* SetDetailController.h */,
+				2F9B89311DD6B7ED00B68A0C /* SetDetailController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1173,6 +1201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F9B892E1DD6B79B00B68A0C /* UIViewAdditions.m in Sources */,
 				2F069A371DCCE399004215C9 /* CommunicationManager.m in Sources */,
 				990759D11B21F0AA0042DD52 /* SDHomeGridViewListItemViewButton.m in Sources */,
 				485E948B1B3AC44A00688546 /* AppDelegate.m in Sources */,
@@ -1187,8 +1216,10 @@
 				2F3013F21DCDCB1500E8B5F7 /* PopupView.m in Sources */,
 				99AFE9CF1B200DB90049E73B /* SDBasicTableViewController.m in Sources */,
 				2F069A4F1DCCE4D2004215C9 /* BaseLoadingView.m in Sources */,
+				2F9B89321DD6B7ED00B68A0C /* SetDetailController.m in Sources */,
 				99AFE9E21B2033660049E73B /* SDAssetsTableViewHeader.m in Sources */,
 				9969DE441B1ED60400723888 /* SDWebImagePrefetcher.m in Sources */,
+				2F9B892F1DD6B79B00B68A0C /* SMPagerTabView.m in Sources */,
 				9969DE431B1ED60400723888 /* SDWebImageManager.m in Sources */,
 				9904C75D1B1F2F3800E2717D /* UIView+SDExtension.m in Sources */,
 				99AFE9D21B20113E0049E73B /* SDAssetsTableViewController.m in Sources */,
@@ -1206,6 +1237,7 @@
 				2F3013EA1DCDCAFF00E8B5F7 /* UIPopoverListView.m in Sources */,
 				99AFE9D61B2016D50049E73B /* SDBasicTableViewControllerCell.m in Sources */,
 				992903861B1EBF2000290346 /* SDBasicNavigationController.m in Sources */,
+				2FEBCD531DD5EDB8002D4B04 /* UIView+STFrame.m in Sources */,
 				2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */,
 				9969DE401B1ED60400723888 /* SDWebImageDecoder.m in Sources */,
 				2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */,

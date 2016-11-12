@@ -1,0 +1,6 @@
+framework module AXStretchableHeaderTabViewController {
+  umbrella header "AXStretchableHeaderTabViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

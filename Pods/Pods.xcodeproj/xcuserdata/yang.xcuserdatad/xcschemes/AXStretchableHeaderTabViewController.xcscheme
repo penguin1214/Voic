@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C2A815E0FD0702FB6F300259A66174A4'
-               BlueprintName = 'SwipeTableView'
+               BlueprintIdentifier = 'ED9D783F3FD93AD4F476501BB743D2E0'
+               BlueprintName = 'AXStretchableHeaderTabViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwipeTableView.framework'>
+               BuildableName = 'AXStretchableHeaderTabViewController.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

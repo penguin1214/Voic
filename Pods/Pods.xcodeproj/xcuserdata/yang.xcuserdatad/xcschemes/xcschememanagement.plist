@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AXStretchableHeaderTabViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JSONModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,11 +54,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwipeTableView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>VBFPopFlatButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>37050EF15C036E8C54C65F08CE649BCC</key>
+		<key>19BE3D30ED1FFED678486F9075C35BFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>427A0142814816D7DBD1BB7CB745234B</key>
+		<key>32AB47EE8234FB2C3A98FC01C1598E96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39A2BF187E868B430491710542A4DCEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,22 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A1B6B94718AB48825CC9C08A3FCFE428</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A9A83F63385AA43314397B8DD375464B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB687ECDDEE571D38C71E23F03B988C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C2A815E0FD0702FB6F300259A66174A4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C8A4B3824584CE6A6C5FB4DE6610CE03</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>EC6F97C53DE595FFAC3E3D12D37C5F15</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED9D783F3FD93AD4F476501BB743D2E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

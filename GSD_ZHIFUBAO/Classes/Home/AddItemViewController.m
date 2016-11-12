@@ -12,12 +12,21 @@
 #import "SDGridItemCacheTool.h"
 #import "AddItemView.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "SetDetailController.h"
 
 @interface AddItemViewController ()
 
 //@property (nonatomic, strong) SDAddItemGridView *mainView;
 @property (nonatomic, strong) AddItemView *mainView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSArray* iconNameArray;
+@property (nonatomic, strong) NSString* iconName;
+
+@end
+
+@interface AddItemViewController () {
+    NSInteger _nStat;
+}
 
 @end
 
@@ -27,9 +36,8 @@
     [super viewDidLoad];
     [self.parentViewController.view setBackgroundColor:[UIColor hexColor:@"ededed"]];
     [self.view addSubview:[self mainView]];
-    
-    
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupMainView];
@@ -61,6 +69,7 @@
     if (!_mainView) {
         _mainView = [[AddItemView alloc] initWithFrame:self.view.bounds];
     }
+    
     _mainView.delegate = self;
     _mainView.statusNumMenu.delegate = self;
     _mainView.statusNumMenu.dataSource = self;
@@ -71,46 +80,9 @@
 
 - (void)setupMainView
 {
-    //    SDAddItemGridView *mainView = [[SDAddItemGridView alloc] initWithFrame:self.view.bounds];
-    //    mainView.showsVerticalScrollIndicator = NO;
-    //    NSArray *titleArray = @[@"淘宝",
-    //                            @"生活缴费",
-    //                            @"教育缴费",
-    //                            @"红包",
-    //                            @"物流",
-    //                            @"信用卡",
-    //                            @"转账",
-    //                            @"爱心捐款",
-    //                            @"彩票",
-    //                            @"当面付",
-    //                            @"余额宝",
-    //                            @"AA付款",
-    //                            @"国际汇款",
-    //                            @"淘点点",
-    //                            @"淘宝电影",
-    //                            @"亲密付",
-    //                            @"股市行情",
-    //                            @"汇率换算",
-    //                            ];
-    //
-    //    NSMutableArray *temp = [NSMutableArray array];
-    //    for (int i = 0; i < 18; i++) {
-    //        SDHomeGridItemModel *model = [[SDHomeGridItemModel alloc] init];
-    //        model.destinationClass = [SDBasicViewContoller class];
-    //        model.imageResString = [NSString stringWithFormat:@"i%02d", i];
-    //        model.title = titleArray[i];
-    //        [temp addObject:model];
-    //    }
-    //
-    //    _dataArray = [temp copy];
-    
-//    [self setupDataArray];
-//    _mainView.gridModelsArray = [_dataArray copy];
-    //    [self.view addSubview:mainView];
-    //    _mainView = mainView;
-    
-//    +++++++++++++++++++
-    
+
+    _iconNameArray = [[NSArray alloc] initWithObjects:@"fa-automobile",@"fa-bell", @"fa-camera", @"fa-clock-o", @"fa-cloud-download", @"fa-desktop", @"fa-lightbulb-o", nil];
+    _nStat = -1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,14 +91,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 -(void)toast:(NSString *)title
 {
@@ -154,9 +126,21 @@
 
 #pragma mark - delegate
 
-- (void)popViewController {
-    [self toast:@"已添加"];
-    [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
+- (void) didClickedAddBtnWithDeviceName:(NSString *)name{
+    //    将item添加到home
+    //    NSMutableArray *temp = [NSMutableArray new];
+    //    temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
+    //    [temp addObject:@{name}];
+    /*
+     检测重复
+     */
+    
+    //    [SDGridItemCacheTool saveItemsArray:[temp copy]];
+    //    [self toast:@"已添加"];
+    //    [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
+    
+    SetDetailController* setDetailController = [[SetDetailController alloc] init];
+    [self.navigationController pushViewController:setDetailController animated:YES];
 }
 
 - (void)popUpController {
@@ -173,18 +157,62 @@
     return 3;
 }
 
-- (NSString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu titleForComponent:(NSInteger)component {
-    return @"test";
+- (NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForComponent:(NSInteger)component {
+    if ((_nStat + 1)) {
+        return [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",((long)(_nStat + 1))]
+                                               attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightRegular],
+                                                            NSForegroundColorAttributeName: kColorGray}];
+        
+    }else{
+        return [[NSAttributedString alloc] initWithString:@"请选择该设备的状态数"
+                                               attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightRegular],
+                                                            NSForegroundColorAttributeName: kColorGray}];
+    }
+}
+
+- (NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForSelectedComponent:(NSInteger)component {
+    if ((_nStat + 1)) {
+        return [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",((long)(_nStat + 1))]
+                                               attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16 weight:UIFontWeightRegular],
+                                                            NSForegroundColorAttributeName: self.view.tintColor}];
+    }else{
+        return [[NSAttributedString alloc] initWithString:@"请选择该设备的状态数"
+                                               attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16 weight:UIFontWeightRegular],
+                                                            NSForegroundColorAttributeName: self.view.tintColor}];
+    }
+    
+}
+
+-(NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSArray* titles = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
+    NSAttributedString* title = [[NSAttributedString alloc] initWithString:titles[row] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightLight],
+                                                                                                    NSForegroundColorAttributeName: [UIColor grayColor]}];
+    return title;
+    
+}
+
+- (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (component == 0) {
+        _nStat = row;
+        [dropdownMenu closeAllComponentsAnimated:YES];
+        [dropdownMenu reloadComponent:component];
+    }
 }
 
 #pragma mark - AKPickerView Delegate & Datasource
 
 - (NSUInteger)numberOfItemsInPickerView:(AKPickerView *)pickerView {
-    return 5;
+    return [_iconNameArray count];
 }
 
-- (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item {
-    return @"icon";
+- (UIImage *)pickerView:(AKPickerView *)pickerView imageForItem:(NSInteger)item {
+    UIImage* icon = [UIImage imageWithIcon:_iconNameArray[item] backgroundColor:kColorWhite iconColor:[UIColor grayColor] fontSize:20];
+    return icon;
+}
+
+-(void)pickerView:(AKPickerView *)pickerView didSelectItem:(NSInteger)item {
+    NSLog(@"selected icon: %@", _iconNameArray[item]);
+    _iconName = _iconNameArray[item];
 }
 
 @end

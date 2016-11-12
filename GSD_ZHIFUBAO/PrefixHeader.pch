@@ -22,6 +22,10 @@
 #import "ErrorMacro.h"
 
 #import "UIColor+hexColor.h"
+#import "UIFont+FontAwesome.h"
 #import "NSString+MD5.h"
+#import "NSString+FontAwesome.h"
+#import "UIImage+FontAwesome.h"
+#import "UIView+STFrame.h"
 
 #endif /* PrefixHeader_pch */
