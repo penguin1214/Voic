@@ -9,18 +9,21 @@
 #import "SetDetailTableViewController.h"
 #import "NKOColorPickerView.h"
 #import "HRColorPickerView.h"
+#import "MKDropdownMenu.h"
 
 #define kCellIdentifier @"cell"
 
 @interface SetDetailTableViewController ()
 
 //@property (nonatomic, strong) HRColorPickerView* colorPickerView;
-@property (nonatomic, strong) NKOColorPickerView* colorPickerView;
+//@property (nonatomic, strong) NKOColorPickerView* colorPickerView;
 @property (nonatomic, strong) NSString* statName;
 @property (nonatomic, strong) UITextField* statusTextField;
 @property (nonatomic, strong) UIButton* button;
 @property (nonatomic, strong) UIColor* statColor;
 @property (nonatomic, strong) NSNumber* pushable;
+
+@property (nonatomic, strong) MKDropdownMenu* colorPicker;
 
 @end
 
@@ -120,14 +123,15 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:kCellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryNone;
         
         if ([indexPath section] == 0) {
             if ([indexPath row] == 0) {
-                
+                cell.accessoryType = UITableViewCellAccessoryNone;
             }
             else {
+#warning color picker not set
                 self.statColor = [UIColor redColor];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }else {
             cell.textLabel.text = @"是否推送状态";
@@ -153,43 +157,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 1) {
-            //
-            //            __weak typeof(self) weakSelf = self;
-            //            id colorDidChangeBlock = ^(UIColor *color){
-            //                typeof(self) strongSelf = weakSelf;
-            //                strongSelf.color = color;
-            //                NSLog(@"change");
-            //            };
-            //
-            //            self.colorPickerView = [[NKOColorPickerView alloc] initWithFrame:CGRectMake(0, 0, 300, 340) color:[UIColor blueColor] andDidChangeColorBlock:colorDidChangeBlock];
-            //
-            //            self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-            //            [self.button addTarget:self action:@selector(finishSelectColor) forControlEvents:UIControlEventTouchUpInside];
-            //            [self.button setTitle:@"" forState:UIControlStateNormal];
-            //            self.button.frame = self.view.frame;
-            //            [self.view addSubview:self.button];
-            //
-            //            [self.view addSubview:self.colorPickerView];
-            //
-            //            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            //            UIViewController* vc = [[UIViewController alloc] init];
-            //            self.colorPickerView = [[HRColorPickerView alloc] init];
-            //            self.colorPickerView.color = [UIColor redColor];
-            //            [self.colorPickerView addTarget:self
-            //                                action:@selector(didChangeColor:)
-            //                      forControlEvents:UIControlEventValueChanged];
-            //            [vc.view addSubview:self.colorPickerView];
-            //
-            //            [self.navigationController pushViewController:vc animated:YES];
-            //                        self.colorPickerView = [[HRColorPickerView alloc] init];
-            //                        self.colorPickerView.color = [UIColor redColor];
-            //                        [self.colorPickerView addTarget:self
-            //                                            action:@selector(didChangeColor:)
-            //                                  forControlEvents:UIControlEventValueChanged];
-            //                        [self.view addSubview:self.colorPickerView];
-            
-            self.statColor = [UIColor redColor];
-            
+            _colorPicker = [[MKDropdownMenu alloc] initWithFrame:CGRectMake(50, 70, 300, 44)];
+            _colorPicker.dataSource = self;
+            _colorPicker.delegate = self;
+            _colorPicker.backgroundColor = kColorWhite;
+            [self.view addSubview:_colorPicker];
         }
     }
 }
@@ -200,16 +172,38 @@
     NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
 }
 
+- (NSInteger)numberOfComponentsInDropdownMenu:(MKDropdownMenu *)dropdownMenu {
+    return 1;
+}
+
+- (NSInteger)dropdownMenu:(MKDropdownMenu *)dropdownMenu numberOfRowsInComponent:(NSInteger)component {
+    return 4;
+}
+
+- (NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForComponent:(NSInteger)component {
+    return [[NSAttributedString alloc] initWithString:@"red"
+                                           attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightRegular],
+                                                        NSForegroundColorAttributeName: kColorGray}];
+}
+
+-(NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSArray* titles = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
+    NSAttributedString* title = [[NSAttributedString alloc] initWithString:titles[row] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightLight],
+                                                                                                    NSForegroundColorAttributeName: [UIColor grayColor]}];
+    return title;
+    
+}
+
 - (void)didChangeColor:(UIColor*)color {
     self.statColor = color;
     NSLog(@"change");
 }
 
-- (void)finishSelectColor {
-    [self.button removeFromSuperview];
-    [self.colorPickerView removeFromSuperview];
-    NSLog(@"removed");
-}
+//- (void)finishSelectColor {
+//    [self.button removeFromSuperview];
+//    [self.colorPickerView removeFromSuperview];
+//    NSLog(@"removed");
+//}
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

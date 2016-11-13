@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "SetDetailView.h"
+#import "MKDropdownMenu.h"
 
-@interface SetDetailTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@protocol SetDetailTableViewControllerDelegate <NSObject>
+
+- (void)popUpColorPicker;
+
+@end
+
+@interface SetDetailTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, MKDropdownMenuDelegate, MKDropdownMenuDataSource>
 
 @property NSNumber* tag;
+
+@property (weak) id<SetDetailTableViewControllerDelegate> delegate;
 
 - (NSArray*)collectDetail;
 - (NSInteger)check;

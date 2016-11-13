@@ -26,6 +26,7 @@
 #import <SMS_SDK/SMSSDK.h>
 #import "iflyMSC/iFlySetting.h"
 #import "iflyMSC/IFlySpeechUtility.h"
+#import "DeviceInfo.h"
 
 @interface AppDelegate ()
 
@@ -66,20 +67,29 @@
     id addItemsCache = [SDGridItemCacheTool addItemsArray];
 
     if (!itemsCache) {
-        NSArray *itemsArray =  @[@{@"淘宝" : @"i00"}, // title => imageString
-                                 @{@"生活缴费" : @"i01"},
-                                 @{@"教育缴费" : @"i02"},
-                                 @{@"红包" : @"i03"},
-                                 @{@"物流" : @"i04"},
-                                 @{@"信用卡" : @"i05"},
-                                 @{@"转账" : @"i06"},
-                                 @{@"爱心捐款" : @"i07"},
-                                 @{@"彩票" : @"i08"},
-                                 @{@"当面付" : @"i09"},
-                                 @{@"余额宝" : @"i10"},
-                                 @{@"AA付款" : @"i11"}
-                                 ];
-        [SDGridItemCacheTool saveItemsArray:itemsArray];
+        DeviceInfo* _deviceInfo = [[DeviceInfo alloc] init];
+        _deviceInfo.title = @"摄像头";
+        _deviceInfo.imageResString = @"fa-camera";
+        _deviceInfo.currentStat = @(0);
+        _deviceInfo.colorStatPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"状态1", kColorMainGreen, @(0), nil] forKey:@(0)];
+        
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
+        
+        [SDGridItemCacheTool saveItemsArray:[NSArray arrayWithObject:data]];
+//        NSArray *itemsArray =  @[@{@"淘宝" : @"i00"}, // title => imageString
+//                                 @{@"生活缴费" : @"i01"},
+//                                 @{@"教育缴费" : @"i02"},
+//                                 @{@"红包" : @"i03"},
+//                                 @{@"物流" : @"i04"},
+//                                 @{@"信用卡" : @"i05"},
+//                                 @{@"转账" : @"i06"},
+//                                 @{@"爱心捐款" : @"i07"},
+//                                 @{@"彩票" : @"i08"},
+//                                 @{@"当面付" : @"i09"},
+//                                 @{@"余额宝" : @"i10"},
+//                                 @{@"AA付款" : @"i11"}
+//                                 ];
+//        [SDGridItemCacheTool saveItemsArray:itemsArray];
     }
     if (!addItemsCache) {
         NSArray *addItemsArray =  @[@{@"国际汇款" : @"i12"},

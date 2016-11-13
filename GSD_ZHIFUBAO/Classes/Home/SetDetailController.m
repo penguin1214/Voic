@@ -10,6 +10,7 @@
 #import "UIViewAdditions.h"
 #import "SDGridItemCacheTool.h"
 #import "DeviceInfo.h"
+#import "HRColorPickerView.h"
 
 #define kUserDefaultDeviceTitleKey @"title"
 #define kUserDefaultDeviceImageResStringKey @"imageResString"
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) DeviceInfo* deviceInfo;
 @property (nonatomic, strong) NSMutableDictionary* colorStatPair;
 @property (nonatomic, strong) NSString* imgResString;
+
+@property (nonatomic, strong) HRColorPickerView* colorPickerView;
 
 @end
 
@@ -49,6 +52,9 @@
     for (int i = 0; i < (_tabNum+1); i++ ) {
         SetDetailTableViewController* vc = [[SetDetailTableViewController alloc]initWithNibName:nil bundle:nil];
         vc.tag = @(i);
+        
+        vc.delegate = self;
+        
         if (i == 0) {
             vc.title = [NSString stringWithFormat:@"状态%@（默认）", @(i+1)];
         }else {
@@ -131,7 +137,6 @@
     
     NSMutableArray *temp = [NSMutableArray new];
     temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
-//    [temp addObject:[SDGridItemCacheTool itemsArray]];
     [temp addObject:data];
     NSArray* arr = [NSArray new];
     arr = [temp copy];
@@ -142,6 +147,24 @@
 }
 
 #pragma mark - delegate
+
+-(void)popUpColorPicker {
+    UIViewController* vc = [[UIViewController alloc] init];
+    self.colorPickerView = [[HRColorPickerView alloc] init];
+    self.colorPickerView.color = [UIColor redColor];
+    [self.colorPickerView addTarget:self
+                             action:@selector(didChangeColor:)
+                   forControlEvents:UIControlEventValueChanged];
+    [vc.view addSubview:self.colorPickerView];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)didChangeColor:(UIColor*)color {
+//    self.statColor = color;
+    NSLog(@"change");
+}
 
 /*
  #pragma mark - Navigation

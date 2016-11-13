@@ -11,7 +11,7 @@
 #import "SMPagerTabView.h"
 #import "SetDetailTableViewController.h"
 
-@interface SetDetailController : BaseController <SMPagerTabViewDelegate, NSCoding>
+@interface SetDetailController : BaseController <SMPagerTabViewDelegate, NSCoding, SetDetailTableViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray* detail;
 

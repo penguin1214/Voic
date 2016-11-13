@@ -31,7 +31,9 @@
 #import "AddItemViewController.h"
 #import "DeviceInfo.h"
 
-#define kHomeHeaderViewHeight 110
+//#define kHomeHeaderViewHeight 110
+#define kHomeHeaderViewHeight 80
+#define kColorHeader [UIColor hexColor:@"171D30"]
 
 #define kTitleIndexInPair 0
 #define kColorIndexInPair 1
@@ -86,6 +88,7 @@
 {
     UIView *header = [[UIView alloc] init];
     header.bounds = CGRectMake(0, 0, self.view.sd_width, kHomeHeaderViewHeight);
+//    header.backgroundColor = kColorHeader;
     header.backgroundColor = [UIColor colorWithRed:(38 / 255.0) green:(42 / 255.0) blue:(59 / 255.0) alpha:1];
     [self.view addSubview:header];
     _headerView = header;
