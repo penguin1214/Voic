@@ -11,8 +11,12 @@
 #import "SMPagerTabView.h"
 #import "SetDetailTableViewController.h"
 
-@interface SetDetailController : BaseController <SMPagerTabViewDelegate>
+@interface SetDetailController : BaseController <SMPagerTabViewDelegate, NSCoding>
+
+@property (nonatomic, strong) NSMutableArray* detail;
 
 - (void)setTabNumber:(NSInteger)tabNum;
+- (void)setDeviceName:(NSString*)deviceName;
+- (void)setImgResString:(NSString*)imgResString;
 
 @end

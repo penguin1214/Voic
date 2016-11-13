@@ -11,4 +11,9 @@
 
 @interface SetDetailTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property NSNumber* tag;
+
+- (NSArray*)collectDetail;
+- (NSInteger)check;
+
 @end

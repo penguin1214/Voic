@@ -16,8 +16,18 @@
 
 //@property (nonatomic, strong) HRColorPickerView* colorPickerView;
 @property (nonatomic, strong) NKOColorPickerView* colorPickerView;
+@property (nonatomic, strong) NSString* statName;
+@property (nonatomic, strong) UITextField* statusTextField;
 @property (nonatomic, strong) UIButton* button;
-@property (nonatomic, strong) UIColor* color;
+@property (nonatomic, strong) UIColor* statColor;
+@property (nonatomic, strong) NSNumber* pushable;
+
+@end
+
+@interface SetDetailTableViewController () {
+    NSString* _deviceName;
+    NSInteger _nStat;
+}
 
 @end
 
@@ -27,17 +37,62 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [UIView new];
+    self.pushable = 0;
+    //        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    //        [nc addObserver:self selector:@selector(recvNotif:) name:@"Check" object:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.statusTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
+    self.statusTextField.adjustsFontSizeToFitWidth = YES;
+    _statusTextField.textColor = [UIColor blackColor];
+    _statusTextField.placeholder = @"将显示在首页";
+    //                _statusTextField.keyboardType = UIKeyboardTypeEmailAddress;
+    //                _statusTextField.returnKeyType = UIReturnKeyNext;
+    
+    _statusTextField.backgroundColor = [UIColor whiteColor];
+    _statusTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
+    _statusTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
+    _statusTextField.textAlignment = NSTextAlignmentLeft;
+    _statusTextField.tag = 0;
+    //statusTextField.delegate = self;
+    
+    _statusTextField.clearButtonMode = UITextFieldViewModeAlways; // no clear 'x' button to the right
+    [_statusTextField setEnabled: YES];
+    [self.view addSubview:_statusTextField];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSArray *)collectDetail {
+    
+    NSArray* statColorArray = [NSArray arrayWithObjects:self.statName, self.statColor,self.pushable, nil];
+    return statColorArray;
+}
+
+- (NSInteger)check {
+    self.statName = _statusTextField.text;
+    if (_statusTextField.text && self.statColor) {
+        return 1;
+    }else {
+        return 0;
+    }
+}
+//- (void)recvNotif:(NSNotification*)notify {
+//    //Collect details
+//    NSDictionary* info = [notify userInfo];
+//    _deviceName = [info objectForKey:@"deviceName"];
+//    _nStat = [[info objectForKey:@"nStat"] integerValue];
+//    NSDictionary* statColorPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:self.statName, self.statColor,self.pushable, nil] forKey: _tag];
+//
+//};
 
 #pragma mark - Table view data source
 
@@ -64,32 +119,15 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:kCellIdentifier];
+                                      reuseIdentifier:kCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
         
         if ([indexPath section] == 0) {
-            UITextField *statusTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
-            statusTextField.adjustsFontSizeToFitWidth = YES;
-            statusTextField.textColor = [UIColor blackColor];
             if ([indexPath row] == 0) {
-                statusTextField.placeholder = @"将显示在首页";
-                statusTextField.keyboardType = UIKeyboardTypeEmailAddress;
-                statusTextField.returnKeyType = UIReturnKeyNext;
                 
-                statusTextField.backgroundColor = [UIColor whiteColor];
-                statusTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
-                statusTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
-                statusTextField.textAlignment = NSTextAlignmentLeft;
-                statusTextField.tag = 0;
-                //statusTextField.delegate = self;
-                
-                statusTextField.clearButtonMode = UITextFieldViewModeAlways; // no clear 'x' button to the right
-                [statusTextField setEnabled: YES];
-                
-                [cell.contentView addSubview:statusTextField];
-
             }
             else {
+                self.statColor = [UIColor redColor];
             }
         }else {
             cell.textLabel.text = @"是否推送状态";
@@ -102,67 +140,68 @@
     }
     if ([indexPath section] == 0) { // Email & Password Section
         if ([indexPath row] == 0) { // Email
-            cell.textLabel.text = @"设备名称";
+            cell.textLabel.text = @"状态名称";
         }
         else {
             cell.textLabel.text = @"状态颜色";
         }
     }
     
-    return cell;    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 1) {
-//            
-//            __weak typeof(self) weakSelf = self;
-//            id colorDidChangeBlock = ^(UIColor *color){
-//                typeof(self) strongSelf = weakSelf;
-//                strongSelf.color = color;
-//                NSLog(@"change");
-//            };
-//            
-//            self.colorPickerView = [[NKOColorPickerView alloc] initWithFrame:CGRectMake(0, 0, 300, 340) color:[UIColor blueColor] andDidChangeColorBlock:colorDidChangeBlock];
-//            
-//            self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-//            [self.button addTarget:self action:@selector(finishSelectColor) forControlEvents:UIControlEventTouchUpInside];
-//            [self.button setTitle:@"" forState:UIControlStateNormal];
-//            self.button.frame = self.view.frame;
-//            [self.view addSubview:self.button];
-//            
-//            [self.view addSubview:self.colorPickerView];
-//            
-//            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//            UIViewController* vc = [[UIViewController alloc] init];
-//            self.colorPickerView = [[HRColorPickerView alloc] init];
-//            self.colorPickerView.color = [UIColor redColor];
-//            [self.colorPickerView addTarget:self
-//                                action:@selector(didChangeColor:)
-//                      forControlEvents:UIControlEventValueChanged];
-//            [vc.view addSubview:self.colorPickerView];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//                        self.colorPickerView = [[HRColorPickerView alloc] init];
-//                        self.colorPickerView.color = [UIColor redColor];
-//                        [self.colorPickerView addTarget:self
-//                                            action:@selector(didChangeColor:)
-//                                  forControlEvents:UIControlEventValueChanged];
-//                        [self.view addSubview:self.colorPickerView];
+            //
+            //            __weak typeof(self) weakSelf = self;
+            //            id colorDidChangeBlock = ^(UIColor *color){
+            //                typeof(self) strongSelf = weakSelf;
+            //                strongSelf.color = color;
+            //                NSLog(@"change");
+            //            };
+            //
+            //            self.colorPickerView = [[NKOColorPickerView alloc] initWithFrame:CGRectMake(0, 0, 300, 340) color:[UIColor blueColor] andDidChangeColorBlock:colorDidChangeBlock];
+            //
+            //            self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+            //            [self.button addTarget:self action:@selector(finishSelectColor) forControlEvents:UIControlEventTouchUpInside];
+            //            [self.button setTitle:@"" forState:UIControlStateNormal];
+            //            self.button.frame = self.view.frame;
+            //            [self.view addSubview:self.button];
+            //
+            //            [self.view addSubview:self.colorPickerView];
+            //
+            //            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //            UIViewController* vc = [[UIViewController alloc] init];
+            //            self.colorPickerView = [[HRColorPickerView alloc] init];
+            //            self.colorPickerView.color = [UIColor redColor];
+            //            [self.colorPickerView addTarget:self
+            //                                action:@selector(didChangeColor:)
+            //                      forControlEvents:UIControlEventValueChanged];
+            //            [vc.view addSubview:self.colorPickerView];
+            //
+            //            [self.navigationController pushViewController:vc animated:YES];
+            //                        self.colorPickerView = [[HRColorPickerView alloc] init];
+            //                        self.colorPickerView.color = [UIColor redColor];
+            //                        [self.colorPickerView addTarget:self
+            //                                            action:@selector(didChangeColor:)
+            //                                  forControlEvents:UIControlEventValueChanged];
+            //                        [self.view addSubview:self.colorPickerView];
             
-            self.color = [UIColor redColor];
-
+            self.statColor = [UIColor redColor];
+            
         }
     }
 }
 
 - (void) switchChanged:(id)sender {
     UISwitch* switchControl = sender;
+    self.pushable = switchControl.on ? @(1):@(0);
     NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
 }
 
 - (void)didChangeColor:(UIColor*)color {
-    self.color = color;
+    self.statColor = color;
     NSLog(@"change");
 }
 
@@ -172,47 +211,47 @@
     NSLog(@"removed");
 }
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

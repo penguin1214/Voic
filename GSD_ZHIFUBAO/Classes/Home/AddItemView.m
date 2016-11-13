@@ -167,20 +167,24 @@
 }
 
 - (void)clickAddBtn {
-//    //    将item添加到home
+    //    将item添加到home
 //    NSMutableArray *temp = [NSMutableArray new];
 //    temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
 //    [temp addObject:@{_vTitleText.text : _vStatusNumMenuText.text}];
-//    /*
-//     检测重复
-//     */
-//    
-//    //    [SDGridItemCacheTool saveItemsArray:[temp copy]];
+    /*
+     检测重复
+     */
+    
+    //    [SDGridItemCacheTool saveItemsArray:[temp copy]];
     [self.delegate didClickedAddBtnWithDeviceName:_vTitleText.text];
 }
 
 - (void)setPickerTitle:(NSString *)title {
     
+}
+
+- (NSString *)getDeviceName {
+    return _vTitleText.text;
 }
 
 @end

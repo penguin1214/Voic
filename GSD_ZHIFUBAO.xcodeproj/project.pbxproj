@@ -50,6 +50,7 @@
 		2F3013F31DCDCB1500E8B5F7 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3013F01DCDCB1500E8B5F7 /* UIPlaceHolderTextView.m */; };
 		2F3013F61DCDCC7000E8B5F7 /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3013F51DCDCC7000E8B5F7 /* TrainViewController.m */; };
 		2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3013F81DCDCCA100E8B5F7 /* DiagleView.m */; };
+		2F46515F1DD76F5F004637C5 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F46515E1DD76F5E004637C5 /* DeviceInfo.m */; };
 		2F7D0EE01DD0A8B3001C3351 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */; };
 		2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EE21DD0AB04001C3351 /* AddItemView.m */; };
 		2F9B892E1DD6B79B00B68A0C /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */; };
@@ -63,7 +64,6 @@
 		2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */; };
 		2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */; };
 		2FE5CE901DD590EC0048C6B4 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */; };
-		2FEBCD531DD5EDB8002D4B04 /* UIView+STFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */; };
 		485E948B1B3AC44A00688546 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E948A1B3AC44A00688546 /* AppDelegate.m */; };
 		486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 486C14241B79FAF000447104 /* SDGridItemCacheTool.m */; };
 		66694C150644C581AD707C17 /* Pods_GSD_ZHIFUBAO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C070A893F1F90E6B9467E9 /* Pods_GSD_ZHIFUBAO.framework */; };
@@ -89,7 +89,6 @@
 		9929038A1B1EC0ED00290346 /* SDBasicViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 992903891B1EC0ED00290346 /* SDBasicViewContoller.m */; };
 		9929038E1B1EC79300290346 /* SDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929038D1B1EC79300290346 /* SDHomeViewController.m */; };
 		992903921B1EC99300290346 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 992903911B1EC99300290346 /* UIView+SDExtension.m */; };
-		9958FBA11B23046900BC9E92 /* SDScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9958FBA01B23046900BC9E92 /* SDScanViewController.m */; };
 		9969DE161B1ECFD900723888 /* SDHomeGridItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9969DE151B1ECFD900723888 /* SDHomeGridItemModel.m */; };
 		9969DE191B1ED13000723888 /* SDHomeGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9969DE181B1ED13000723888 /* SDHomeGridView.m */; };
 		9969DE1C1B1ED2E900723888 /* SDHomeGridViewListItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9969DE1B1B1ED2E900723888 /* SDHomeGridViewListItemView.m */; };
@@ -207,6 +206,8 @@
 		2F3013F51DCDCC7000E8B5F7 /* TrainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainViewController.m; sourceTree = "<group>"; };
 		2F3013F71DCDCCA100E8B5F7 /* DiagleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagleView.h; sourceTree = "<group>"; };
 		2F3013F81DCDCCA100E8B5F7 /* DiagleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagleView.m; sourceTree = "<group>"; };
+		2F46515D1DD76F5E004637C5 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		2F46515E1DD76F5E004637C5 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		2F7D0EDE1DD0A8B3001C3351 /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
 		2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 		2F7D0EE11DD0AB04001C3351 /* AddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemView.h; sourceTree = "<group>"; };
@@ -232,8 +233,6 @@
 		2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
 		2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
-		2FEBCD511DD5EDB8002D4B04 /* UIView+STFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+STFrame.h"; sourceTree = "<group>"; };
-		2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+STFrame.m"; sourceTree = "<group>"; };
 		485E94891B3AC44A00688546 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GSD_ZHIFUBAO/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		485E948A1B3AC44A00688546 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = GSD_ZHIFUBAO/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		486C14231B79FAF000447104 /* SDGridItemCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDGridItemCacheTool.h; sourceTree = "<group>"; };
@@ -283,8 +282,6 @@
 		9929038D1B1EC79300290346 /* SDHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDHomeViewController.m; sourceTree = "<group>"; };
 		992903901B1EC99300290346 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		992903911B1EC99300290346 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		9958FB9F1B23046900BC9E92 /* SDScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanViewController.h; sourceTree = "<group>"; };
-		9958FBA01B23046900BC9E92 /* SDScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanViewController.m; sourceTree = "<group>"; };
 		9969DE141B1ECFD900723888 /* SDHomeGridItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDHomeGridItemModel.h; sourceTree = "<group>"; };
 		9969DE151B1ECFD900723888 /* SDHomeGridItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDHomeGridItemModel.m; sourceTree = "<group>"; };
 		9969DE171B1ED13000723888 /* SDHomeGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDHomeGridView.h; sourceTree = "<group>"; };
@@ -447,8 +444,6 @@
 				2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */,
 				2FE5CE8C1DD590EC0048C6B4 /* UIImage+FontAwesome.h */,
 				2FE5CE8D1DD590EC0048C6B4 /* UIImage+FontAwesome.m */,
-				2FEBCD511DD5EDB8002D4B04 /* UIView+STFrame.h */,
-				2FEBCD521DD5EDB8002D4B04 /* UIView+STFrame.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -811,7 +806,6 @@
 			children = (
 				2F8D46681DCF717500E613E3 /* Command */,
 				9958FBA21B23441300BC9E92 /* AddItem */,
-				9958FB9E1B23043E00BC9E92 /* Scan */,
 				9958FB9D1B23042A00BC9E92 /* Host */,
 			);
 			path = Home;
@@ -836,21 +830,14 @@
 			name = Host;
 			sourceTree = "<group>";
 		};
-		9958FB9E1B23043E00BC9E92 /* Scan */ = {
-			isa = PBXGroup;
-			children = (
-				9958FB9F1B23046900BC9E92 /* SDScanViewController.h */,
-				9958FBA01B23046900BC9E92 /* SDScanViewController.m */,
-			);
-			name = Scan;
-			sourceTree = "<group>";
-		};
 		9958FBA21B23441300BC9E92 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
 				2F9B89291DD6B78C00B68A0C /* PagerView */,
 				99A7325E1B24192B0033E878 /* Views */,
 				99A7325A1B2418E30033E878 /* Controllers */,
+				2F46515D1DD76F5E004637C5 /* DeviceInfo.h */,
+				2F46515E1DD76F5E004637C5 /* DeviceInfo.m */,
 			);
 			name = AddItem;
 			sourceTree = "<group>";
@@ -1220,6 +1207,7 @@
 				9904C7591B1F2F3800E2717D /* TADotView.m in Sources */,
 				9969DE3C1B1ED60400723888 /* MKAnnotationView+WebCache.m in Sources */,
 				2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */,
+				2F46515F1DD76F5F004637C5 /* DeviceInfo.m in Sources */,
 				9969DE491B1ED60400723888 /* UIImageView+WebCache.m in Sources */,
 				992903921B1EC99300290346 /* UIView+SDExtension.m in Sources */,
 				990759DA1B2216DC0042DD52 /* SDYuEBaoTableViewController.m in Sources */,
@@ -1247,7 +1235,6 @@
 				2F3013EA1DCDCAFF00E8B5F7 /* UIPopoverListView.m in Sources */,
 				99AFE9D61B2016D50049E73B /* SDBasicTableViewControllerCell.m in Sources */,
 				992903861B1EBF2000290346 /* SDBasicNavigationController.m in Sources */,
-				2FEBCD531DD5EDB8002D4B04 /* UIView+STFrame.m in Sources */,
 				2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */,
 				9969DE401B1ED60400723888 /* SDWebImageDecoder.m in Sources */,
 				2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */,
@@ -1264,7 +1251,6 @@
 				2F069A3E1DCCE457004215C9 /* UIColor+hexColor.m in Sources */,
 				9969DE411B1ED60400723888 /* SDWebImageDownloader.m in Sources */,
 				9969DE461B1ED60400723888 /* UIImage+GIF.m in Sources */,
-				9958FBA11B23046900BC9E92 /* SDScanViewController.m in Sources */,
 				99AFE9DB1B201A480049E73B /* SDAssetsTableViewControllerCell.m in Sources */,
 				9904C7581B1F2F3800E2717D /* TAAnimatedDotView.m in Sources */,
 				486C14251B79FAF000447104 /* SDGridItemCacheTool.m in Sources */,

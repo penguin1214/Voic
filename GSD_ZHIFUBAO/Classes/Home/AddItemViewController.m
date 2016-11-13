@@ -20,7 +20,7 @@
 @property (nonatomic, strong) AddItemView *mainView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray* iconNameArray;
-@property (nonatomic, strong) NSString* iconName;
+@property (nonatomic, strong) NSString* imgResString;
 
 @end
 
@@ -80,9 +80,9 @@
 
 - (void)setupMainView
 {
-
     _iconNameArray = [[NSArray alloc] initWithObjects:@"fa-automobile",@"fa-bell", @"fa-camera", @"fa-clock-o", @"fa-cloud-download", @"fa-desktop", @"fa-lightbulb-o", nil];
     _nStat = -1;
+    _imgResString = @"fa-automobile";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,12 +135,10 @@
      检测重复
      */
     
-    //    [SDGridItemCacheTool saveItemsArray:[temp copy]];
-    //    [self toast:@"已添加"];
-    //    [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
-    
     SetDetailController* setDetailController = [[SetDetailController alloc] init];
+    [setDetailController setDeviceName:[_mainView getDeviceName]];
     [setDetailController setTabNumber:_nStat];
+    [setDetailController setImgResString:_imgResString];
     [self.navigationController pushViewController:setDetailController animated:YES];
 }
 
@@ -213,7 +211,7 @@
 
 -(void)pickerView:(AKPickerView *)pickerView didSelectItem:(NSInteger)item {
     NSLog(@"selected icon: %@", _iconNameArray[item]);
-    _iconName = _iconNameArray[item];
+    _imgResString = _iconNameArray[item];
 }
 
 @end

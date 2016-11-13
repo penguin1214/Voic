@@ -26,6 +26,9 @@
 #import "UIView+SDExtension.h"
 #import "SDHomeGridViewListItemViewButton.h"
 
+#define kTitleIndexInPair 0
+#define kColorIndexInPair 1
+
 @implementation SDHomeGridViewListItemView
 {
     SDHomeGridViewListItemViewButton *_button;
@@ -71,17 +74,17 @@
 
 - (void)buttonClicked
 {
-//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您确定要删除该设备吗" preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-//        
-//        if (self.buttonClickedOperationBlock) {
-//            self.buttonClickedOperationBlock(self);
-//        }
-//        
-//    }];
-//    
-//    [alert addAction:defaultAction];
-//    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    //    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您确定要删除该设备吗" preferredStyle:UIAlertControllerStyleAlert];
+    //    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+    //
+    //        if (self.buttonClickedOperationBlock) {
+    //            self.buttonClickedOperationBlock(self);
+    //        }
+    //
+    //    }];
+    //
+    //    [alert addAction:defaultAction];
+    //    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
     NSLog(@"delete button clicked");
 }
 
@@ -100,18 +103,27 @@
 {
     _itemModel = itemModel;
     
+//    NSString* t = [[NSString alloc] initWithFormat:@"%@[测试]", itemModel.title];
+        NSString* t = [[NSString alloc] initWithFormat:@"%@[%@]", itemModel.title, itemModel.colorStatPair[itemModel.currentStat][kTitleIndexInPair]];
+    
     if (itemModel.title) {
-        [_button setTitle:itemModel.title forState:UIControlStateNormal];
+        [_button setTitle:t forState:UIControlStateNormal];
     }
+    
+    _button.titleLabel.font = [UIFont systemFontOfSize:10];
     
     if (itemModel.imageResString) {
         if ([itemModel.imageResString hasPrefix:@"http:"]) {
             [_button setImageWithURL:[NSURL URLWithString:itemModel.imageResString] forState:UIControlStateNormal placeholderImage:nil];
         } else {
-            [_button setImage:[UIImage imageNamed:itemModel.imageResString] forState:UIControlStateNormal];
+            itemModel.currentStat = @(0);
+            [_button setImage:[UIImage imageWithIcon:itemModel.imageResString backgroundColor:kColorWhite iconColor:[itemModel.colorStatPair objectForKey:itemModel.currentStat][kColorIndexInPair] fontSize:50] forState:UIControlStateNormal];
+            
+//            [_button setImage:[UIImage imageWithIcon:itemModel.imageResString backgroundColor:kColorWhite iconColor:[UIColor redColor] fontSize:50] forState:UIControlStateNormal];
+            
+            //                        [_button setImage:[UIImage imageWithIcon:@"fa-github" backgroundColor:kColorWhite iconColor:kColorMainGreen fontSize:50] forState:UIControlStateNormal];
         }
     }
-    
 }
 
 - (void)setHidenIcon:(BOOL)hidenIcon

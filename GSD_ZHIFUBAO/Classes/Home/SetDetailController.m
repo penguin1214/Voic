@@ -8,16 +8,26 @@
 
 #import "SetDetailController.h"
 #import "UIViewAdditions.h"
+#import "SDGridItemCacheTool.h"
+#import "DeviceInfo.h"
+
+#define kUserDefaultDeviceTitleKey @"title"
+#define kUserDefaultDeviceImageResStringKey @"imageResString"
+#define KUserDefaultDeviceCurrentStatKey @"currentStat"
 
 @interface SetDetailController ()
 
 @property (nonatomic, strong) NSMutableArray *allVC;
 @property (nonatomic, strong) SMPagerTabView *segmentView;
+@property (nonatomic, strong) DeviceInfo* deviceInfo;
+@property (nonatomic, strong) NSMutableDictionary* colorStatPair;
+@property (nonatomic, strong) NSString* imgResString;
 
 @end
 
 @interface SetDetailController () {
     NSInteger _tabNum;
+    NSString* _deviceName;
 }
 
 @end
@@ -33,28 +43,42 @@
     
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
+    self.colorStatPair = [NSMutableDictionary new];
     _allVC = [NSMutableArray array];
     
     for (int i = 0; i < (_tabNum+1); i++ ) {
         SetDetailTableViewController* vc = [[SetDetailTableViewController alloc]initWithNibName:nil bundle:nil];
-        vc.title = [NSString stringWithFormat:@"状态%@", @(i+1)];
+        vc.tag = @(i);
+        if (i == 0) {
+            vc.title = [NSString stringWithFormat:@"状态%@（默认）", @(i+1)];
+        }else {
+            vc.title = [NSString stringWithFormat:@"状态%@", @(i+1)];
+        }
         [_allVC addObject:vc];
     }
     
     self.segmentView.delegate = self;
     //可自定义背景色和tab button的文字颜色等
-//    self.segmentView.tabButtonTitleColorForSelected = kColorMainGreen;
+    //    self.segmentView.tabButtonTitleColorForSelected = kColorMainGreen;
     
     //开始构建UI
     [_segmentView buildUI];
     //起始选择一个tab
     [_segmentView selectTabWithIndex:0 animate:NO];
     //显示红点，点击消失
-//    [_segmentView showRedDotWithIndex:0];
+    //    [_segmentView showRedDotWithIndex:0];
 }
 
 - (void)setTabNumber:(NSInteger)tabNum {
     _tabNum = tabNum;
+}
+
+-(void)setDeviceName:(NSString *)deviceName {
+    _deviceName = deviceName;
+}
+
+- (void)setImgResString:(NSString *)imgResString {
+    _imgResString = imgResString;
 }
 
 #pragma mark - DBPagerTabView Delegate
@@ -79,9 +103,46 @@
 }
 
 - (void)didFinishSetting:(NSDictionary*)settings {
+    
+    _deviceInfo = [[DeviceInfo alloc] init];
+    _deviceInfo.title = _deviceName;
+    _deviceInfo.imageResString = _imgResString;
+    _deviceInfo.currentStat = @(0);
+    
+    //    NSMutableDictionary* tempInfo = [[NSMutableDictionary alloc] initWithObjectsAndKeys:kUserDefaultDeviceTitleKey, _deviceName,kUserDefaultDeviceImageResStringKey, _imgResString, KUserDefaultDeviceCurrentStatKey, @(0), nil];
+    
+    for (SetDetailTableViewController* tableVC in _allVC) {
+        if ([tableVC check]) {
+            NSArray* arr = [tableVC collectDetail];
+            [self.colorStatPair setObject:arr forKey:tableVC.tag];
+        }else {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"设置未完成" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                return;
+            }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }
+    
+    _deviceInfo.colorStatPair = _colorStatPair;
+    
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
+    
+    NSMutableArray *temp = [NSMutableArray new];
+    temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
+//    [temp addObject:[SDGridItemCacheTool itemsArray]];
+    [temp addObject:data];
+    NSArray* arr = [NSArray new];
+    arr = [temp copy];
+    [SDGridItemCacheTool saveItemsArray:arr];
+    
     [self toast:@"添加成功" seconds:2];
     [self.navigationController performSelector:@selector(popToRootViewControllerAnimated:) withObject:nil afterDelay:2.0];
 }
+
+#pragma mark - delegate
+
 /*
  #pragma mark - Navigation
  

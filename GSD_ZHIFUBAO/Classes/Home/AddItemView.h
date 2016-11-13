@@ -23,6 +23,7 @@
 
 @property (weak) id <AddItemViewDelegate> delegate;
 
+- (NSString*)getDeviceName;
 - (void)setPickerTitle:(NSString*)title;
 
 @end
