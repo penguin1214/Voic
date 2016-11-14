@@ -24,4 +24,6 @@
 
 @interface SDFrameTabBarController : UITabBarController
 
+- (void)toast:(NSString*)message;
+
 @end

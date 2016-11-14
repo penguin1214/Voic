@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AYVibrantButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Color-Picker-for-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,17 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1FC3E878B0A96EAC23CAF04BFE28B34B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>34C20EA7D289101D383599338B9A4DFE</key>
+		<key>11F461C854EE8CA9733568EDAAAF50BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>43082DD02EA093BE1A0C2043A71510C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>461DCF794AC14D47EC84DC37DEFA36C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E7D05182739F1319718FFAB63097CA4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,7 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B9BB132F50C76CE9EEAF94100521C3F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C1CD1F1DE0F273D90638723EA7A09124</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4FF809E9D6CB14AAF4C3C47CC84974A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,16 +153,6 @@
 			<true/>
 		</dict>
 		<key>ED9D783F3FD93AD4F476501BB743D2E0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F473370D04535578EE0F5793E23A49BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC4C8D138C4E9EC8054666D77BE0528B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

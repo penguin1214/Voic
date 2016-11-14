@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "VBFPopFlatButton.h"
 
 @interface DiagleView : UIView
 
@@ -38,7 +38,6 @@
 -(void)recordViewInit; //revordView 初始化为小喇叭图案
 
 -(void)recordViewChangeWithVolume:(int)volume;  //revordView 刷新音量动画
-
 
 @end
 

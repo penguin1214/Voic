@@ -17,5 +17,6 @@ pod 'MKDropdownMenu'
 pod 'AXStretchableHeaderTabViewController'
 pod 'NKOColorPickerView'
 pod 'Color-Picker-for-iOS', '~> 2.0'
+pod 'AYVibrantButton'
 
 end

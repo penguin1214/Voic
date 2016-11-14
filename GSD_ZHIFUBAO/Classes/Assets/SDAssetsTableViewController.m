@@ -25,11 +25,9 @@
 #import "SDAssetsTableViewControllerCellModel.h"
 #import "SDAssetsTableViewHeader.h"
 #import "LogoutCell.h"
-#import "SDYuEBaoTableViewController.h"
 #import "LogginController.h"
 #import "ProfileManager.h"
 #import "iFlyNvpViewController.h"
-#import "TrainViewController.h"
 #import "Reachability.h"
 #import "VoiceModelController.h"
 
@@ -94,22 +92,27 @@
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 
+#warning TEST CODE!!!!!!!!!!!!!!!!
+    [[ProfileManager sharedInstance] setVoiceID:@""];
+    
     if ([[ProfileManager sharedInstance] checkLogin]) {
         if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
             
             //已登录 未录入声纹模型
+            
+            if( [self netConnectAble] == NO ){
+                [self toast:@"无网络连接，无法录入声纹"];
+                return;
+            }
+
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
                 
-//                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
-//                [self.navigationController pushViewController:nvp animated:YES];
                 
-                if( [self netConnectAble] == NO ){
-                    [self toast:@"无网络连接"];
-                    return;
-                }
-               
-                [self trainOrVerifyNumCode:TRAIN_SST];
+                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+                nvp.sst = TRAIN_SST;
+                [self presentViewController:nvp animated:YES completion:nil];
+
             }];
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
@@ -160,7 +163,6 @@
     }
     
     isvRec = [IFlyISVRecognizer sharedInstance];
-    [isvRec setParameter:TRAIN_SST forKey:KEY_SST];
 
     [self setupModel];
     [self setUpHeader];
@@ -192,7 +194,7 @@
     // section 0 的model
     SDAssetsTableViewControllerCellModel *model01 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"声纹" iconImageName:@"20000032Icon" destinationControllerClass:[VoiceModelController class]];
 
-    SDAssetsTableViewControllerCellModel *model02 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"指纹" iconImageName:@"20000059Icon" destinationControllerClass:[SDYuEBaoTableViewController class]];
+    SDAssetsTableViewControllerCellModel *model02 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"指纹" iconImageName:@"20000059Icon" destinationControllerClass:[VoiceModelController class]];
     
     // section 1 的model
     SDAssetsTableViewControllerCellModel *model11 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"个人设置" iconImageName:@"20000118Icon" destinationControllerClass:[SDBasicTableViewController class]];
@@ -203,44 +205,6 @@
                        @[model11, model12]];
 }
 
-//训练或者验证 数字密码
--(void)trainOrVerifyNumCode:(NSString *)sst
-{
-    if( ![sst isEqualToString:VERIFY_SST] && ![sst isEqualToString:TRAIN_SST] ){
-        NSLog(@"in %s,sst 参数错误",__func__);
-        return;
-    }
-    
-    numCodeArray=[self downloadPassworld:ivppwdt];
-    
-    if( numCodeArray == nil ){
-        [self toast:@"获取密码失败"];
-        return;
-    }
-    
-    if( [sst isEqualToString:VERIFY_SST] ){
-        if( numCodeArray!=nil && numCodeArray.count > 0 ){
-            NSString *ptString=[numCodeArray objectAtIndex:0];
-            [self defaultSetparam:voiceID withpdwt: PWDT_NUM_CODE withptxt:ptString trainorverify:VERIFY_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.numCodeArray =numCodeArray;
-            trainController.pwdt=PWDT_NUM_CODE;
-            trainController.sst=VERIFY_SST;
-            [self presentViewController:trainController animated:YES completion:nil];
-        }
-        
-    }else{
-        if( numCodeArray!=nil && numCodeArray.count > 0 ){
-            NSString *ptString=[self numArrayToString:numCodeArray];
-            [self defaultSetparam:voiceID withpdwt: PWDT_NUM_CODE withptxt:ptString trainorverify:TRAIN_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.numCodeArray =numCodeArray;
-            trainController.pwdt=PWDT_NUM_CODE;
-            trainController.sst=TRAIN_SST;
-            [self presentViewController:trainController animated:YES completion:nil];
-        }
-    }
-}
 
 //查询模型
 - (void)queryButtonHandler:(id)sender
@@ -360,72 +324,6 @@
     return YES;
 }
 
-#pragma mark - other function
-//下载密码
--(NSArray*)downloadPassworld:(int)pwdtParam
-{
-    
-    if( pwdtParam != PWDT_FIXED_CODE && pwdtParam != PWDT_NUM_CODE ){
-        NSLog(@"in %s,pwdtParam 参数错误",__func__);
-        return nil;
-    }
-    NSArray* tmpArray=[isvRec getPasswordList:pwdtParam];  // attention isv +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-    if( tmpArray == nil ){
-        NSLog(@"in %s,请求数据有误",__func__);
-        return nil;
-    }
-    
-    return tmpArray;   //返回下载
-    
-}
-
-
-
-//数字密码 把array里面的数字 串起来,ISV 固定规则
--(NSString*)numArrayToString:(NSArray *)numArrayParam
-{
-    if( numArrayParam == nil ){
-        NSLog(@"在%s中，numArrayParam is nil",__func__);
-        return nil;
-    }
-    
-    NSMutableString *ptxtString = [NSMutableString stringWithCapacity:1];
-    [ptxtString appendString:[numArrayParam objectAtIndex:0]];
-    
-    for (int i = 1;i < [numArrayParam count] ; i++ ){
-        NSString *str = [numArrayParam objectAtIndex:i];
-        [ptxtString appendString:[NSString stringWithFormat:@"-%@",str]];
-        
-    }
-    return  ptxtString;
-}
-
-
-
-//根据从网络上获得的密码，生成一个actionsheet并显示所有可用的固定密码
--(BOOL)generateActionSheetWithArray:(NSArray *)arrayParam withTag:(int)tag
-{
-    if( arrayParam ==nil || arrayParam.count == 0 ){
-        NSLog(@"在%s中，文本密码为空，无法生成actionsheet",__func__);
-    }
-    
-    UIActionSheet *showSheet=[[UIActionSheet alloc] initWithTitle:@"选择一个文本密码"
-                                                         delegate:self
-                                                cancelButtonTitle:nil
-                                           destructiveButtonTitle:nil
-                                                otherButtonTitles:nil,nil];
-    showSheet.tag=tag;
-    
-    for(int i =0; i< arrayParam.count; i++){
-        [showSheet addButtonWithTitle:[arrayParam objectAtIndex:i]];
-    }
-    
-    [showSheet addButtonWithTitle:@"取消"];
-    [showSheet showInView:self.view];
-    return YES;
-    
-}
 
 #pragma mark - delegate 
 

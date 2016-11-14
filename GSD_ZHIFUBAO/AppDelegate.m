@@ -27,6 +27,10 @@
 #import "iflyMSC/iFlySetting.h"
 #import "iflyMSC/IFlySpeechUtility.h"
 #import "DeviceInfo.h"
+#import "iFlyNvpViewController.h"
+#import "ProfileManager.h"
+#import "LogginController.h"
+#import "Reachability.h"
 
 @interface AppDelegate ()
 
@@ -50,6 +54,7 @@
     
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",kXFAPPID];
     [IFlySpeechUtility createUtility:initString];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[SDFrameTabBarController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -64,8 +69,7 @@
     
     // 初始化griditems
     id itemsCache = [SDGridItemCacheTool itemsArray];
-    id addItemsCache = [SDGridItemCacheTool addItemsArray];
-
+    
     if (!itemsCache) {
         DeviceInfo* _deviceInfo = [[DeviceInfo alloc] init];
         _deviceInfo.title = @"摄像头";
@@ -76,31 +80,31 @@
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
         
         [SDGridItemCacheTool saveItemsArray:[NSArray arrayWithObject:data]];
-//        NSArray *itemsArray =  @[@{@"淘宝" : @"i00"}, // title => imageString
-//                                 @{@"生活缴费" : @"i01"},
-//                                 @{@"教育缴费" : @"i02"},
-//                                 @{@"红包" : @"i03"},
-//                                 @{@"物流" : @"i04"},
-//                                 @{@"信用卡" : @"i05"},
-//                                 @{@"转账" : @"i06"},
-//                                 @{@"爱心捐款" : @"i07"},
-//                                 @{@"彩票" : @"i08"},
-//                                 @{@"当面付" : @"i09"},
-//                                 @{@"余额宝" : @"i10"},
-//                                 @{@"AA付款" : @"i11"}
-//                                 ];
-//        [SDGridItemCacheTool saveItemsArray:itemsArray];
+        //        NSArray *itemsArray =  @[@{@"淘宝" : @"i00"}, // title => imageString
+        //                                 @{@"生活缴费" : @"i01"},
+        //                                 @{@"教育缴费" : @"i02"},
+        //                                 @{@"红包" : @"i03"},
+        //                                 @{@"物流" : @"i04"},
+        //                                 @{@"信用卡" : @"i05"},
+        //                                 @{@"转账" : @"i06"},
+        //                                 @{@"爱心捐款" : @"i07"},
+        //                                 @{@"彩票" : @"i08"},
+        //                                 @{@"当面付" : @"i09"},
+        //                                 @{@"余额宝" : @"i10"},
+        //                                 @{@"AA付款" : @"i11"}
+        //                                 ];
+        //        [SDGridItemCacheTool saveItemsArray:itemsArray];
     }
-    if (!addItemsCache) {
-        NSArray *addItemsArray =  @[@{@"国际汇款" : @"i12"},
-                                  @{@"淘点点" : @"i13"},
-                                  @{@"淘宝电影" : @"i14"},
-                                  @{@"亲密付" : @"i15"},
-                                  @{@"股市行情" : @"i16"},
-                                  @{@"汇率换算" : @"i17"}
-                                  ];
-        [SDGridItemCacheTool saveAddItemsArray:addItemsArray];
-    }
+    //    if (!addItemsCache) {
+    //        NSArray *addItemsArray =  @[@{@"国际汇款" : @"i12"},
+    //                                  @{@"淘点点" : @"i13"},
+    //                                  @{@"淘宝电影" : @"i14"},
+    //                                  @{@"亲密付" : @"i15"},
+    //                                  @{@"股市行情" : @"i16"},
+    //                                  @{@"汇率换算" : @"i17"}
+    //                                  ];
+    //        [SDGridItemCacheTool saveAddItemsArray:addItemsArray];
+    //    }
     return YES;
 }
 
@@ -120,6 +124,47 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"become active");
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        
+        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
+            
+            //已登录 未录入声纹模型
+            
+            if( [self netConnectAble] == NO ){
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"退出程序" message:@"无网络连接，无法录入声纹" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                    
+                    exit(0);
+                }];
+                [alert addAction:defaultAction];
+                [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+                return;
+            }
+            
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                
+                
+                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+                nvp.sst = @"train";
+                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
+                
+            }];
+            [alert addAction:defaultAction];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }
+        
+        
+    }
+}
+
+-(BOOL)netConnectAble
+{
+    if ( [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable ){
+        return NO;
+    }
+    return YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

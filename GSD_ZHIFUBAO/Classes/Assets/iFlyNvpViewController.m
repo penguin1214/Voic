@@ -1,8 +1,6 @@
 //
 //  DiagleView.m
-//  MSCDemo_UI
 //
-//  Created by wangdan on 14-12-22.
 //
 //
 
@@ -10,68 +8,29 @@
 #import "iflyMSC/IFlySpeechError.h"
 #import "Reachability.h"
 #import "iflyMSC/iFlyISVRecognizer.h"
-#import "TrainViewController.h"
 #import "DiagleView.h"
+#import "ProfileManager.h"
 
+#pragma  mark  result_dic key
+#define  SUC_KEY           @"suc"
+#define  RGN_KEY           @"rgn"
 
-@interface  iFlyNvpViewController()
-{
-    IFlyISVRecognizer      *isvRec;     //atention 声纹类的单例模式 atention  +++++++++++++++++++++++++++++++
-    
-    UIButton               *trainButt;
-    
-    UIButton               *verifyButt;
-    
-    UIButton               *deleteButt;
-    
-    UIButton               *queryButt;
-    
-    UIBarButtonItem        *settingButt;   //四个按钮： 训练，验证，删除，查询
-    
-    PopupView              *resultShow;   //动态显示界面 黑底白字
-    
-    NSString               *authID;    //atention  声纹用户名++++++++++++++++++++++++++++++++++++
-    
-    UIView                 *registerView;
-    
-    UITextField            *nameField;
-    
-    UILabel                *nameLabel;  //输入用户名界面
-    
-    int                     screenWidth ; //界面宽度
-    
-    int                     screenHeight; //界面宽度
-    
-    int                     ivppwdt;      //atention  声纹密码类型参数+++++++++++++++++++++++++++++++++++++++
-    
-    NSArray * fixCodeArray;             //固定密码数组  +++++++++++++++++++++++++++++++++++++++++++++++++++++!
-    
-    NSArray * numCodeArray;             //数字密码数组  +++++++++++++++++++++++++++++++++++++++++++++++++++++!
-    
-}
+#pragma pwdt type
+#define PWDT_NUM_CODE      3
 
-@end
-
+#pragma mark value of key
+#define  TRAIN_SST          @"train"
+#define  VERIFY_SST         @"verify"
+#define  DCS                @"dcs"
+#define  SUCCESS            @"success"
+#define  FAIL               @"fail"
 
 #define IOS7_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+
 #define Margin  5
 #define Slide   2
 
-#define PWDT_FIXED_CODE  1     //固定密码
-//#define PWDT_FREE_CODE   2     //自由说
-#define PWDT_NUM_CODE    3     //数字密码
-
-
-
-#pragma  mark actionsheet tag
-
-#define SETTING_TAG            1
-#define FIXED_CODE_VERIFY_TAG  3
-#define FIXED_CODE_TRAIN_TAG   2
-#define FIXED_CODE_QUERY_TAG   4
-#define FIXED_CODE_DEL_TAG     5
-//
-
+#define pwdt_code 3
 
 #pragma  key of isv
 #define  KEY_PTXT           @"ptxt"
@@ -85,16 +44,37 @@
 #define  KEY_KEYTIMEOUT     @"key_speech_timeout"
 #define  KEY_VADTIMEOUT     @"vad_timeout"
 
-#pragma mark value of key 
+#pragma mark value of key
 #define  TRAIN_SST          @"train"
 #define  VERIFY_SST         @"verify"
 
+@interface  iFlyNvpViewController()
+{
+    IFlyISVRecognizer      *isvRec;     //atention 声纹类的单例模式 atention  +++++++++++++++++++++++++++++++
+    
+    UIButton               *trainButt;
+    
+    UIButton               *verifyButt;
+    
+    PopupView              *resultShow;   //动态显示界面 黑底白字
+    
+    NSString               *voiceID;    //atention  声纹用户名++++++++++++++++++++++++++++++++++++
+    
+    int                     screenWidth ; //界面宽度
+    
+    int                     screenHeight; //界面宽度
+    
+    int                     ivppwdt;      //atention  声纹密码类型参数+++++++++++++++++++++++++++++++++++++++
+    
+    NSArray * fixCodeArray;             //固定密码数组  +++++++++++++++++++++++++++++++++++++++++++++++++++++!
+    
+}
 
-#pragma mark del or query
-#define  DEL                @"del"
-#define  QUERY              @"que"
+@end
 
 @implementation iFlyNvpViewController
+
+@synthesize numCodeArray = _numCodeArray;
 
 - (void)viewDidLoad
 {
@@ -111,106 +91,186 @@
     
     [super viewDidLoad];
     
+    voiceID = [NSString new];
+    //    voiceID = [[ProfileManager sharedInstance] voiceID];
+    voiceID = @"YANGJINGLEI1test";
+    
     isvRec=[IFlyISVRecognizer sharedInstance];    // 创建声纹对象 attention isv +++++++++++++++++++++++++++++++++++++
+    isvRec.delegate = self;
+    ivppwdt = PWDT_NUM_CODE;
     
-    ivppwdt = PWDT_NUM_CODE;//默认为数字密码方式
+    [isvRec setParameter:[NSString stringWithFormat:@"%d",pwdt_code] forKey:KEY_PWDT];
+    [isvRec setParameter:voiceID forKey:KEY_AUTHID];
+    [isvRec setParameter:@"3000" forKey:KEY_VADTIMEOUT];
+    [isvRec setParameter:@"700" forKey:KEY_TAIL];
+    [isvRec setParameter:@"180000" forKey:KEY_KEYTIMEOUT];
+    [isvRec setParameter:@"50" forKey:KEY_TSD];
     
-    [self viewInit];
+    [self trainOrVerifyNumCode:_sst];
+    
+    self.diagView=[[DiagleView alloc]initWithFrame:kScreenBound];//录音界面
+    [self.diagView.cancelButton addTarget:self action:@selector(cancelButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self initialDiagViewRecordTtile];//初始化录音界面的titile
+    
+    [self.view addSubview:self.diagView];
+    
+    if ([_sst  isEqual: VERIFY_SST]) {
+        self.diagView.cancelButton.enabled = NO;
+        self.diagView.cancelButton.tintColor = [UIColor grayColor];
+    }
+    
+//    self.trainVerifyAlert=[[UIAlertView alloc]initWithTitle:@"nihao"
+//                                                    message:nil
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"确定"
+//                                          otherButtonTitles:nil, nil];
+    
+}
 
+#pragma  mark button Handler
+
+-(void)startButtonHandler {
+    if( [self netConnectAble] == NO )
+    {
+        [self.trainVerifyAlert setTitle:@"网络连接异常"];
+        [self.trainVerifyAlert show];
+        return;
+    }
+    
+    self.diagView.startRecButton.enabled=NO;
+    [isvRec startListening];//开始录音
+}
+
+-(void)stopButtonHandler {
+    NSLog(@"stopButtonHandler");
+    [isvRec stopListening];//停止录音
+}
+
+
+-(void)cancelButtonHandler:(id)sender
+{
+    [isvRec cancel];//结束会话
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 
-#pragma mark ButtonHandler
+#pragma  mark iFlyISVDelegate
 
-//重写navigation 的返回按钮
--(void)leftBarButtonHandler:(id)sender
+//正常结果返回回调
+-(void)onResult:(NSDictionary *)dic
 {
-//    [registerView removeFromSuperview];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)textEditEndHandler:(id)sender //点击换行，退出输入法界面
-{
-    [nameField resignFirstResponder];
-}
-
-
-//用户名输入"确定" 按钮
--(void)nameRegisterHandler:(id)sender
-{
-    int  errorFlag=0;
-    NSString *nameString = nameField.text;
+    NSLog(@"onResult");
+    [self.diagView.recognitionView stopAnimating];
+    [self.diagView recordViewInit];
     
-    if( nameString.length < 6 || nameString.length > 18 ){
-        errorFlag=1;  // 长度不对
-    }else{
-        for( int i=0 ; i< nameString.length ; i++ ){
-            char sigleChar=[nameString characterAtIndex:i];
-            NSString *subString=[nameString substringWithRange:NSMakeRange(i, 1)];
-            const char *u8string=[subString UTF8String];
-            if( i ==0 ){
-                if( strlen(u8string) < 3 ){
-                    if( (( sigleChar > 64 && sigleChar < 91 ) || ( sigleChar > 96 && sigleChar <123))==0){
-                        errorFlag=4;    ///* 首个不是字母 */
-                        break;
-                    }
-                }else{
-                    errorFlag=5;        //首个字符是中文或是其他类型字符
-                    break;
-                }
-                continue;
-            }
+    [self resultProcess:dic];
+    //should stop
+//    [self.diagView setRoundButtonCurrentType:@(0)];
+}
 
-            if(strlen(u8string)==3){
-                errorFlag=2;       /*  含有中文*/
-                break;
-            }else if((sigleChar>64 && sigleChar<91)|| (sigleChar>96 && sigleChar <123) || (sigleChar>47 && sigleChar<58) || sigleChar==95)
-            {
-                continue;
-            }else{
-                errorFlag=3;        /* 不满足要求的字符 */
-                break;
-            }
+
+
+//发生错误
+-(void) onError:(IFlySpeechError *) errorCode
+{
+    NSLog(@"onError");
+    [self.diagView.recognitionView stopAnimating];
+    [self.diagView recordViewInit];
+    
+    if( errorCode.errorCode != 0 )
+    {
+        //        self.diagView.startRecButton.enabled=YES;
+//        [self.diagView setRoundButtonCurrentType:@(1)];
+        self.diagView.resultLabel.textColor=[UIColor redColor];
+        self.diagView.resultLabel.text=[NSString stringWithFormat:@"错误码:%d",errorCode.errorCode];
+    }
+    
+}
+
+
+//音量回调
+-(void)onVolumeChanged:(int)volume
+{
+    NSLog(@"onVolumechanged");
+    [self.diagView recordViewChangeWithVolume:volume];
+}
+
+//识别中回调
+-(void)onRecognition
+{
+    NSLog(@"正在识别中");
+    [self performSelectorOnMainThread:@selector(hideRecordView) withObject:nil waitUntilDone:YES];
+    //    [self.diagView.recordView removeFromSuperview];//替代方法
+    [self.diagView.recognitionView startAnimating];
+    
+}
+
+#pragma  mark initial recordTitle
+
+-(void)initialDiagViewRecordTtile //录音小窗口标题设置
+{
+    if( _numCodeArray != nil && _numCodeArray.count !=0 )
+        self.diagView.recordTitleLable.text=[_numCodeArray objectAtIndex:0];
+}
+
+
+#pragma mark result process
+
+//对声纹回调结果进行处理
+-(void)resultProcess:(NSDictionary *)dic
+{
+    if( dic == nil ){
+        NSLog(@"in %s,dic is nil",__func__);
+        return;
+    }
+    
+    if( [self.sst isEqualToString:TRAIN_SST] ){  //训练结果
+        
+        NSNumber *suc=[dic objectForKey:SUC_KEY] ;
+        self.diagView.resultLabel.textColor=[UIColor blackColor];
+        self.diagView.resultLabel.text=[NSString stringWithFormat:@"%d",[suc intValue]];
+        NSNumber *rgn=[dic objectForKey:RGN_KEY];
+        
+        if( [suc intValue] >= [rgn intValue] ){
+            [self.trainVerifyAlert setTitle:@"训练成功"];
+            [self.trainVerifyAlert show];
         }
         
+        
+        if( [suc intValue] < [rgn intValue] ){
+            self.diagView.recordTitleLable.text=[_numCodeArray objectAtIndex:[suc intValue]];
+        }
     }
     
-    if(errorFlag==1){
-        nameLabel.text=@"用户名长度不符合要求";
-    }else if(errorFlag==2 || errorFlag==3 ){
-        nameLabel.text=@"用户名内部含有非法字符";
-    }else if(errorFlag==4 || errorFlag==5){
-        nameLabel.text=@"首字母不是英文字符";
-    }else{
-        authID=[[NSString alloc]initWithString:nameField.text];
-        if( registerView ){ //左侧滑动效果
-            [UIView animateWithDuration:0.4 animations:^{
-                registerView.center=CGPointMake(-registerView.center.x,registerView.center.y);
-            } completion:^(BOOL finished){
-                [registerView removeFromSuperview];
-                }];
-        }
-        self.title=@"声纹测试";
-        settingButt.enabled=YES;
-    }
 }
 
-/* Navigation tool bar 右键 */
-- (void)settingHandler:(id)sender
+#pragma  mark  net detect
+//网络连接判断
+-(BOOL)netConnectAble
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:@"选择密码类型"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"固定密码", @"数字密码", nil];
-    actionSheet.tag = SETTING_TAG;
-    [actionSheet showInView:self.view];
+    if ( [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable ){
+        return NO;
+    }
+    return YES;
 }
 
 
+-(void)hideRecordView
+{
+    [self.diagView.recordView setHidden:YES];
+}
 
+
+#pragma mark - DiagView delegate
+
+- (void)startRecording {
+    [self startButtonHandler];
+}
+
+- (void)stopRecording {
+    [self stopButtonHandler];
+}
 
 //训练模型
 -(void) trainButtonHandler:(id)sender
@@ -222,26 +282,14 @@
     }
     [isvRec cancel];
     
-    [self buttonDisable];
     [isvRec setParameter:TRAIN_SST forKey:KEY_SST];  //  attention isv ++++++++++++++++++++++++++++++++++++
     
-    if( ivppwdt == PWDT_FIXED_CODE ){
-        [self trainOrVerifyFixedCode:TRAIN_SST];
-    }else if( ivppwdt == PWDT_NUM_CODE ){
-        [self trainOrVerifyNumCode:TRAIN_SST];
-    }
-//    else if( ivppwdt == PWDT_FREE_CODE ){
-//        [self trainOrVerifyFreeCode:TRAIN_SST];
-//    }
-    [self buttonEanble];
+    
+    [self trainOrVerifyNumCode:TRAIN_SST];
     
 }
 
-
-
-
-
-
+//
 //验证模型
 -(void)verifyButtonHandler:(UIButton *)sender
 {
@@ -254,218 +302,12 @@
     [isvRec cancel];
     [self buttonDisable];
     
-    if( ivppwdt == PWDT_FIXED_CODE ){
-        [self trainOrVerifyFixedCode:VERIFY_SST];
-    }else if( ivppwdt == PWDT_NUM_CODE ){
-        [self trainOrVerifyNumCode:VERIFY_SST];
-    }
-//    else if( ivppwdt == PWDT_FREE_CODE ){
-//        [self trainOrVerifyFreeCode:VERIFY_SST];
-//    }
-    [self buttonEanble];
-}
-
-
-//删除模型
--(void)deleteButtonHandler:(id)sender
-{
-    if( [self netConnectAble] == NO )
-    {
-        [resultShow setText:@"无网络连接"];
-        [self.view addSubview:resultShow];
-        return;
-    }
     
-    [self buttonDisable];
-    
-    if( ivppwdt == PWDT_FIXED_CODE ){
-        [self startRequestFixedCode:DEL];
-    }else if( ivppwdt == PWDT_NUM_CODE ){
-        [self startRequestNumCode:DEL];
-    }
-//    else if( ivppwdt == PWDT_FREE_CODE ){
-//        [self startRequestFreeCode:DEL];
-//    }
+    [self trainOrVerifyNumCode:VERIFY_SST];
     
     [self buttonEanble];
 }
 
-
-
-//查询模型
-- (void)queryButtonHandler:(id)sender
-{
-    if( [self netConnectAble] == NO )
-    {
-        [resultShow setText:@"无网络连接"];
-        [self.view addSubview:resultShow];
-        return;
-    }//判断网络连接状态
-    
-    [self buttonDisable];
-    
-    if( ivppwdt == PWDT_FIXED_CODE ){
-        [self startRequestFixedCode:QUERY];
-    }else if( ivppwdt == PWDT_NUM_CODE ){
-        [self startRequestNumCode:QUERY];
-    }
-//    else if( ivppwdt == PWDT_FREE_CODE ){
-//        [self startRequestFreeCode:QUERY];
-//    }
-    
-    [self buttonEanble];
-}
-
-
-
-
-#pragma mark UIActionSheetDelegate
-
-// actionsheet 点击处理函数
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self processActionSheet:actionSheet withIndex:buttonIndex];
-}
-
-
--(void)processActionSheet:(UIActionSheet *)actionSheet withIndex:(NSInteger)buttonIndex
-{
-    if( actionSheet.tag == SETTING_TAG ) {//选择固定密码或者是数字密码或者是自由说
-        switch (buttonIndex){
-            case 0:
-                NSLog(@"选择了固定密码");
-                ivppwdt = PWDT_FIXED_CODE;
-                break;
-            case 1:
-                NSLog(@"选择了数字密码");
-                ivppwdt = PWDT_NUM_CODE;
-                break;
-            default:
-                break;
-        }
-        
-    }else if( actionSheet.tag == FIXED_CODE_TRAIN_TAG ){  //选择固定密码的文本密码 /注册
-        if( buttonIndex < actionSheet.numberOfButtons-1 ){
-            NSString *ptString=[fixCodeArray objectAtIndex:buttonIndex];
-            [self defaultSetparam:authID withpdwt: PWDT_FIXED_CODE withptxt:ptString trainorverify:TRAIN_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.fixCodeArray=fixCodeArray;
-            trainController.pwdt=PWDT_FIXED_CODE;
-            trainController.sst=TRAIN_SST;
-            trainController.titleString=ptString;    //设置训练的密码，用于显示在小喇叭上方
-            [self presentViewController:trainController animated:YES completion:nil];
-        }
-        
-    }else if( actionSheet.tag == FIXED_CODE_VERIFY_TAG) {
-        if( buttonIndex < actionSheet.numberOfButtons-1 ){
-            NSString *ptString=[fixCodeArray objectAtIndex:buttonIndex];
-            [self defaultSetparam:authID withpdwt: PWDT_FIXED_CODE withptxt:ptString trainorverify:VERIFY_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.fixCodeArray=fixCodeArray;
-            trainController.pwdt=PWDT_FIXED_CODE;
-            trainController.sst=VERIFY_SST;
-            trainController.titleString=ptString;    //设置训练的密码，用于显示在小喇叭上方
-            [self presentViewController:trainController animated:YES completion:nil];
-        }
-        
-    }else if( actionSheet.tag == FIXED_CODE_QUERY_TAG ){
-        if( buttonIndex < actionSheet.numberOfButtons-1 ){
-            NSString *ptString=[fixCodeArray objectAtIndex:buttonIndex];
-            int err;
-            BOOL ret;
-            ret=[isvRec sendRequest:QUERY authid:authID pwdt:ivppwdt ptxt:ptString vid:nil err:&err]; // attention isv +++++++++++++++++++++++++++
-            [self processRequestResult:QUERY ret:ret err:err];
-        }
-        
-    }else if( actionSheet.tag == FIXED_CODE_DEL_TAG ){
-        if( buttonIndex < actionSheet.numberOfButtons-1 ){
-            NSString *ptString=[fixCodeArray objectAtIndex:buttonIndex];
-            int err;
-            BOOL ret;
-            ret=[isvRec sendRequest:DEL authid:authID pwdt:ivppwdt ptxt:ptString vid:nil err:&err];  // attention isv ++++++++++++++++++++++++++++
-            [self processRequestResult:DEL ret:ret err:err];
-        }
-    }
-    
-}
-
-
-#pragma  mark SYSTEM Delegate
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-
-
-#pragma mark train or verify model
-//声纹默认参数设置
-- (void)defaultSetparam:(NSString *)auth_id withpdwt:(int) pwdt withptxt:(NSString *) ptxt trainorverify:(NSString*)sst
-{
-    if( isvRec != nil ){
-        [isvRec setParameter:@"ivp" forKey:KEY_SUB];
-        [isvRec setParameter:[NSString stringWithFormat:@"%d",pwdt] forKey:KEY_PWDT];
-        [isvRec setParameter:@"50" forKey:KEY_TSD];
-        [isvRec setParameter:@"3000" forKey:KEY_VADTIMEOUT];
-        [isvRec setParameter:@"700" forKey:KEY_TAIL];
-        [isvRec setParameter:ptxt forKey:KEY_PTXT];
-        [isvRec setParameter:auth_id forKey:KEY_AUTHID];
-        [isvRec setParameter:sst forKey:KEY_SST];            /* train or test */
-        [isvRec setParameter:@"180000" forKey:KEY_KEYTIMEOUT];
-        if( pwdt == PWDT_FIXED_CODE || pwdt == PWDT_NUM_CODE ){
-            [isvRec setParameter:@"5" forKey:KEY_RGN];
-        }else{
-            [isvRec setParameter:@"1" forKey:KEY_RGN];
-        }
-    }else{
-        NSLog(@"isvRec is nil\n");
-    }
-    
-}
-
-
-
-/* 判断网络是否连接 */
--(BOOL)netConnectAble
-{
-    if ( [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable ){
-        return NO;
-    }
-    return YES;
-}
-
-
-
-//训练或者验证 固定密码
--(void)trainOrVerifyFixedCode:(NSString *)sst
-{
-    if( ![sst isEqualToString:VERIFY_SST] && ![sst isEqualToString:TRAIN_SST] ){
-        NSLog(@"in %s,sst 参数错误",__func__);
-        return;
-    }
-    
-    fixCodeArray=[self downloadPassworld:PWDT_FIXED_CODE];
-    
-    if( fixCodeArray == nil ){
-        [resultShow setText:@"获取密码失败"];
-        [self.view addSubview:resultShow];
-        return;
-    }
-    
-    if( [sst isEqualToString:VERIFY_SST] ){
-        if( fixCodeArray != nil ){
-            [self generateActionSheetWithArray:fixCodeArray withTag:FIXED_CODE_VERIFY_TAG]; //点击生成的actionsheet元素，在actionSheet中处理
-        }else{
-            NSLog(@"固定密码，获取密码失败");
-        }
-    }else{
-        if( fixCodeArray != nil ){
-            [self generateActionSheetWithArray:fixCodeArray withTag:FIXED_CODE_TRAIN_TAG];
-        }else{
-            NSLog(@"固定密码，获取密码失败");
-        }
-    }
-}
 
 
 //训练或者验证 数字密码
@@ -476,162 +318,46 @@
         return;
     }
     
-    numCodeArray=[self downloadPassworld:ivppwdt];
+    _numCodeArray=[self downloadPassworld:ivppwdt];
     
-    if( numCodeArray == nil ){
+    if( _numCodeArray == nil ){
         [resultShow setText:@"获取密码失败"];
         [self.view addSubview:resultShow];
         return;
     }
     
     if( [sst isEqualToString:VERIFY_SST] ){
-        if( numCodeArray!=nil && numCodeArray.count > 0 ){
-            NSString *ptString=[numCodeArray objectAtIndex:0];
-            [self defaultSetparam:authID withpdwt: PWDT_NUM_CODE withptxt:ptString trainorverify:VERIFY_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.numCodeArray =numCodeArray;
-            trainController.pwdt=PWDT_NUM_CODE;
-            trainController.sst=VERIFY_SST;
-            [self presentViewController:trainController animated:YES completion:nil];
+        if( _numCodeArray!=nil && _numCodeArray.count > 0 ){
+            NSString *ptString=[_numCodeArray objectAtIndex:0];
+            [isvRec setParameter:ptString forKey:KEY_PTXT];
+            [isvRec setParameter:VERIFY_SST forKey:KEY_SST];
+            
         }
         
     }else{
-        if( numCodeArray!=nil && numCodeArray.count > 0 ){
-            NSString *ptString=[self numArrayToString:numCodeArray];
-            [self defaultSetparam:authID withpdwt: PWDT_NUM_CODE withptxt:ptString trainorverify:TRAIN_SST];
-            TrainViewController *trainController=[[TrainViewController alloc]init];
-            trainController.numCodeArray =numCodeArray;
-            trainController.pwdt=PWDT_NUM_CODE;
-            trainController.sst=TRAIN_SST;
-            [self presentViewController:trainController animated:YES completion:nil];
+        if( _numCodeArray!=nil && _numCodeArray.count > 0 ){
+            NSString *ptString=[self numArrayToString:_numCodeArray];
+            [isvRec setParameter:ptString forKey:KEY_PTXT];
+            [isvRec setParameter:TRAIN_SST forKey:KEY_SST];
         }
     }
 }
 
-
-//训练或者验证  自由说
-/*
--(void)trainOrVerifyFreeCode:(NSString *)sst
-{
-    if( ![sst isEqualToString:VERIFY_SST] && ![sst isEqualToString:TRAIN_SST] ){
-        NSLog(@"in %s,sst 参数错误",__func__);
-        return;
-    }
-    
-    if( [sst isEqualToString:VERIFY_SST] ){
-        [self defaultSetparam:authID withpdwt: PWDT_FREE_CODE withptxt:nil trainorverify:VERIFY_SST];
-        TrainViewController *trainController=[[TrainViewController alloc]init];
-        trainController.pwdt=PWDT_FREE_CODE;
-        trainController.sst=VERIFY_SST;
-        [self presentViewController:trainController animated:YES completion:nil];
-        
-    }else{
-        [self defaultSetparam:authID withpdwt: PWDT_FREE_CODE withptxt:nil trainorverify:TRAIN_SST];
-        TrainViewController *trainController=[[TrainViewController alloc]init];
-        trainController.pwdt=PWDT_FREE_CODE;
-        trainController.sst=TRAIN_SST;
-        [self presentViewController:trainController animated:YES completion:nil];
-    }
-}
-*/
-
-
-#pragma mark request  model
-
-//固定密码查询或者删除
--(void) startRequestFixedCode:(NSString *)queryMode
-{
-    fixCodeArray=[self downloadPassworld:PWDT_FIXED_CODE];
-    if( fixCodeArray != nil ){
-        if( [queryMode isEqualToString: QUERY] ){
-            [self generateActionSheetWithArray:fixCodeArray withTag:FIXED_CODE_QUERY_TAG]; //点击生成的actionsheet元素，可进入训练界面
-        }else if( [queryMode isEqualToString: DEL] ){
-            [self generateActionSheetWithArray:fixCodeArray withTag:FIXED_CODE_DEL_TAG];
-        }
-    }else{
-        [resultShow setText:@"获取密码失败"];
-        [self.view addSubview:resultShow];
-        NSLog(@"in %s,固定密码获取密码失败",__func__);
-    }
-}
-
-
-
-//自由说查询或者删除
-/*
--(void)startRequestFreeCode:(NSString *)queryMode
-{
-    if( ![queryMode isEqualToString: QUERY] && ![queryMode isEqualToString:DEL] ){
-        NSLog(@"in %s,queryMode 参数错误",__func__);
-        return;
-    }
-    int err;
-    BOOL ret;
-    
-    ret=[isvRec sendRequest:queryMode authid:authID pwdt:PWDT_FREE_CODE ptxt:nil vid:nil err:&err]; // attention isv ++++++++++++++++++++++++++
-    [self processRequestResult:queryMode ret:ret err:err];
-
-}
- */
-
-
-//数字密码查询或者删除
--(void)startRequestNumCode:(NSString *)queryMode
-{
-    if( ![queryMode isEqualToString: QUERY] && ![queryMode isEqualToString:DEL] ){
-        NSLog(@"in %s,queryMode 参数错误",__func__);
-        return;
-    }
-    int err;
-    BOOL ret;
-    ret=[isvRec sendRequest:queryMode authid:authID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
-    [self processRequestResult:queryMode ret:ret err:err];
-}
-
-//查询或者时删除返回的结果处理
--(void)processRequestResult:(NSString*)requestMode ret:(BOOL)ret err:(int)err
-{
-    if( ![requestMode isEqualToString:DEL] && ![requestMode isEqualToString:QUERY]){
-        NSLog(@"在%s中，queryMode参数错误",__func__);
-        return;
-    }
-    
-    if( [requestMode isEqualToString:QUERY] ){
-        if( err != 0 ){
-            NSLog(@"查询错误，错误码：%d",err);
-            [resultShow setText:[NSString stringWithFormat:@"查询出错！错误码:%d",err]];
-        }else{
-            if( ret == NO ){
-                NSLog(@"模型不存在");
-                [resultShow setText:@"模型不存在"];
-            }else{
-                NSLog(@"查询成功");
-                [resultShow setText:@"模型存在！"];
-            }
-        }
-    }else if(  [requestMode isEqualToString:DEL]){
-        if( err != 0 ){
-            NSLog(@"删除错误，错误码：%d",err);
-            [resultShow setText:[NSString stringWithFormat:@"删除出错！错误码:%d",err]];
-        }else{
-            if( ret == NO ){
-                NSLog(@"模型不存在");
-                [resultShow setText:@"模型不存在"];
-            }else{
-                NSLog(@"删除成功");
-                [resultShow setText:@"删除成功！"];
-            }
-        }
-    }
-    [self.view addSubview:resultShow];
-}
 
 #pragma mark other function
 //下载密码
 -(NSArray*)downloadPassworld:(int)pwdtParam
 {
+//    if( [self netConnectAble] == NO )
+//    {
+//        [resultShow setText:@"无网络连接"];
+//        [self.view addSubview:resultShow];
+//        
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+//
     
-    if( pwdtParam != PWDT_FIXED_CODE && pwdtParam != PWDT_NUM_CODE ){
+    if(pwdtParam != PWDT_NUM_CODE ){
         NSLog(@"in %s,pwdtParam 参数错误",__func__);
         return nil;
     }
@@ -643,7 +369,7 @@
     }
     
     return tmpArray;   //返回下载
-   
+    
 }
 
 
@@ -669,188 +395,41 @@
 
 
 
-//根据从网络上获得的密码，生成一个actionsheet并显示所有可用的固定密码
--(BOOL)generateActionSheetWithArray:(NSArray *)arrayParam withTag:(int)tag
-{
-    if( arrayParam ==nil || arrayParam.count == 0 ){
-        NSLog(@"在%s中，文本密码为空，无法生成actionsheet",__func__);
-    }
-    
-    UIActionSheet *showSheet=[[UIActionSheet alloc] initWithTitle:@"选择一个文本密码"
-                                             delegate:self
-                                    cancelButtonTitle:nil
-                               destructiveButtonTitle:nil
-                                    otherButtonTitles:nil,nil];
-    showSheet.tag=tag;
-
-    for(int i =0; i< arrayParam.count; i++){
-        [showSheet addButtonWithTitle:[arrayParam objectAtIndex:i]];
-    }
-    
-    [showSheet addButtonWithTitle:@"取消"];
-    [showSheet showInView:self.view];
-    return YES;
-    
-}
-
-
-
 #pragma  mark  button enable or disable
 -(void)buttonEanble //禁止四个button
 {
     trainButt.enabled = YES;
-    deleteButt.enabled = YES;
     verifyButt.enabled = YES;
-    queryButt.enabled = YES;
 }
 
 -(void)buttonDisable //允许4个button
 {
     trainButt.enabled = NO;
-    deleteButt.enabled = NO;
     verifyButt.enabled = NO;
-    queryButt.enabled = NO;
 }
 
-
-
-
-
-
-#pragma mark view init
--(void)viewInit
+//声纹默认参数设置
+- (void)defaultSetparam:(NSString *)auth_id withpdwt:(int) pwdt withptxt:(NSString *) ptxt trainorverify:(NSString*)sst
 {
-    self.title = @"用户名";
-    self.view.backgroundColor = [UIColor whiteColor];
-
+    if( isvRec != nil ){
+        [isvRec setParameter:@"ivp" forKey:KEY_SUB];
+        [isvRec setParameter:[NSString stringWithFormat:@"%d",pwdt] forKey:KEY_PWDT];
+        [isvRec setParameter:@"50" forKey:KEY_TSD];
+        [isvRec setParameter:@"3000" forKey:KEY_VADTIMEOUT];
+        [isvRec setParameter:@"700" forKey:KEY_TAIL];
+        [isvRec setParameter:ptxt forKey:KEY_PTXT];
+        [isvRec setParameter:auth_id forKey:KEY_AUTHID];
+        [isvRec setParameter:sst forKey:KEY_SST];            /* train or test */
+        [isvRec setParameter:@"180000" forKey:KEY_KEYTIMEOUT];
+        if( pwdt == PWDT_NUM_CODE ){
+            [isvRec setParameter:@"5" forKey:KEY_RGN];
+        }else{
+            [isvRec setParameter:@"1" forKey:KEY_RGN];
+        }
+    }else{
+        NSLog(@"isvRec is nil\n");
+    }
     
-    settingButt = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStyleBordered target:self action:@selector(settingHandler:)];
-    self.navigationItem.rightBarButtonItem = settingButt;
-    settingButt.enabled=NO;
-    
-    
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonHandler:)];
-    CGRect rect=[[UIScreen mainScreen] bounds];
-    CGSize size = rect.size;
-    screenWidth = size.width;
-    screenHeight=size.height;
-    
-    UITextView* thumbView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth/2-self.view.frame.size.width/2 +Margin, Margin, self.view.frame.size.width-2*Margin, 260)];
-    thumbView.text = @"1.点击右上角\"设置\"按钮选择声纹类型\n\n2.点击\"训练模型\"按钮，通过训练向服务器注册声纹模型\n\n3.在训练模型界面，如果是固定密码或者是数字密码类型，点击\"开始录音\"按钮并朗读麦克风图标上方文字，朗读完等待1秒后点击\"停止录音\"，重复直到下方显示的数字为5\n\n4.训练成功后，可以点击\"识别声纹\"按钮进行验证\n\n5.可以点击\"删除模型\"或者是\"查询模型\"进行删除或是查询声纹模型操作";
-    thumbView.layer.borderWidth = 1;
-    thumbView.layer.cornerRadius = 8;
-    
-    thumbView.editable = NO;
-    thumbView.font = [UIFont systemFontOfSize:15.0f];
-    [self.view addSubview:thumbView];
-    
-    
-    
-    
-    
-    UIView *trainButtView=[[UIView alloc]initWithFrame:CGRectMake(4, 289, 140.5, 43.5)];
-    trainButtView.backgroundColor=[UIColor grayColor];
-    trainButt= [UIButton buttonWithType:UIButtonTypeCustom];
-    [trainButt setBackgroundImage:[UIImage imageNamed:@"speekNormal"] forState:UIControlStateNormal];
-    [trainButt setBackgroundImage:[UIImage imageNamed:@"speekDone"] forState:UIControlStateHighlighted];
-    [trainButt setBackgroundImage:[UIImage imageNamed:@"cancelDone"] forState:UIControlStateDisabled];
-    [trainButt setFrame:CGRectMake(0.5 , 0, 140, 43)];
-    [trainButt setTitle:@"训练模型" forState:UIControlStateNormal];
-    [trainButt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [trainButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateHighlighted];
-    [trainButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateDisabled];
-    [trainButt addTarget:self action:@selector(trainButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
-    trainButt.exclusiveTouch=YES;//训练按钮
-    [trainButtView addSubview:trainButt];
-    [self.view  addSubview: trainButtView];
-    
-    
-    
-    UIView *verifyButtView=[[UIView alloc]initWithFrame:CGRectMake(screenWidth-144.5, 289, 140.5, 43.5)];//width 135.5
-    verifyButtView.backgroundColor=[UIColor grayColor];
-    verifyButt= [UIButton buttonWithType:UIButtonTypeCustom];
-    [verifyButt setBackgroundImage:[UIImage imageNamed:@"speekNormal"] forState:UIControlStateNormal];
-    [verifyButt setBackgroundImage:[UIImage imageNamed:@"speekDone"] forState:UIControlStateHighlighted];
-    [verifyButt setBackgroundImage:[UIImage imageNamed:@"cancelDone"] forState:UIControlStateDisabled];
-    [verifyButt setFrame:CGRectMake(0.5 , 0, 140, 43)];
-    [verifyButt setTitle:@"识别声纹" forState:UIControlStateNormal];
-    [verifyButt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [verifyButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateHighlighted];
-    [verifyButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateDisabled];
-    [verifyButt addTarget:self action:@selector(verifyButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
-    verifyButt.exclusiveTouch=YES;//验证模型按钮
-    [verifyButtView addSubview:verifyButt];
-    [self.view  addSubview: verifyButtView];
-    
-    
-    
-    UIView *deleteButtView=[[UIView alloc]initWithFrame:CGRectMake(4, 340.5, 140.5, 43.5)];//width 135.5
-    deleteButtView.backgroundColor=[UIColor grayColor];
-    deleteButt= [UIButton buttonWithType:UIButtonTypeCustom];
-    [deleteButt setBackgroundImage:[UIImage imageNamed:@"speekNormal"] forState:UIControlStateNormal];
-    [deleteButt setBackgroundImage:[UIImage imageNamed:@"speekDone"] forState:UIControlStateHighlighted];
-    [deleteButt setBackgroundImage:[UIImage imageNamed:@"cancelDone"] forState:UIControlStateDisabled];
-    [deleteButt setFrame:CGRectMake(0.5 , 0, 140, 43)];
-    [deleteButt setTitle:@"删除模型" forState:UIControlStateNormal];
-    [deleteButt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [deleteButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateHighlighted];
-    [deleteButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateDisabled];
-    [deleteButt addTarget:self action:@selector(deleteButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
-    deleteButt.exclusiveTouch=YES;//删除模型按钮
-    [deleteButtView addSubview:deleteButt];
-    [self.view  addSubview: deleteButtView];
-    
-    
-    UIView *queryButtView=[[UIView alloc]initWithFrame:CGRectMake(screenWidth-144.5, 340.5, 140.5, 43.5)];//width 135.5
-    queryButtView.backgroundColor=[UIColor grayColor];
-    queryButt= [UIButton buttonWithType:UIButtonTypeCustom];
-    [queryButt setBackgroundImage:[UIImage imageNamed:@"speekNormal"] forState:UIControlStateNormal];
-    [queryButt setBackgroundImage:[UIImage imageNamed:@"speekDone"] forState:UIControlStateHighlighted];
-    [queryButt setBackgroundImage:[UIImage imageNamed:@"cancelDone"] forState:UIControlStateDisabled];
-    
-    [queryButt setFrame:CGRectMake(0.5 , 0, 140, 43)];
-    [queryButt setTitle:@"查询模型" forState:UIControlStateNormal];
-    [queryButt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [queryButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateHighlighted];
-    [queryButt setTitleColor:[UIColor colorWithRed:172/255.0 green:172/255.0 blue:172/255.0 alpha:1] forState:UIControlStateDisabled];
-    [queryButt addTarget:self action:@selector(queryButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
-    queryButt.exclusiveTouch=YES;//查询模型按钮
-    [queryButtView addSubview:queryButt];
-    [self.view  addSubview: queryButtView];
-    
-    resultShow =  [[PopupView alloc]initWithFrame:CGRectMake(100, 240, 0, 0)];
-    resultShow.ParentView=self.view;    // 渐变结果显示
-
-    authID=[[NSString alloc]init];    // 用户名
-    
-
-    registerView=[[UIView alloc]initWithFrame:CGRectMake(0,0,screenWidth,screenHeight)];
-    registerView.backgroundColor=[UIColor whiteColor];   // 输入用户名界面
-    
-    UIView *namebackView=[[UIView alloc]initWithFrame:CGRectMake(screenWidth/2-120-Slide/2,30-Slide/2,240+Slide,25+Slide)];
-    namebackView.backgroundColor=[UIColor blackColor];
-    [registerView addSubview:namebackView];
-    
-    nameField=[[UITextField alloc]initWithFrame:CGRectMake(screenWidth/2-120,30,240,25)];
-    [nameField setBackgroundColor:[UIColor whiteColor]];
-    [nameField addTarget:self action:@selector(textEditEndHandler:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    [registerView addSubview:nameField];
-    
-    UIButton *nameButt=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [nameButt setFrame:CGRectMake(screenWidth/2-40, 65, 80, 25)];
-    [nameButt setTitle:@"确定" forState:UIControlStateNormal];
-    [nameButt addTarget:self action:@selector(nameRegisterHandler:) forControlEvents:UIControlEventTouchUpInside];
-    [nameButt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [registerView addSubview:nameButt];
-    
-    nameLabel= [[UILabel alloc]initWithFrame:CGRectMake(0, 120, screenWidth, 40)];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
-    nameLabel.font = [UIFont boldSystemFontOfSize:15];
-    nameLabel.backgroundColor = [UIColor clearColor];
-    nameLabel.text = @"请输入由字母、数字、下划线组成的用户名";
-    [registerView addSubview:nameLabel];
-    
-    [self.view addSubview:registerView];
-
 }
+
 @end

@@ -1,0 +1,6 @@
+framework module AYVibrantButton {
+  umbrella header "AYVibrantButton-umbrella.h"
+
+  export *
+  module * { export * }
+}

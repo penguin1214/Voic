@@ -25,6 +25,7 @@
 #import "SDBasicViewContoller.h"
 #import "SDHomeViewController.h"
 #import "SDAssetsTableViewController.h"
+#import "MBProgressHUD.h"
 
 @implementation SDFrameTabBarController
 
@@ -33,6 +34,8 @@
     [super viewDidLoad];
     
     [self setupChildControllers];
+    
+    self.selectedIndex = 1;
 }
 
 - (void)setupChildControllers
@@ -50,5 +53,26 @@
     navVc.tabBarItem.image = [UIImage imageNamed:name];
     navVc.tabBarItem.selectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Sel", name]];
     [self addChildViewController:navVc];
+}
+
+-(void)toast:(NSString *)title
+{
+    int seconds = 3;
+    [self toast:title seconds:seconds];
+}
+
+-(void)toast:(NSString *)title seconds:(int)seconds
+{
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    HUD.detailsLabelText = title;
+    HUD.mode = MBProgressHUDModeText;
+    
+
+    [HUD showAnimated:YES whileExecutingBlock:^{
+        sleep(seconds);
+    } completionBlock:^{
+        [HUD removeFromSuperview];
+    }];
 }
 @end
