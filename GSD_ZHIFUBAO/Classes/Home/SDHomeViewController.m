@@ -30,6 +30,7 @@
 #import "SDGridItemCacheTool.h"
 #import "AddItemViewController.h"
 #import "DeviceInfo.h"
+#import "CommandController.h"
 
 //#define kHomeHeaderViewHeight 110
 #define kHomeHeaderViewHeight 80
@@ -121,6 +122,9 @@
 
 - (void)commandBtnClicked {
     NSLog(@"command button clicked");
+    CommandController* comVc = [[CommandController alloc] init];
+    comVc.title = @"发送命令";
+    [self.navigationController pushViewController:comVc animated:YES];
 }
 
 -(SDHomeGridView*)mainView{

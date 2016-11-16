@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F04967C1DDC3F8B007F02CE /* CommandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F04967B1DDC3F8A007F02CE /* CommandController.m */; };
 		2F069A0F1DCCE277004215C9 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A0D1DCCE277004215C9 /* MOBFoundation.framework */; };
 		2F069A101DCCE277004215C9 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A0E1DCCE277004215C9 /* SMS_SDK.framework */; };
 		2F069A211DCCE2E2004215C9 /* UserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F069A1A1DCCE2E2004215C9 /* UserDefaultUtil.m */; };
@@ -160,6 +161,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F04967A1DDC3F8A007F02CE /* CommandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandController.h; sourceTree = "<group>"; };
+		2F04967B1DDC3F8A007F02CE /* CommandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandController.m; sourceTree = "<group>"; };
 		2F069A0B1DCCE1E2004215C9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2F069A0D1DCCE277004215C9 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
 		2F069A0E1DCCE277004215C9 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
@@ -614,6 +617,8 @@
 		2F8D46681DCF717500E613E3 /* Command */ = {
 			isa = PBXGroup;
 			children = (
+				2F04967A1DDC3F8A007F02CE /* CommandController.h */,
+				2F04967B1DDC3F8A007F02CE /* CommandController.m */,
 			);
 			name = Command;
 			sourceTree = "<group>";
@@ -1356,6 +1361,7 @@
 				2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */,
 				2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */,
 				2F3013F11DCDCB1500E8B5F7 /* AlertView.m in Sources */,
+				2F04967C1DDC3F8B007F02CE /* CommandController.m in Sources */,
 				2F069A3D1DCCE457004215C9 /* NSString+MD5.m in Sources */,
 				9969DE161B1ECFD900723888 /* SDHomeGridItemModel.m in Sources */,
 				2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */,
