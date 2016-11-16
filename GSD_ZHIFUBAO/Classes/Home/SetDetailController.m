@@ -11,6 +11,8 @@
 #import "SDGridItemCacheTool.h"
 #import "DeviceInfo.h"
 #import "HRColorPickerView.h"
+#import "CommunicationManager.h"
+#import "ProfileManager.h"
 
 #define kUserDefaultDeviceTitleKey @"title"
 #define kUserDefaultDeviceImageResStringKey @"imageResString"
@@ -25,6 +27,8 @@
 @property (nonatomic, strong) NSString* imgResString;
 
 @property (nonatomic, strong) HRColorPickerView* colorPickerView;
+
+@property (nonatomic, strong) NSMutableDictionary* sendedPair;
 
 @end
 
@@ -121,6 +125,7 @@
         if ([tableVC check]) {
             NSArray* arr = [tableVC collectDetail];
             [self.colorStatPair setObject:arr forKey:tableVC.tag];
+            [self.sendedPair setObject:arr forKey:[tableVC.tag stringValue]];
         }else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"设置未完成" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
@@ -132,6 +137,21 @@
     }
     
     _deviceInfo.colorStatPair = _colorStatPair;
+    
+    //发送设备信息到服务器并获取id
+    [CommunicationManager addDeviceWithTitle:_deviceInfo.title image:_deviceInfo.imageResString currentStat:_deviceInfo.currentStat colorStatPair:self.sendedPair success:^(BOOL result, NSString *message, NSDictionary *data) {
+        if (!result) {
+            NSLog(@"%@", message);
+            //data
+            NSString* _device_id = [data objectForKey:kResponseDeviceID];
+            
+            //store device id
+            _deviceInfo.deviceID = @([_device_id integerValue]);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
     
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
     

@@ -16,6 +16,6 @@
 //XF
 #define kXFAPPID                @"57ba8983"
 
-#define kModelSugar             @"oiwrjfds"
+#define kModelSugar             @"oiwrj"    //5位
 
 #endif /* KeyMacro_h */

@@ -24,5 +24,6 @@
 #define kResponseUserIDKey      @"user_id"
 #define kResponseUserAuthToken  @"auth_token"
 #define kResponseUserGridItems  @"grid_items"
+#define kResponseDeviceID       @"device_id"
 
 #endif /* CommonMacro_h */

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString* userPhone;
 @property (strong, nonatomic) NSString* authToken;
 @property (strong, nonatomic) NSString* voiceID;
+@property (strong, nonatomic) NSString* deviceID;
 
 + (instancetype)sharedInstance;
 
@@ -31,6 +32,8 @@
 
 - (NSString*)getVoiceID;
 
+- (NSString*)getDeviceID;
+
 -(void)setUserID:(NSString *)userID;
 
 -(void)setUserPhone:(NSString *)userPhone;
@@ -40,5 +43,7 @@
 -(void)setVoiceID:(NSString *)voiceID;
 
 -(void)setGridItems:(NSArray*)gridItems;
+
+-(void)setVoiceIDWithSugar;
 
 @end

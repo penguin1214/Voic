@@ -8,6 +8,7 @@
 
 #import "DeviceInfo.h"
 
+#define kUserDefaultDeviceIDKey    @"deviceID"
 #define kUserDefaultDeviceTitleKey @"title"
 #define kUserDefaultDeviceImageResStringKey @"imageResString"
 #define KUserDefaultDeviceCurrentStatKey @"currentStat"
@@ -17,6 +18,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
+        _deviceID = [aDecoder decodeObjectForKey:kUserDefaultDeviceIDKey];
         _title = [aDecoder decodeObjectForKey:kUserDefaultDeviceTitleKey];
         _imageResString = [aDecoder decodeObjectForKey:kUserDefaultDeviceImageResStringKey];
         _currentStat = [aDecoder decodeObjectForKey:KUserDefaultDeviceCurrentStatKey];
@@ -26,6 +28,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_deviceID forKey:kUserDefaultDeviceIDKey];
     [aCoder encodeObject:_title forKey:kUserDefaultDeviceTitleKey];
     [aCoder encodeObject:_imageResString forKey:kUserDefaultDeviceImageResStringKey];
     [aCoder encodeObject:_currentStat forKey:KUserDefaultDeviceCurrentStatKey];

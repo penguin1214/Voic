@@ -91,9 +91,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-
-#warning TEST CODE!!!!!!!!!!!!!!!!
-    [[ProfileManager sharedInstance] setVoiceID:@""];
+    
+//    voiceID = [[ProfileManager sharedInstance] getVoiceID];
     
     if ([[ProfileManager sharedInstance] checkLogin]) {
         if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
@@ -104,7 +103,7 @@
                 [self toast:@"无网络连接，无法录入声纹"];
                 return;
             }
-
+            
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
                 
@@ -112,7 +111,7 @@
                 iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
                 nvp.sst = TRAIN_SST;
                 [self presentViewController:nvp animated:YES completion:nil];
-
+                
             }];
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
@@ -153,26 +152,20 @@
     
     self.cellClass = [SDAssetsTableViewControllerCell class];
     
-    //generate voice id
-    if (![[ProfileManager sharedInstance] getVoiceID]) {
-        //no voice id generated
-        voiceID = [[NSString alloc] initWithString:[[[ProfileManager sharedInstance] getUserPhone] stringByAppendingString:kModelSugar]];
-        [[ProfileManager sharedInstance] setVoiceID:voiceID];
-    }else{
-        voiceID = [[NSString alloc] initWithString:[[ProfileManager sharedInstance] getVoiceID]];
-    }
+    
+//    voiceID = [[NSString alloc] initWithString:[[ProfileManager sharedInstance] getVoiceID]];
     
     isvRec = [IFlyISVRecognizer sharedInstance];
-
+    
     [self setupModel];
     [self setUpHeader];
     [self setUpFooter];
     
     //check wheather voice model exists.
-//    int err;
-//    BOOL ret;
-//    ret=[isvRec sendRequest:QUERY authid:voiceID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
-//    [self processRequestResult:QUERY ret:ret err:err];
+    //    int err;
+    //    BOOL ret;
+    //    ret=[isvRec sendRequest:QUERY authid:voiceID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
+    //    [self processRequestResult:QUERY ret:ret err:err];
     
     NSLog(@"view loaded");
 }
@@ -193,7 +186,7 @@
 {
     // section 0 的model
     SDAssetsTableViewControllerCellModel *model01 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"声纹" iconImageName:@"20000032Icon" destinationControllerClass:[VoiceModelController class]];
-
+    
     SDAssetsTableViewControllerCellModel *model02 = [SDAssetsTableViewControllerCellModel modelWithTitle:@"指纹" iconImageName:@"20000059Icon" destinationControllerClass:[VoiceModelController class]];
     
     // section 1 的model
@@ -251,10 +244,10 @@
         }else{
             if( ret == NO ){
                 NSLog(@"模型不存在");
-//                [resultShow setText:@"模型不存在"];
+                //                [resultShow setText:@"模型不存在"];
             }else{
                 NSLog(@"查询成功");
-//                [resultShow setText:@"模型存在！"];
+                //                [resultShow setText:@"模型存在！"];
             }
         }
     }else if(  [requestMode isEqualToString:DEL]){
@@ -270,6 +263,7 @@
                 NSLog(@"模型不存在");
                 [self toast:@"模型不存在"];
             }else{
+                [[ProfileManager sharedInstance] setVoiceID:@""];
                 NSLog(@"删除成功");
                 [self toast:@"删除成功"];
             }
@@ -285,7 +279,7 @@
         [self toast:@"not internet connection"];
         return;
     }
-
+    
     [self startRequestNumCode:DEL];
 }
 
@@ -325,7 +319,7 @@
 }
 
 
-#pragma mark - delegate 
+#pragma mark - delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -367,6 +361,8 @@
     static int index;
     NSLog(@"recv bcast %d", index++);
     
+    voiceID = [[NSString alloc] initWithString:[kModelSugar stringByAppendingString:[[ProfileManager sharedInstance] getUserPhone]]];
+    
     // 取得广播内容
     NSDictionary *dict = [notify userInfo];
     NSString *name = [dict objectForKey:@"NotifyName"];
@@ -379,7 +375,7 @@
         }
         
         [self startRequestNumCode:DEL];
- 
+        
     }
 }
 

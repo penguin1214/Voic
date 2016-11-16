@@ -10,6 +10,7 @@
 
 @interface DeviceInfo : NSObject <NSCoding>
 
+@property (nonatomic, retain) NSNumber* deviceID;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* imageResString;
 @property (nonatomic, retain) NSNumber* currentStat;

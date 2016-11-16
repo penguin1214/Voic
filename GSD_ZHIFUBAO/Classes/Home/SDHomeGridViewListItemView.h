@@ -26,6 +26,8 @@
 
 @interface SDHomeGridViewListItemView : UIView
 
+@property (nonatomic, strong) NSArray* colorArray;
+
 @property (nonatomic, strong) SDHomeGridItemModel *itemModel;
 @property (nonatomic, assign) BOOL hidenIcon;
 

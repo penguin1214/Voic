@@ -15,4 +15,11 @@
 // application color scheme
 #define kColorMainGreen   [UIColor hexColor:@"77e0e9"]
 #define kColorBackGray    [UIColor hexColor:@"f8f8f8"]
+
+#define kColorDeviceRed   [UIColor hexColor:@"FF8A80"]
+#define kColorDeviceYellow [UIColor hexColor:@"FFEE58"]
+#define kColorDeviceGreen   [UIColor hexColor:@"76FF03"]
+#define kColorDeviceBlue   [UIColor hexColor:@"40C4FF"]
+
+
 #endif /* ColorMacro_h */

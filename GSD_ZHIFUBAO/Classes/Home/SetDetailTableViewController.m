@@ -20,10 +20,11 @@
 @property (nonatomic, strong) NSString* statName;
 @property (nonatomic, strong) UITextField* statusTextField;
 @property (nonatomic, strong) UIButton* button;
-@property (nonatomic, strong) UIColor* statColor;
+@property (nonatomic, strong) NSNumber* statColor;
 @property (nonatomic, strong) NSNumber* pushable;
 
 @property (nonatomic, strong) MKDropdownMenu* colorPicker;
+@property (nonatomic, strong) NSArray* colorArray;
 
 @end
 
@@ -40,7 +41,8 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [UIView new];
-    self.pushable = 0;
+    self.pushable = @(0);
+    self.colorArray = @[@"红色", @"黄色", @"绿色", @"蓝色"];
     //        NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     //        [nc addObserver:self selector:@selector(recvNotif:) name:@"Check" object:nil];
     
@@ -130,8 +132,11 @@
             }
             else {
 #warning color picker not set
-                self.statColor = [UIColor redColor];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                _colorPicker = [[MKDropdownMenu alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+                _colorPicker.dataSource = self;
+                _colorPicker.delegate = self;
+                _colorPicker.backgroundColor = kColorWhite;
+                [cell addSubview:_colorPicker];
             }
         }else {
             cell.textLabel.text = @"是否推送状态";
@@ -147,7 +152,7 @@
             cell.textLabel.text = @"状态名称";
         }
         else {
-            cell.textLabel.text = @"状态颜色";
+            //            cell.textLabel.text = @"状态颜色";
         }
     }
     
@@ -157,11 +162,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath section] == 0) {
         if ([indexPath row] == 1) {
-            _colorPicker = [[MKDropdownMenu alloc] initWithFrame:CGRectMake(50, 70, 300, 44)];
-            _colorPicker.dataSource = self;
-            _colorPicker.delegate = self;
-            _colorPicker.backgroundColor = kColorWhite;
-            [self.view addSubview:_colorPicker];
+            
         }
     }
 }
@@ -181,23 +182,36 @@
 }
 
 - (NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForComponent:(NSInteger)component {
-    return [[NSAttributedString alloc] initWithString:@"red"
+    if (self.statColor) {
+        return [[NSAttributedString alloc] initWithString:[self.colorArray objectAtIndex:[self.statColor integerValue]]
+                                               attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightRegular],
+                                                            NSForegroundColorAttributeName: [UIColor blackColor]}];
+    }else {
+    return [[NSAttributedString alloc] initWithString:@"请选择状态颜色"
                                            attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightRegular],
-                                                        NSForegroundColorAttributeName: kColorGray}];
+                                                        NSForegroundColorAttributeName: [UIColor blackColor]}];
+    }
 }
 
 -(NSAttributedString *)dropdownMenu:(MKDropdownMenu *)dropdownMenu attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSArray* titles = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
-    NSAttributedString* title = [[NSAttributedString alloc] initWithString:titles[row] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightLight],
-                                                                                                    NSForegroundColorAttributeName: [UIColor grayColor]}];
+    //    NSArray* titles = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", @"4", nil];
+    
+    NSAttributedString* title = [[NSAttributedString alloc] initWithString:self.colorArray[row] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20 weight:UIFontWeightLight],
+                                                                                                             NSForegroundColorAttributeName: [UIColor grayColor]}];
     return title;
     
 }
 
-- (void)didChangeColor:(UIColor*)color {
-    self.statColor = color;
-    NSLog(@"change");
+- (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.statColor = @(row);
+    [dropdownMenu closeAllComponentsAnimated:YES];
+    [dropdownMenu reloadComponent:0];
 }
+
+//- (void)didChangeColor:(UIColor*)color {
+//    self.statColor = color;
+//    NSLog(@"change");
+//}
 
 //- (void)finishSelectColor {
 //    [self.button removeFromSuperview];

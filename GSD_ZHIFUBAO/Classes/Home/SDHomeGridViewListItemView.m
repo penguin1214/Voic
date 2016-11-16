@@ -47,6 +47,8 @@
 {
     self.backgroundColor = [UIColor whiteColor];
     
+    self.colorArray = [NSArray arrayWithObjects:kColorDeviceRed, kColorDeviceYellow, kColorDeviceGreen, kColorMainGreen, nil];
+    
     SDHomeGridViewListItemViewButton *button = [[SDHomeGridViewListItemViewButton alloc] init];
     [button addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
@@ -104,7 +106,8 @@
     _itemModel = itemModel;
     
 //    NSString* t = [[NSString alloc] initWithFormat:@"%@[测试]", itemModel.title];
-        NSString* t = [[NSString alloc] initWithFormat:@"%@[%@]", itemModel.title, itemModel.colorStatPair[itemModel.currentStat][kTitleIndexInPair]];
+    NSString* st = [itemModel.colorStatPair objectForKey:itemModel.currentStat][kTitleIndexInPair];
+        NSString* t = [[NSString alloc] initWithFormat:@"%@[%@]", itemModel.title, st];
     
     if (itemModel.title) {
         [_button setTitle:t forState:UIControlStateNormal];
@@ -116,8 +119,10 @@
         if ([itemModel.imageResString hasPrefix:@"http:"]) {
             [_button setImageWithURL:[NSURL URLWithString:itemModel.imageResString] forState:UIControlStateNormal placeholderImage:nil];
         } else {
-            itemModel.currentStat = @(0);
-            [_button setImage:[UIImage imageWithIcon:itemModel.imageResString backgroundColor:kColorWhite iconColor:[itemModel.colorStatPair objectForKey:itemModel.currentStat][kColorIndexInPair] fontSize:50] forState:UIControlStateNormal];
+//            itemModel.currentStat = @(0);
+            NSNumber* i = [itemModel.colorStatPair objectForKey:itemModel.currentStat][kColorIndexInPair];
+            UIColor* col = [self.colorArray objectAtIndex:[i integerValue]];
+            [_button setImage:[UIImage imageWithIcon:itemModel.imageResString backgroundColor:kColorWhite iconColor:[self.colorArray objectAtIndex:[[itemModel.colorStatPair objectForKey:itemModel.currentStat][kColorIndexInPair] integerValue]] fontSize:50] forState:UIControlStateNormal];
             
 //            [_button setImage:[UIImage imageWithIcon:itemModel.imageResString backgroundColor:kColorWhite iconColor:[UIColor redColor] fontSize:50] forState:UIControlStateNormal];
             

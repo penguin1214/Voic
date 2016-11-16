@@ -10,6 +10,7 @@
 #import "RegPhoneView.h"
 #import "CommunicationManager.h"
 #import "FormatUtil.h"
+#import "ProfileManager.h"
 
 @interface RegisterController (){
     RegPhoneView* _vRegView;
@@ -56,8 +57,17 @@
     [CommunicationManager registerWithPhone:phone password:password success:^(BOOL result, NSString *message, NSDictionary* data) {
         if (!result) {
             NSLog(@"%@", message);
-            //            NSString* token = [data objectForKey:@"auth_token"];
-            //            [[ProfileManager sharedInstance] setAuthToken:token];
+            
+            [[ProfileManager sharedInstance] setUserPhone:phone];
+            
+            //删除模型
+            NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+            
+            NSString* notifyName = @"deleteModel";
+            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+            
+            [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
+            
             [self toast:@"注册成功"];
             [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
         }

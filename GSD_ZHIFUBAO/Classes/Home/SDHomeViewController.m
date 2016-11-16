@@ -147,6 +147,7 @@
         DeviceInfo* deviceInfo = [NSKeyedUnarchiver unarchiveObjectWithData:aDevice];
         SDHomeGridItemModel *model = [[SDHomeGridItemModel alloc] init];
         model.destinationClass = [SDBasicViewContoller class];
+        model.deviceID = deviceInfo.deviceID;
         model.imageResString = deviceInfo.imageResString;
         model.title = deviceInfo.title;
         model.currentStat = deviceInfo.currentStat;

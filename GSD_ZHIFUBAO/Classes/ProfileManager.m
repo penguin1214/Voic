@@ -44,6 +44,10 @@
 
 -(void)logOut{
     self.authToken = @"";
+    
+    //将数据存放到服务器
+    
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kProfileUserID];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kProfileAuthToken];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kProfileUserPhone];
@@ -75,11 +79,11 @@
 
 - (NSString *)getUserID{
     return @"1";
-//    return [UserDefaultUtil getObjectBykey:kProfileUserID];
+    //    return [UserDefaultUtil getObjectBykey:kProfileUserID];
 }
 
 -(NSString *)getUserPhone{
-//    return [UserDefaultUtil getObjectBykey:kProfileUserPhone];
+    //    return [UserDefaultUtil getObjectBykey:kProfileUserPhone];
     return @"18349201941";
 }
 
@@ -89,11 +93,23 @@
 }
 
 -(NSString*)getVoiceID{
-    return [UserDefaultUtil getObjectBykey:kProfileVoiceID];
+    
+    NSString* voiceID = [UserDefaultUtil getObjectBykey:kProfileVoiceID];
+
+    return voiceID;
+}
+
+- (NSString*)getDeviceID {
+    return [UserDefaultUtil getObjectBykey:kProfileDeviceID];
 }
 
 -(void)setGridItems:(NSArray*)gridItems {
     [SDGridItemCacheTool saveItemsArray:gridItems];
+}
+
+-(void)setVoiceIDWithSugar {
+             NSString* voiceID = [[NSString alloc] initWithString:[kModelSugar stringByAppendingString:[[ProfileManager sharedInstance] getUserPhone]]];
+            [[ProfileManager sharedInstance] setVoiceID:voiceID];
 }
 
 @end

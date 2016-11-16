@@ -48,6 +48,8 @@
 #define  TRAIN_SST          @"train"
 #define  VERIFY_SST         @"verify"
 
+#define kErrModelNotExist   10116
+
 @interface  iFlyNvpViewController()
 {
     IFlyISVRecognizer      *isvRec;     //atention 声纹类的单例模式 atention  +++++++++++++++++++++++++++++++
@@ -92,8 +94,8 @@
     [super viewDidLoad];
     
     voiceID = [NSString new];
-    //    voiceID = [[ProfileManager sharedInstance] voiceID];
-    voiceID = @"YANGJINGLEI1test";
+    
+    voiceID = [[NSString alloc] initWithString:[kModelSugar stringByAppendingString:[[ProfileManager sharedInstance] getUserPhone]]];
     
     isvRec=[IFlyISVRecognizer sharedInstance];    // 创建声纹对象 attention isv +++++++++++++++++++++++++++++++++++++
     isvRec.delegate = self;
@@ -111,6 +113,8 @@
     self.diagView=[[DiagleView alloc]initWithFrame:kScreenBound];//录音界面
     [self.diagView.cancelButton addTarget:self action:@selector(cancelButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self initialDiagViewRecordTtile];//初始化录音界面的titile
+    [self.diagView.startRecButton addTarget:self action:@selector(startButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.diagView.stopRecButton  addTarget:self action:@selector(stopButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.diagView];
     
@@ -119,17 +123,18 @@
         self.diagView.cancelButton.tintColor = [UIColor grayColor];
     }
     
-//    self.trainVerifyAlert=[[UIAlertView alloc]initWithTitle:@"nihao"
-//                                                    message:nil
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"确定"
-//                                          otherButtonTitles:nil, nil];
+    self.trainVerifyAlert=[[UIAlertView alloc]initWithTitle:@"nihao"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
     
 }
 
 #pragma  mark button Handler
 
--(void)startButtonHandler {
+-(void)startButtonHandler:(id)sender
+{
     if( [self netConnectAble] == NO )
     {
         [self.trainVerifyAlert setTitle:@"网络连接异常"];
@@ -141,7 +146,8 @@
     [isvRec startListening];//开始录音
 }
 
--(void)stopButtonHandler {
+-(void)stopButtonHandler:(id)sender
+{
     NSLog(@"stopButtonHandler");
     [isvRec stopListening];//停止录音
 }
@@ -165,8 +171,9 @@
     [self.diagView recordViewInit];
     
     [self resultProcess:dic];
+    self.diagView.startRecButton.enabled = YES;
     //should stop
-//    [self.diagView setRoundButtonCurrentType:@(0)];
+    //    [self.diagView setRoundButtonCurrentType:@(0)];
 }
 
 
@@ -180,11 +187,25 @@
     
     if( errorCode.errorCode != 0 )
     {
-        //        self.diagView.startRecButton.enabled=YES;
-//        [self.diagView setRoundButtonCurrentType:@(1)];
+        self.diagView.startRecButton.enabled=YES;
+        if (errorCode.errorCode == 10121) {
+            
+            [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+            NSLog(@"in %s,模型已存在",__func__);
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"模型已存在" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+            return;
+        }
         self.diagView.resultLabel.textColor=[UIColor redColor];
         self.diagView.resultLabel.text=[NSString stringWithFormat:@"错误码:%d",errorCode.errorCode];
     }
+    
+    self.diagView.startRecButton.enabled=YES;
     
 }
 
@@ -233,14 +254,50 @@
         NSNumber *rgn=[dic objectForKey:RGN_KEY];
         
         if( [suc intValue] >= [rgn intValue] ){
-            [self.trainVerifyAlert setTitle:@"训练成功"];
-            [self.trainVerifyAlert show];
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"训练成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+            }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         
         
         if( [suc intValue] < [rgn intValue] ){
             self.diagView.recordTitleLable.text=[_numCodeArray objectAtIndex:[suc intValue]];
         }
+    }else if( [self.sst isEqualToString:VERIFY_SST] ){ //验证结果
+        
+        self.diagView.resultLabel.text=@""; //结果label不显示
+        NSString *successStr=@"";
+        
+        if( [[dic objectForKey:DCS] isEqualToString:SUCCESS] ){
+            
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"验证成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+//                [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+            }];
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }else{
+            successStr=@"验证失败";
+        }
+//        [self.trainVerifyAlert setTitle:successStr];
+//        [self.trainVerifyAlert show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"验证失败" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+            //                [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+ 
     }
     
 }
@@ -264,13 +321,6 @@
 
 #pragma mark - DiagView delegate
 
-- (void)startRecording {
-    [self startButtonHandler];
-}
-
-- (void)stopRecording {
-    [self stopButtonHandler];
-}
 
 //训练模型
 -(void) trainButtonHandler:(id)sender
@@ -348,14 +398,14 @@
 //下载密码
 -(NSArray*)downloadPassworld:(int)pwdtParam
 {
-//    if( [self netConnectAble] == NO )
-//    {
-//        [resultShow setText:@"无网络连接"];
-//        [self.view addSubview:resultShow];
-//        
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//
+    //    if( [self netConnectAble] == NO )
+    //    {
+    //        [resultShow setText:@"无网络连接"];
+    //        [self.view addSubview:resultShow];
+    //
+    //        [self dismissViewControllerAnimated:YES completion:nil];
+    //    }
+    //
     
     if(pwdtParam != PWDT_NUM_CODE ){
         NSLog(@"in %s,pwdtParam 参数错误",__func__);
@@ -364,7 +414,15 @@
     NSArray* tmpArray=[isvRec getPasswordList:pwdtParam];  // attention isv +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     
     if( tmpArray == nil ){
-        NSLog(@"in %s,请求数据有误",__func__);
+        //        NSLog(@"in %s,请求数据有误",__func__);
+        //        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"获取声纹数字失败" message:@"请稍后再试" preferredStyle:UIAlertControllerStyleAlert];
+        //        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+        //            [self dismissViewControllerAnimated:YES completion:nil];
+        //        }];
+        //        [alert addAction:defaultAction];
+        //        [self.navigationController presentViewController:alert animated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
         return nil;
     }
     
@@ -430,6 +488,70 @@
         NSLog(@"isvRec is nil\n");
     }
     
+}
+
+//删除模型
+-(void)deleteButtonHandler:(id)sender
+{
+    
+    [self startRequestNumCode:@"del"];
+}
+
+//数字密码查询或者删除
+-(void)startRequestNumCode:(NSString *)queryMode
+{
+    if( ![queryMode isEqualToString: @"que"] && ![queryMode isEqualToString:@"del"] ){
+        NSLog(@"in %s,queryMode 参数错误",__func__);
+        return;
+    }
+    int err;
+    BOOL ret;
+    ret=[isvRec sendRequest:queryMode authid:voiceID pwdt:PWDT_NUM_CODE ptxt:nil vid:nil err:&err];  // attention isv +++++++++++++++++++++
+    [self processRequestResult:queryMode ret:ret err:err];
+}
+
+//查询或者时删除返回的结果处理
+-(void)processRequestResult:(NSString*)requestMode ret:(BOOL)ret err:(int)err
+{
+    if( ![requestMode isEqualToString:@"del"] && ![requestMode isEqualToString:@"que"]){
+        NSLog(@"在%s中，queryMode参数错误",__func__);
+        return;
+    }
+    
+    if( [requestMode isEqualToString:@"que"] ){
+        if( err != 0 ){
+            NSLog(@"查询错误，错误码：%d",err);
+            //处理返回值
+            if (err == kErrModelNotExist) {
+                NSLog(@"模型不存在");
+                [[ProfileManager sharedInstance] setVoiceID:@""];
+            }
+        }else{
+            if( ret == NO ){
+                NSLog(@"模型不存在");
+                //                [resultShow setText:@"模型不存在"];
+            }else{
+                NSLog(@"查询成功");
+                //                [resultShow setText:@"模型存在！"];
+            }
+        }
+    }else if(  [requestMode isEqualToString:@"del"]){
+        if( err != 0 ){
+            NSLog(@"删除错误，错误码：%d",err);
+            //处理返回值
+            if (err == kErrModelNotExist) {
+                NSLog(@"模型不存在");
+                [[ProfileManager sharedInstance] setVoiceID:@""];
+            }
+        }else{
+            if( ret == NO ){
+                NSLog(@"模型不存在");
+            }else{
+                [[ProfileManager sharedInstance] setVoiceID:@""];
+                NSLog(@"删除成功");
+            }
+        }
+    }
 }
 
 @end

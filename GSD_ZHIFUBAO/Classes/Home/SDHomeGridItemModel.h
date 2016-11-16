@@ -24,6 +24,7 @@
 
 @interface SDHomeGridItemModel : NSObject
 
+@property (nonatomic, copy) NSNumber* deviceID;
 @property (nonatomic, copy) NSString *title;    //device name
 @property (nonatomic, copy) NSString *imageResString;
 @property (nonatomic, copy) NSNumber* currentStat;

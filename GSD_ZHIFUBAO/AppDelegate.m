@@ -75,7 +75,7 @@
         _deviceInfo.title = @"摄像头";
         _deviceInfo.imageResString = @"fa-camera";
         _deviceInfo.currentStat = @(0);
-        _deviceInfo.colorStatPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"状态1", kColorMainGreen, @(0), nil] forKey:@(0)];
+        _deviceInfo.colorStatPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"状态1", @(0), @(0), nil] forKey:@(0)];
         
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
         
@@ -125,38 +125,51 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"become active");
-    if ([[ProfileManager sharedInstance] checkLogin]) {
-        
-        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
-            
-            //已登录 未录入声纹模型
-            
-            if( [self netConnectAble] == NO ){
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"退出程序" message:@"无网络连接，无法录入声纹" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-                    
-                    exit(0);
-                }];
-                [alert addAction:defaultAction];
-                [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-                return;
-            }
-            
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-                
-                
-                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
-                nvp.sst = @"train";
-                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
-                
-            }];
-            [alert addAction:defaultAction];
-            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-        }
-        
-        
-    }
+//    if ([[ProfileManager sharedInstance] checkLogin]) {
+//        
+//        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
+//            
+//            //已登录 未录入声纹模型
+//            
+//            if( [self netConnectAble] == NO ){
+//                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"退出程序" message:@"无网络连接，无法录入声纹" preferredStyle:UIAlertControllerStyleAlert];
+//                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+//                    
+//                    exit(0);
+//                }];
+//                [alert addAction:defaultAction];
+//                [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//                return;
+//            }
+//            
+//            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+//                
+//                
+//                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+//                nvp.sst = @"train";
+//                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
+//                
+//            }];
+//            [alert addAction:defaultAction];
+//            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//        }else {
+//            
+//            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请验证声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"验证" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+//                
+//                
+//                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+//                nvp.sst = @"verify";
+//                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
+//                
+//            }];
+//            [alert addAction:defaultAction];
+//            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//        }
+//        
+//        
+//    }
 }
 
 -(BOOL)netConnectAble

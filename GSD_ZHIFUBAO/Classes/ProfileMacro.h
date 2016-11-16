@@ -13,6 +13,7 @@
 #define kProfileUserPhone @"userPhone"
 #define kProfileAuthToken @"authToken"
 #define kProfileVoiceID   @"voiceID"
+#define kProfileDeviceID  @"deviceID"
 #define kProfileUserGridItems   @"gridItems"
 
 #define kLoggedMark     @"1"

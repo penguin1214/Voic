@@ -23,4 +23,11 @@
                success:(void(^)(BOOL result, NSString* message, NSDictionary* data))success
                failure:(void(^)(NSError* error))failure;
 
++ (void)addDeviceWithTitle:(NSString*)title
+                    image:(NSString*)img_res_string
+              currentStat:(NSNumber*)current_stat
+            colorStatPair:(NSDictionary*)color_stat_pair
+                  success:(void(^)(BOOL result, NSString* message, NSDictionary* data))success
+                  failure:(void(^)(NSError* error))failure;
+
 @end
