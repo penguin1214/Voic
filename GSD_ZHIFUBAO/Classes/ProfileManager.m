@@ -103,6 +103,10 @@
     return [UserDefaultUtil getObjectBykey:kProfileDeviceID];
 }
 
+- (NSArray *)getAllCommand {
+    return [UserDefaultUtil getObjectBykey:kProfileAllCommand];
+}
+
 -(void)setGridItems:(NSArray*)gridItems {
     [SDGridItemCacheTool saveItemsArray:gridItems];
 }
@@ -110,6 +114,10 @@
 -(void)setVoiceIDWithSugar {
              NSString* voiceID = [[NSString alloc] initWithString:[kModelSugar stringByAppendingString:[[ProfileManager sharedInstance] getUserPhone]]];
             [[ProfileManager sharedInstance] setVoiceID:voiceID];
+}
+
+-(void)setCommand:(NSArray *)command {
+    [[NSUserDefaults standardUserDefaults] setObject:command forKey:kProfileAllCommand];
 }
 
 @end

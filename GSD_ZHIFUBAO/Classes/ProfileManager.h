@@ -34,6 +34,8 @@
 
 - (NSString*)getDeviceID;
 
+- (NSArray*)getAllCommand;
+
 -(void)setUserID:(NSString *)userID;
 
 -(void)setUserPhone:(NSString *)userPhone;
@@ -45,5 +47,7 @@
 -(void)setGridItems:(NSArray*)gridItems;
 
 -(void)setVoiceIDWithSugar;
+
+-(void)setCommand:(NSArray*)command;
 
 @end

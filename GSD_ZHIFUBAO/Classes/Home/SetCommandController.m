@@ -9,6 +9,10 @@
 #import "SetCommandController.h"
 #import "SMPagerTabView.h"
 #import "SetCommandDetailController.h"
+#import "SDGridItemCacheTool.h"
+#import "DeviceInfo.h"
+#import "Command.h"
+#import "ProfileManager.h"
 
 @interface SetCommandController () <SMPagerTabViewDelegate>
 
@@ -22,7 +26,7 @@
 @end
 
 @interface SetCommandController () {
-    NSNumber* _tabNum;
+    NSInteger _tabNum;
 }
 
 @end
@@ -34,51 +38,42 @@
     
     self.view.backgroundColor = [UIColor hexColor:@"ededed"];
     
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didFinishSetting:)];
+    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didFinishSetting)];
     
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
+    NSArray* itemsArray = [SDGridItemCacheTool itemsArray];
+    DeviceInfo* _device = [NSKeyedUnarchiver unarchiveObjectWithData:[itemsArray objectAtIndex:[_deviceIndex integerValue]]];
     
-    self.colorStatPair = [NSMutableDictionary new];
     _allVC = [NSMutableArray array];
+    _tabNum = _device.colorStatPair.count;
     
-//    for (int i = 0; i < (_tabNum+1); i++ ) {
-//        SetCommandDetailController* vc = [[SetCommandDetailController alloc] init];
-//        vc.tag = @(i);
-//        
+    for (int i = 0; i < _tabNum; i++ ) {
+        SetCommandDetailController* vc = [[SetCommandDetailController alloc] init];
+        vc.tag = @(i);
+        
 //        vc.delegate = self;
-//        
-//        if (i == 0) {
-//            vc.title = [NSString stringWithFormat:@"状态%@（默认）", @(i+1)];
-//        }else {
-//            vc.title = [NSString stringWithFormat:@"状态%@", @(i+1)];
-//        }
-//        [_allVC addObject:vc];
-//    }
+        
+        if (i == 0) {
+            vc.title = [NSString stringWithFormat:@"状态%@（默认）", @(i+1)];
+        }else {
+            vc.title = [NSString stringWithFormat:@"状态%@", @(i+1)];
+        }
+        [_allVC addObject:vc];
+    }
     
-//    self.segmentView.delegate = self;
-//    //可自定义背景色和tab button的文字颜色等
-//    //    self.segmentView.tabButtonTitleColorForSelected = kColorMainGreen;
-//    
-//    //开始构建UI
-//    [_segmentView buildUI];
-//    //起始选择一个tab
-//    [_segmentView selectTabWithIndex:0 animate:NO];
-    //显示红点，点击消失
-    //    [_segmentView showRedDotWithIndex:0];
+    self.segmentView.delegate = self;
+    //可自定义背景色和tab button的文字颜色等
+    //    self.segmentView.tabButtonTitleColorForSelected = kColorMainGreen;
+    
+    //开始构建UI
+    [_segmentView buildUI];
+    //起始选择一个tab
+    [_segmentView selectTabWithIndex:0 animate:NO];
+//    显示红点，点击消失
+        [_segmentView showRedDotWithIndex:0];
 }
 
-- (void)setTabNumber:(NSInteger)tabNum {
-//    _tabNum = tabNum;
-}
-
--(void)setDeviceName:(NSString *)deviceName {
-//    _deviceName = deviceName;
-}
-
-- (void)setImgResString:(NSString *)imgResString {
-    _imgResString = imgResString;
-}
 
 #pragma mark - DBPagerTabView Delegate
 - (NSUInteger)numberOfPagers:(SMPagerTabView *)view {
@@ -95,10 +90,27 @@
 #pragma mark - setter/getter
 - (SMPagerTabView *)segmentView {
     if (!_segmentView) {
-        self.segmentView = [[SMPagerTabView alloc]initWithFrame:CGRectMake(10, 10, self.view.width-20, 180)];
+        self.segmentView = [[SMPagerTabView alloc]initWithFrame:CGRectMake(10, 20, self.view.width-20, 180)];
         [self.view addSubview:_segmentView];
     }
     return _segmentView;
+}
+
+- (void)didFinishSetting {
+//    NSString* command = [NSString stringWithString:[self.segmentView[0].command]];
+//    NSString* commandCode = [NSString stringWithString:[self.segmentView[0].commandCode]];
+    
+#warning HARD CODE
+    NSString* command = @"开灯";
+    NSString* commandCode = @"0";
+    Command* _command = [[Command alloc] init];
+    _command.command = command;
+    _command.commandCode = commandCode;
+    
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_command];
+    [[ProfileManager sharedInstance] setCommand:[NSArray arrayWithObject:data]];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 /*
 #pragma mark - Navigation

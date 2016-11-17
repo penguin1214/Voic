@@ -10,4 +10,6 @@
 
 @interface SetCommandController : BaseController
 
+@property (nonatomic, strong) NSNumber* deviceIndex;
+
 @end

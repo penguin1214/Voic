@@ -33,6 +33,7 @@
 		2F069A591DCCE591004215C9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A581DCCE591004215C9 /* MessageUI.framework */; };
 		2F069A5B1DCCE59C004215C9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A5A1DCCE59C004215C9 /* JavaScriptCore.framework */; };
 		2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */; };
+		2F1A7D141DDE540700D66C35 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1A7D131DDE540700D66C35 /* Command.m */; };
 		2F1D91501DCE0DDF00EA1601 /* VoiceModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */; };
 		2F25DE381DDD78E20007B15E /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F25DE371DDD78E20007B15E /* SocketManager.m */; };
 		2F3013CE1DCD8C1D00E8B5F7 /* LogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3013CD1DCD8C1D00E8B5F7 /* LogoutCell.xib */; };
@@ -216,6 +217,8 @@
 		2F069A5A1DCCE59C004215C9 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		2F069A5E1DCD7B6C004215C9 /* LogoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutCell.h; sourceTree = "<group>"; };
 		2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutCell.m; sourceTree = "<group>"; };
+		2F1A7D121DDE540700D66C35 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
+		2F1A7D131DDE540700D66C35 /* Command.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Command.m; sourceTree = "<group>"; };
 		2F1D914E1DCE0DDF00EA1601 /* VoiceModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModelController.h; sourceTree = "<group>"; };
 		2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModelController.m; sourceTree = "<group>"; };
 		2F25DE361DDD78E20007B15E /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
@@ -906,6 +909,8 @@
 				2FE161661DDE319A006CFA4B /* SetCommandController.m */,
 				2FE161681DDE338C006CFA4B /* SetCommandDetailController.h */,
 				2FE161691DDE338C006CFA4B /* SetCommandDetailController.m */,
+				2F1A7D121DDE540700D66C35 /* Command.h */,
+				2F1A7D131DDE540700D66C35 /* Command.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1352,6 +1357,7 @@
 				9969DE471B1ED60400723888 /* UIImage+MultiFormat.m in Sources */,
 				99AFE9DF1B201B4C0049E73B /* SDAssetsTableViewControllerCellModel.m in Sources */,
 				9904C75C1B1F2F3800E2717D /* SDCycleScrollView.m in Sources */,
+				2F1A7D141DDE540700D66C35 /* Command.m in Sources */,
 				2FE161671DDE319A006CFA4B /* SetCommandController.m in Sources */,
 				9969DE481B1ED60400723888 /* UIImage+WebP.m in Sources */,
 				2F069A361DCCE399004215C9 /* ProfileManager.m in Sources */,

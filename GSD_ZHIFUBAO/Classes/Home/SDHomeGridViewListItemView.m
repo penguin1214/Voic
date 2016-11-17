@@ -25,6 +25,9 @@
 #import "UIButton+WebCache.h"
 #import "UIView+SDExtension.h"
 #import "SDHomeGridViewListItemViewButton.h"
+#import "SetCommandController.h"
+#import "SDGridItemCacheTool.h"
+#import "DeviceInfo.h"
 
 #define kTitleIndexInPair 0
 #define kColorIndexInPair 1
@@ -33,6 +36,8 @@
 {
     SDHomeGridViewListItemViewButton *_button;
     UIButton *_iconView;
+    
+    NSNumber* _deviceIndex;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -88,6 +93,29 @@
 //        [alert addAction:defaultAction];
 //        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 //    NSLog(@"delete button clicked");
+    
+    NSArray *itemsArray = [SDGridItemCacheTool itemsArray];
+    
+    NSMutableArray* devices = [NSMutableArray new];
+    
+    for (NSData* aDevice in itemsArray) {
+        DeviceInfo* deviceInfo = [NSKeyedUnarchiver unarchiveObjectWithData:aDevice];
+        [devices addObject:deviceInfo];
+    }
+    
+    for (int i = 0; i < [devices count]; i++) {
+        if ([[[devices objectAtIndex:i] title] isEqualToString:self.itemModel.title]) {
+            _deviceIndex = @(i);
+            break;
+        }
+    }
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    
+    NSString* notifyName = @"show command setter";
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName",_deviceIndex, @"Data", nil];
+    
+    [nc postNotificationName:@"Command" object:self userInfo:dict];
     
     NSLog(@"button clicked");
     

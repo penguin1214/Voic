@@ -164,9 +164,11 @@
     NSDictionary *dict = [notify userInfo];
     NSString* name = [dict objectForKey:@"NotifyName"];
     NSString* data= [dict objectForKey:@"Data"];
+    NSData* sended = [data dataUsingEncoding:NSUTF8StringEncoding];
     
     if ([name isEqualToString:@"send cammand"]) {
         //发送命令
+        [_asyncSocket writeData:sended withTimeout:1 tag:1];
     }else if ([name isEqualToString:@"receive data"]) {
         //接收数据
     }

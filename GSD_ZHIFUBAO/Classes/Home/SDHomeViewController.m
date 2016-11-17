@@ -30,6 +30,7 @@
 #import "SDGridItemCacheTool.h"
 #import "AddItemViewController.h"
 #import "DeviceInfo.h"
+#import "SetCommandController.h"
 #import "CommandController.h"
 
 //#define kHomeHeaderViewHeight 110
@@ -59,6 +60,9 @@
 {
     [super viewDidLoad];
     [self setupHeader];
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"Command" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -216,5 +220,18 @@
     [self setupDataArray];
 }
 
+- (void)recvNotif:(NSNotification*)notify {
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString *name = [dict objectForKey:@"NotifyName"];
+    NSNumber* data = [dict objectForKey:@"Data"];
+    
+    if ([name  isEqual: @"show command setter"]) {
+        SetCommandController* vc = [[SetCommandController alloc] init];
+        vc.deviceIndex = data;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+}
 
 @end

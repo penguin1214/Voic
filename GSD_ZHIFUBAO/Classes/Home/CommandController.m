@@ -8,8 +8,12 @@
 
 #import "CommandController.h"
 //#import "ISRDataHelper.m"
+#import "ProfileManager.h"
+#import "Command.h"
 
-@interface CommandController ()
+@interface CommandController () {
+    NSString* _code;
+}
 
 @end
 
@@ -230,7 +234,19 @@
     [self toast:[NSString stringWithFormat:@"%@",resultFromJson]];
     
 #warning test code
-    [self sendCommand:@"1"];
+//    [self sendCommand:@"1"];
+    
+    NSArray* commandArray = [[ProfileManager sharedInstance] getAllCommand];
+    
+    NSArray* commands = [NSMutableArray new];
+    for (NSData* aCom in commandArray) {
+        Command* com = [NSKeyedUnarchiver unarchiveObjectWithData:aCom];
+        if ([com.command isEqualToString:resultFromJson]) {
+            _code = [NSString stringWithString:com.commandCode];
+            break;
+        }
+    }
+    [self sendCommand:_code];
     
 }
 
@@ -332,6 +348,7 @@
     
     NSString* notifyName = @"send cammand";
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName",commandCode, @"Data", nil];
+    
     
     [nc postNotificationName:@"Socket" object:self userInfo:dict];
 }
