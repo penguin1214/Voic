@@ -51,6 +51,7 @@
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
     self.colorStatPair = [NSMutableDictionary new];
+    self.sendedPair = [NSMutableDictionary new];
     _allVC = [NSMutableArray array];
     
     for (int i = 0; i < (_tabNum+1); i++ ) {
