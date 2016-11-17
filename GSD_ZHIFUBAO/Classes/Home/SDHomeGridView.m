@@ -27,6 +27,8 @@
 #import "UIView+SDExtension.h"
 #import "SDCycleScrollView.h"
 #import "SDGridItemCacheTool.h"
+#import "DeviceInfo.h"
+#import "SDBasicViewContoller.h"
 
 
 #define kHomeGridViewPerRowItemCount 4
@@ -264,14 +266,33 @@
 - (void)deleteView:(SDHomeGridViewListItemView *)view
 {
 
+    //处理删除设备
+    NSArray *itemsArray = [SDGridItemCacheTool itemsArray];
+    NSMutableArray *temp = [itemsArray mutableCopy];
+    
+    NSMutableArray* devices = [NSMutableArray new];
+    
+    for (NSData* aDevice in itemsArray) {
+        DeviceInfo* deviceInfo = [NSKeyedUnarchiver unarchiveObjectWithData:aDevice];
+        [devices addObject:deviceInfo];
+    }
+    
+    for (int i = 0; i < [devices count]; i++) {
+        if ([[[devices objectAtIndex:i] title] isEqualToString:view.itemModel.title]) {
+            [temp removeObjectAtIndex:i];
+            break;
+        }
+    }
+    
+    [SDGridItemCacheTool saveItemsArray:temp];
+    
+    
+    
+//    _dataArray = [temp copy];
+    
     [_itemsArray removeObject:view];
     [view removeFromSuperview];
     // 将删除的数据添加到 更多里面
-    NSMutableArray *temp = [NSMutableArray new];
-    temp = [[SDGridItemCacheTool addItemsArray] mutableCopy];
-    [temp addObject:@{view.itemModel.title : view.itemModel.imageResString}];
-    [SDGridItemCacheTool saveAddItemsArray:[temp copy]];
-    
     
     [self saveItemsSettingCache];
     [UIView animateWithDuration:0.4 animations:^{
@@ -288,7 +309,7 @@
         }
     }];
     
-    [SDGridItemCacheTool saveItemsArray:[tempItemsContainer copy]];
+//    [SDGridItemCacheTool saveItemsArray:[tempItemsContainer copy]];
     if ([self.gridViewDelegate respondsToSelector:@selector(homeGrideViewDidChangeItems:)]) {
         [self.gridViewDelegate homeGrideViewDidChangeItems:self];
     }

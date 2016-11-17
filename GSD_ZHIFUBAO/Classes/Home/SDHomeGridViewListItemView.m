@@ -76,18 +76,21 @@
 
 - (void)buttonClicked
 {
-    //    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您确定要删除该设备吗" preferredStyle:UIAlertControllerStyleAlert];
-    //    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-    //
-    //        if (self.buttonClickedOperationBlock) {
-    //            self.buttonClickedOperationBlock(self);
-    //        }
-    //
-    //    }];
-    //
-    //    [alert addAction:defaultAction];
-    //    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-    NSLog(@"delete button clicked");
+//        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您确定要删除该设备吗" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+//    
+//            if (self.buttonClickedOperationBlock) {
+//                self.buttonClickedOperationBlock(self);
+//            }
+//    
+//        }];
+//    
+//        [alert addAction:defaultAction];
+//        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//    NSLog(@"delete button clicked");
+    
+    NSLog(@"button clicked");
+    
 }
 
 

@@ -22,4 +22,6 @@
 #define kUnloggedUserId @"user"
 #define kUnloggedAuthToken  @"authToken"
 
+#define kProfileAllCommand  @"command"
+
 #endif /* ProfileMacro_h */

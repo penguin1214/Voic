@@ -83,6 +83,7 @@
         
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
         
+        NSArray* arr = [NSArray arrayWithObject:data];
         [SDGridItemCacheTool saveItemsArray:[NSArray arrayWithObject:data]];
         //        NSArray *itemsArray =  @[@{@"淘宝" : @"i00"}, // title => imageString
         //                                 @{@"生活缴费" : @"i01"},

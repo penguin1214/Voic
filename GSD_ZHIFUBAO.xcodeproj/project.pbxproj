@@ -98,6 +98,8 @@
 		2F9F11E51DD941CC00A4978A /* VerifyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9F11E41DD941CC00A4978A /* VerifyController.m */; };
 		2FD77EB31DCF80CA007A0FDD /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */; };
 		2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD77EB21DCF80CA007A0FDD /* UserEntity.m */; };
+		2FE161671DDE319A006CFA4B /* SetCommandController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE161661DDE319A006CFA4B /* SetCommandController.m */; };
+		2FE1616A1DDE338C006CFA4B /* SetCommandDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE161691DDE338C006CFA4B /* SetCommandDetailController.m */; };
 		2FE5CE871DD590C60048C6B4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */; };
 		2FE5CE8E1DD590EC0048C6B4 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */; };
 		2FE5CE8F1DD590EC0048C6B4 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5CE8B1DD590EC0048C6B4 /* NSString+FontAwesome.m */; };
@@ -299,6 +301,10 @@
 		2FD77EB01DCF80CA007A0FDD /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		2FD77EB11DCF80CA007A0FDD /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntity.h; sourceTree = "<group>"; };
 		2FD77EB21DCF80CA007A0FDD /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntity.m; sourceTree = "<group>"; };
+		2FE161651DDE319A006CFA4B /* SetCommandController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCommandController.h; sourceTree = "<group>"; };
+		2FE161661DDE319A006CFA4B /* SetCommandController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCommandController.m; sourceTree = "<group>"; };
+		2FE161681DDE338C006CFA4B /* SetCommandDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCommandDetailController.h; sourceTree = "<group>"; };
+		2FE161691DDE338C006CFA4B /* SetCommandDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCommandDetailController.m; sourceTree = "<group>"; };
 		2FE5CE861DD590C60048C6B4 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		2FE5CE881DD590EC0048C6B4 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
 		2FE5CE891DD590EC0048C6B4 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
@@ -896,6 +902,10 @@
 			children = (
 				9929038C1B1EC79300290346 /* SDHomeViewController.h */,
 				9929038D1B1EC79300290346 /* SDHomeViewController.m */,
+				2FE161651DDE319A006CFA4B /* SetCommandController.h */,
+				2FE161661DDE319A006CFA4B /* SetCommandController.m */,
+				2FE161681DDE338C006CFA4B /* SetCommandDetailController.h */,
+				2FE161691DDE338C006CFA4B /* SetCommandDetailController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1307,6 +1317,7 @@
 				9969DE3C1B1ED60400723888 /* MKAnnotationView+WebCache.m in Sources */,
 				2FD77EB41DCF80CA007A0FDD /* UserEntity.m in Sources */,
 				2F46515F1DD76F5F004637C5 /* DeviceInfo.m in Sources */,
+				2FE1616A1DDE338C006CFA4B /* SetCommandDetailController.m in Sources */,
 				9969DE491B1ED60400723888 /* UIImageView+WebCache.m in Sources */,
 				992903921B1EC99300290346 /* UIView+SDExtension.m in Sources */,
 				2F3013F21DCDCB1500E8B5F7 /* PopupView.m in Sources */,
@@ -1341,6 +1352,7 @@
 				9969DE471B1ED60400723888 /* UIImage+MultiFormat.m in Sources */,
 				99AFE9DF1B201B4C0049E73B /* SDAssetsTableViewControllerCellModel.m in Sources */,
 				9904C75C1B1F2F3800E2717D /* SDCycleScrollView.m in Sources */,
+				2FE161671DDE319A006CFA4B /* SetCommandController.m in Sources */,
 				9969DE481B1ED60400723888 /* UIImage+WebP.m in Sources */,
 				2F069A361DCCE399004215C9 /* ProfileManager.m in Sources */,
 				9969DE421B1ED60400723888 /* SDWebImageDownloaderOperation.m in Sources */,
