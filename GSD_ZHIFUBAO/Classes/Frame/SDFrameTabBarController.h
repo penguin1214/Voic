@@ -21,8 +21,9 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "GCDAsyncSocket.h"
 
-@interface SDFrameTabBarController : UITabBarController
+@interface SDFrameTabBarController : UITabBarController< GCDAsyncSocketDelegate>
 
 - (void)toast:(NSString*)message;
 

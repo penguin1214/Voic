@@ -31,8 +31,12 @@
 #import "ProfileManager.h"
 #import "LogginController.h"
 #import "Reachability.h"
+#import "GCDAsyncSocket.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
+@property (nonatomic, strong) GCDAsyncSocket* asyncSocket;
 
 @end
 
@@ -167,10 +171,11 @@
 //            [alert addAction:defaultAction];
 //            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 //        }
-//        
-//        
+//
 //    }
 }
+
+#pragma mark - Other Methods
 
 -(BOOL)netConnectAble
 {

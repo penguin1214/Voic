@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaAsyncSocket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Color-Picker-for-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,6 +92,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0F27137B489B4F1E66DE0212D8DD1DB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>11F461C854EE8CA9733568EDAAAF50BF</key>
 		<dict>
 			<key>primary</key>
@@ -97,12 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>461DCF794AC14D47EC84DC37DEFA36C9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7E7D05182739F1319718FFAB63097CA4</key>
+		<key>4A14208F5104F729B468B8C55421C83E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,17 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B9BB132F50C76CE9EEAF94100521C3F0</key>
+		<key>ABC64CE6C24013EC9885430780ADC2DD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B1D17BA74BEACBD28F897F231B5907A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C1CD1F1DE0F273D90638723EA7A09124</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C4FF809E9D6CB14AAF4C3C47CC84974A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>ED9D783F3FD93AD4F476501BB743D2E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE6EF854C651E346DA638F6DE22589E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

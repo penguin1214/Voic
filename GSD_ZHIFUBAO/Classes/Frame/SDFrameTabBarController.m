@@ -27,6 +27,17 @@
 #import "SDAssetsTableViewController.h"
 #import "MBProgressHUD.h"
 
+
+#define HOST @"127.0.0.1"
+#define PORT  8808
+
+@interface SDFrameTabBarController ()
+
+@property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
+@property (nonatomic, strong) GCDAsyncSocket* asyncSocket;
+
+@end
+
 @implementation SDFrameTabBarController
 
 - (void)viewDidLoad
@@ -34,8 +45,10 @@
     [super viewDidLoad];
     
     [self setupChildControllers];
+    [self connectTCP];
     
     self.selectedIndex = 1;
+    
 }
 
 - (void)setupChildControllers
@@ -55,6 +68,89 @@
     [self addChildViewController:navVc];
 }
 
+#pragma mark - Socket
+
+- (void)connectTCP {
+    if (!_asyncSocket)
+    {
+        _asyncSocket=nil;
+    }
+    
+    _asyncSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    _asyncSocket.delegate = self;
+    
+    NSError *error = nil;
+    [_asyncSocket connectToHost:HOST onPort:PORT withTimeout:-1 error:&error];
+    if (error!=nil) {
+        NSLog(@"连接失败：%@",error);
+    }else{
+        NSLog(@"连接成功");
+    }
+}
+
+- (void)socket:(GCDAsyncSocket *)sock willDisconnectWithError:(NSError *)err
+{
+    NSLog(@"willDisconnectWithError");
+    //[self logInfo:FORMAT(@"Client Disconnected: %@:%hu", [sock connectedHost], [sock connectedPort])];
+    if (err) {
+        NSLog(@"错误报告：%@",err);
+    }else{
+        NSLog(@"连接工作正常");
+    }
+    _asyncSocket = nil;
+}
+
+//连接成功回调
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{
+    NSLog(@"didConnectToHost");
+    //    NSData *writeData = [@"connected\r\n" dataUsingEncoding:NSUTF8StringEncoding];
+    //    [sock writeData:writeData withTimeout:-1 tag:0];
+    
+    // 每隔30s像服务器发送心跳包
+    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];// 在longConnectToSocket方法中进行长连接需要向服务器发送的讯息
+    
+    [self.connectTimer fire];//    [sock readDataWithTimeout:0.5 tag:0];
+}
+
+// 心跳连接
+-(void)longConnectToSocket{
+    
+    // 根据服务器要求发送固定格式的数据，假设为指令@"longConnect"，但是一般不会是这么简单的指令
+    
+    NSString *longConnect = @"longConnect";
+    
+#warning need \r\n or not
+    
+    NSData   *dataStream  = [longConnect dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [_asyncSocket writeData:dataStream withTimeout:1 tag:1];
+    
+}
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    NSLog(@"didReadData");
+    NSData *strData = [data subdataWithRange:NSMakeRange(0, [data length])];
+    NSString *msg = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
+    if(msg)
+    {
+        NSLog(@"%@",msg);
+    }
+    else
+    {
+        NSLog(@"错误");
+    }
+    [sock readDataWithTimeout:-1 tag:0]; //一直监听网络
+    
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag{
+    
+    
+}
+
+#pragma mark - Other Methods
+
 -(void)toast:(NSString *)title
 {
     int seconds = 3;
@@ -68,11 +164,12 @@
     HUD.detailsLabelText = title;
     HUD.mode = MBProgressHUDModeText;
     
-
+    
     [HUD showAnimated:YES whileExecutingBlock:^{
         sleep(seconds);
     } completionBlock:^{
         [HUD removeFromSuperview];
     }];
 }
+
 @end

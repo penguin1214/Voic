@@ -34,6 +34,7 @@
 		2F069A5B1DCCE59C004215C9 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F069A5A1DCCE59C004215C9 /* JavaScriptCore.framework */; };
 		2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */; };
 		2F1D91501DCE0DDF00EA1601 /* VoiceModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */; };
+		2F25DE381DDD78E20007B15E /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F25DE371DDD78E20007B15E /* SocketManager.m */; };
 		2F3013CE1DCD8C1D00E8B5F7 /* LogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3013CD1DCD8C1D00E8B5F7 /* LogoutCell.xib */; };
 		2F3013D01DCDC67B00E8B5F7 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3013CF1DCDC67B00E8B5F7 /* iflyMSC.framework */; };
 		2F3013D21DCDC6B200E8B5F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3013D11DCDC6B200E8B5F7 /* AVFoundation.framework */; };
@@ -215,6 +216,8 @@
 		2F069A5F1DCD7B6C004215C9 /* LogoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutCell.m; sourceTree = "<group>"; };
 		2F1D914E1DCE0DDF00EA1601 /* VoiceModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceModelController.h; sourceTree = "<group>"; };
 		2F1D914F1DCE0DDF00EA1601 /* VoiceModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceModelController.m; sourceTree = "<group>"; };
+		2F25DE361DDD78E20007B15E /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
+		2F25DE371DDD78E20007B15E /* SocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketManager.m; sourceTree = "<group>"; };
 		2F3013CD1DCD8C1D00E8B5F7 /* LogoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoutCell.xib; sourceTree = "<group>"; };
 		2F3013CF1DCDC67B00E8B5F7 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		2F3013D11DCDC6B200E8B5F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -488,6 +491,8 @@
 				2F069A331DCCE399004215C9 /* ProfileManager.m */,
 				2F069A341DCCE399004215C9 /* CommunicationManager.h */,
 				2F069A351DCCE399004215C9 /* CommunicationManager.m */,
+				2F25DE361DDD78E20007B15E /* SocketManager.h */,
+				2F25DE371DDD78E20007B15E /* SocketManager.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -1361,6 +1366,7 @@
 				2F3013F91DCDCCA100E8B5F7 /* DiagleView.m in Sources */,
 				2F069A601DCD7B6C004215C9 /* LogoutCell.m in Sources */,
 				2F3013F11DCDCB1500E8B5F7 /* AlertView.m in Sources */,
+				2F25DE381DDD78E20007B15E /* SocketManager.m in Sources */,
 				2F04967C1DDC3F8B007F02CE /* CommandController.m in Sources */,
 				2F069A3D1DCCE457004215C9 /* NSString+MD5.m in Sources */,
 				9969DE161B1ECFD900723888 /* SDHomeGridItemModel.m in Sources */,

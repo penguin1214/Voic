@@ -19,6 +19,13 @@ PODS:
   - AKPickerView (0.2.7)
   - AXStretchableHeaderTabViewController (0.2.0)
   - AYVibrantButton (1.0.4)
+  - CocoaAsyncSocket (7.4.3):
+    - CocoaAsyncSocket/All (= 7.4.3)
+  - CocoaAsyncSocket/All (7.4.3):
+    - CocoaAsyncSocket/GCD
+    - CocoaAsyncSocket/RunLoop
+  - CocoaAsyncSocket/GCD (7.4.3)
+  - CocoaAsyncSocket/RunLoop (7.4.3)
   - Color-Picker-for-iOS (2.0.2)
   - JSONModel (1.2.0)
   - Masonry (1.0.1)
@@ -38,6 +45,7 @@ DEPENDENCIES:
   - AKPickerView
   - AXStretchableHeaderTabViewController
   - AYVibrantButton
+  - CocoaAsyncSocket
   - Color-Picker-for-iOS (~> 2.0)
   - JSONModel
   - Masonry
@@ -63,6 +71,7 @@ SPEC CHECKSUMS:
   AKPickerView: 125372e36fcc372216127600a541f14dcdbb7993
   AXStretchableHeaderTabViewController: 37c56211c98d3e823ecf7493d68f5ee8fa7028e1
   AYVibrantButton: ca0138e754e886d92e3c71c58dd16cc392c780b8
+  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
@@ -73,6 +82,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   VBFPopFlatButton: 39e48ab56277f3d056734a9b5ec5d0cc60d69778
 
-PODFILE CHECKSUM: 8f882554df379e8eb8e64b15be0bb70bc5e3b54f
+PODFILE CHECKSUM: 073ed3c470a2cfc68ab19ac9d68e6f274ba15e27
 
 COCOAPODS: 1.0.1
