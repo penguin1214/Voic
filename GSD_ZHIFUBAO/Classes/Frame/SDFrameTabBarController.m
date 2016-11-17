@@ -47,6 +47,9 @@
     [self setupChildControllers];
     [self connectTCP];
     
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"Socket" object:nil];
+    
     self.selectedIndex = 1;
     
 }
@@ -111,6 +114,9 @@
     self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];// 在longConnectToSocket方法中进行长连接需要向服务器发送的讯息
     
     [self.connectTimer fire];//    [sock readDataWithTimeout:0.5 tag:0];
+    
+    [_asyncSocket readDataWithTimeout:-1 tag:0];
+
 }
 
 // 心跳连接
@@ -127,6 +133,7 @@
     [_asyncSocket writeData:dataStream withTimeout:1 tag:1];
     
 }
+
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     NSLog(@"didReadData");
@@ -135,17 +142,34 @@
     if(msg)
     {
         NSLog(@"%@",msg);
+        //处理接收数据
+        
     }
     else
     {
         NSLog(@"错误");
     }
+    
     [sock readDataWithTimeout:-1 tag:0]; //一直监听网络
     
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag{
     
+    
+}
+
+- (void)recvNotif:(NSNotification*)notify {
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString* name = [dict objectForKey:@"NotifyName"];
+    NSString* data= [dict objectForKey:@"Data"];
+    
+    if ([name isEqualToString:@"send cammand"]) {
+        //发送命令
+    }else if ([name isEqualToString:@"receive data"]) {
+        //接收数据
+    }
     
 }
 

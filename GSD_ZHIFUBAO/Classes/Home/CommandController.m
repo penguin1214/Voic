@@ -228,6 +228,10 @@
     NSLog(@"_result=%@",_result);
     NSLog(@"resultFromJson=%@",resultFromJson);
     [self toast:[NSString stringWithFormat:@"%@",resultFromJson]];
+    
+#warning test code
+    [self sendCommand:@"1"];
+    
 }
 
 /**
@@ -319,6 +323,17 @@
         }
     }
     return tempStr;
+}
+
+#pragma mark - send command
+
+- (void)sendCommand:(NSString*)commandCode {
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    
+    NSString* notifyName = @"send cammand";
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName",commandCode, @"Data", nil];
+    
+    [nc postNotificationName:@"Socket" object:self userInfo:dict];
 }
 /*
  #pragma mark - Navigation
