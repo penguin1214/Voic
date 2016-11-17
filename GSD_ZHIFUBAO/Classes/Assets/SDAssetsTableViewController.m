@@ -92,8 +92,6 @@
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-//    voiceID = [[ProfileManager sharedInstance] getVoiceID];
-    
     if ([[ProfileManager sharedInstance] checkLogin]) {
         if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
             

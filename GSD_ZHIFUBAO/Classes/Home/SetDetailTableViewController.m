@@ -18,7 +18,10 @@
 //@property (nonatomic, strong) HRColorPickerView* colorPickerView;
 //@property (nonatomic, strong) NKOColorPickerView* colorPickerView;
 @property (nonatomic, strong) NSString* statName;
+@property (nonatomic, strong) NSString* commandCode;
+
 @property (nonatomic, strong) UITextField* statusTextField;
+@property (nonatomic, strong) UITextField* commandCodeField;
 @property (nonatomic, strong) UIButton* button;
 @property (nonatomic, strong) NSNumber* statColor;
 @property (nonatomic, strong) NSNumber* pushable;
@@ -69,6 +72,19 @@
     [_statusTextField setEnabled: YES];
     [self.view addSubview:_statusTextField];
     
+    self.commandCodeField = [[UITextField alloc] initWithFrame:CGRectMake(110, 50, 185, 30)];
+    self.commandCodeField.adjustsFontSizeToFitWidth = YES;
+    self.commandCodeField.textColor = [UIColor blackColor];
+    self.commandCodeField.placeholder = @"用于发送命令";
+    self.commandCodeField.backgroundColor = [UIColor whiteColor];
+    self.commandCodeField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.commandCodeField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.commandCodeField.textAlignment = NSTextAlignmentLeft;
+    self.commandCodeField.clearButtonMode = UITextFieldViewModeAlways;
+    self.commandCodeField.tag = 1;
+    [self.commandCodeField setEnabled:YES];
+    [self.view addSubview:self.commandCodeField];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,13 +94,15 @@
 
 - (NSArray *)collectDetail {
     
-    NSArray* statColorArray = [NSArray arrayWithObjects:self.statName, self.statColor,self.pushable, nil];
+//    NSArray* statColorArray = [NSArray arrayWithObjects:self.statName, self.statColor,self.pushable, nil];
+    NSArray* statColorArray = [NSArray arrayWithObjects:self.statName, self.statColor,self.commandCode, nil];
     return statColorArray;
 }
 
 - (NSInteger)check {
     self.statName = _statusTextField.text;
-    if (_statusTextField.text && self.statColor) {
+    self.commandCode = self.commandCodeField.text;
+    if (_statusTextField.text && self.commandCodeField.text && self.statColor) {
         return 1;
     }else {
         return 0;
@@ -107,7 +125,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     }else if (section == 1) {
         return 1;
     }else {
@@ -127,7 +145,7 @@
                                       reuseIdentifier:kCellIdentifier];
         
         if ([indexPath section] == 0) {
-            if ([indexPath row] == 0) {
+            if ([indexPath row] == 0 | [indexPath row] == 1) {
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
             else {
@@ -150,9 +168,10 @@
     if ([indexPath section] == 0) { // Email & Password Section
         if ([indexPath row] == 0) { // Email
             cell.textLabel.text = @"状态名称";
-        }
-        else {
-            //            cell.textLabel.text = @"状态颜色";
+        }else if ([indexPath row] == 1) {
+            cell.textLabel.text = @"命令码";
+        }else {
+            // do nothing
         }
     }
     

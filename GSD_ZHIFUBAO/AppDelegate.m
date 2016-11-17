@@ -76,10 +76,10 @@
     
     if (!itemsCache) {
         DeviceInfo* _deviceInfo = [[DeviceInfo alloc] init];
-        _deviceInfo.title = @"摄像头";
+        _deviceInfo.title = @"LED灯";
         _deviceInfo.imageResString = @"fa-camera";
         _deviceInfo.currentStat = @(0);
-        _deviceInfo.colorStatPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"状态1", @(0), @(0), nil] forKey:@(0)];
+        _deviceInfo.colorStatPair = [NSDictionary dictionaryWithObject:[NSArray arrayWithObjects:@"状态1", @(0), @"1", nil] forKey:@(0)];
         
         NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
         

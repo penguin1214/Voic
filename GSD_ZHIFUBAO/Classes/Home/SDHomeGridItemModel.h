@@ -28,7 +28,7 @@
 @property (nonatomic, copy) NSString *title;    //device name
 @property (nonatomic, copy) NSString *imageResString;
 @property (nonatomic, copy) NSNumber* currentStat;
-@property (nonatomic, copy) NSDictionary* colorStatPair;    // @{1: [title, color, pushable]
+@property (nonatomic, copy) NSDictionary* colorStatPair;    // @{1: [title, color, command_code]
 @property (nonatomic, copy) Class destinationClass;
 
 @end
