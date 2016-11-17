@@ -11,10 +11,12 @@
 #import "ProfileManager.h"
 #import "LogginView.h"
 #import "CommunicationManager.h"
+#import "iFlyNvpViewController.h"
 
 @interface LogginController (){
 //    RegisterController* _cRegController;
     LogginView* _vLogginView;
+    NSString* _phone;
 }
 
 @end
@@ -29,6 +31,9 @@
     self.view = [[UIView alloc] initWithFrame:kScreenBound];
     _vLogginView = [[LogginView alloc] init];
     _vLogginView.delegate = self;
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"Login" object:nil];
     
     return self;
 }
@@ -53,36 +58,62 @@
 
 - (void)didClickRegisterBtn{
     RegisterController* _cRegController = [[RegisterController alloc] init];
-//    [self presentViewController:_cRegController animated:YES completion:nil];
+    
+    //删除模型
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    
+    NSString* notifyName = @"deleteModel";
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+    
+    [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
+    
     [self.navigationController pushViewController:_cRegController animated:NO];
+}
+
+- (void)didClickLoginBtnWithPhone:(NSString *)phone {
+    _phone = phone;
+    [[ProfileManager sharedInstance] setUserPhone:phone];
+    iFlyNvpViewController* ivp = [[iFlyNvpViewController alloc] init];
+    ivp.sst = @"verify";
+    [self.navigationController pushViewController:ivp animated:YES];
 }
 
 - (void)toastMessage:(NSString *)message{
     [self toast:message];
 }
 
--(void)didClickLoginBtnWithPhone:(NSString *)phone Password:(NSString *)password success:(void (^)(BOOL))success failure:(void (^)(NSError *))failure{
-    [CommunicationManager loginWithPhone:phone password:password success:^(BOOL result, NSString *message, NSDictionary *data) {
-        if (!result) {
-            NSLog(@"%@",message);
-            //data:
-            NSString* _user_id = [data objectForKey:kResponseUserIDKey];
-            NSString* _auth_token = [data objectForKey:kResponseUserAuthToken];
-            NSArray* _grid_items = [data objectForKey:kResponseUserGridItems];
+
+- (void)recvNotif:(NSNotification*)notify {
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString *name = [dict objectForKey:@"NotifyName"];
+    
+    if ([name  isEqual: @"login success"]) {
+        
+        [CommunicationManager loginWithPhone:_phone success:^(BOOL result, NSString *message, NSDictionary *data) {
             
-            [[ProfileManager sharedInstance] setUserID:_user_id];
-            [[ProfileManager sharedInstance] setAuthToken:_auth_token];
-            [[ProfileManager sharedInstance] setUserPhone:phone];
-            [[ProfileManager sharedInstance] setGridItems:_grid_items];
-            
-            success(YES);
-        }else{
-            [self toast:message];
-            success(NO);
-        }
-    } failure:^(NSError* error){
-        NSLog(@"%@", error);
-    }];
+            if (!result) {
+                NSLog(@"%@", message);
+                //data
+                NSString* _user_id = [data objectForKey:kResponseUserIDKey];
+                NSString* _auth_token = [data objectForKey:kResponseUserAuthToken];
+                NSArray* _grid_items = [data objectForKey:kResponseUserGridItems];
+                
+                [[ProfileManager sharedInstance] setUserID:_user_id];
+                [[ProfileManager sharedInstance] setAuthToken:_auth_token];
+                [[ProfileManager sharedInstance] setUserPhone:_phone];
+                [[ProfileManager sharedInstance] setGridItems:_grid_items];
+                [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+                
+                [self toast:@"登录成功"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else {
+                NSLog(@"%@", message);
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@", error);
+        }];
+    }
 }
 
 - (void)loginSuccess{

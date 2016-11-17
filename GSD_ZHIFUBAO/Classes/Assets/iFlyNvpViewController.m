@@ -128,7 +128,6 @@
                                                    delegate:self
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles:nil, nil];
-    
 }
 
 #pragma  mark button Handler
@@ -256,6 +255,14 @@
         if( [suc intValue] >= [rgn intValue] ){
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"训练成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                
+                NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+                
+                NSString* notifyName = @"register success";
+                NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+                
+                [nc postNotificationName:@"Register" object:self userInfo:dict];
+                
                 [[ProfileManager sharedInstance] setVoiceIDWithSugar];
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
@@ -278,6 +285,14 @@
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"验证成功" message:@"" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
 //                [[ProfileManager sharedInstance] setVoiceIDWithSugar];
+                //登录时发送消息，推出控制器。
+                NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+                
+                NSString* notifyName = @"login success";
+                NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+                
+                [nc postNotificationName:@"Login" object:self userInfo:dict];
+                
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
             }];

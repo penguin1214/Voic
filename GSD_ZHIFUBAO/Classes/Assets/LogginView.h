@@ -11,12 +11,13 @@
 @protocol LogginViewDelegate <NSObject>
 
 - (void)didClickRegisterBtn;
-- (void)didClickLoginBtnWithPhone:(NSString*)phone
-                         Password:(NSString*)password
-                          success:(void(^)(BOOL result))success
-                          failure:(void(^)(NSError* error))failure;
+
+- (void)didClickLoginBtnWithPhone:(NSString*)phone;
+
 - (void)loginSuccess;
+
 - (void)toastMessage:(NSString*)message;
+
 @end
 
 @interface LogginView : BaseView

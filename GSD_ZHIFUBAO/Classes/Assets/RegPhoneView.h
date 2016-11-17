@@ -10,7 +10,7 @@
 
 @protocol RegPhoneViewDelegate <NSObject>
 
-- (void)didClickRegisterButtonWithPhone:(NSString*)phone Password:(NSString*)password;
+- (void)didClickRegisterButtonWithPhone:(NSString*)phone;
 - (void)toastMessage:(NSString*)message;
 
 @end

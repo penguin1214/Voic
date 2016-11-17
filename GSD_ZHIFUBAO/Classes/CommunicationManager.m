@@ -12,12 +12,10 @@
 
 @implementation CommunicationManager
 
-+(void)registerWithPhone:(NSString *)phone password:(NSString *)password success:(void (^)(BOOL, NSString *, NSDictionary *))success failure:(void (^)(NSError *))failure{
++(void)registerWithPhone:(NSString *)phone success:(void (^)(BOOL, NSString *, NSDictionary *))success failure:(void (^)(NSError *))failure{
     NSString* _url = kUrlUserRegister;
-    NSString* _password = [password MD5String];
     NSDictionary* _data = [NSDictionary dictionaryWithObjectsAndKeys:
                            phone, @"phone",
-                           _password ,@"password",
                            nil];
     NSDictionary* _param = [RequestPackUtil packWithData: _data];
     [[HTTPUtil sharedInstance] POST:_url parameters:_param progress:nil success:^(NSURLSessionDataTask* task, id response){
@@ -31,12 +29,10 @@
     }];
 }
 
-+(void)loginWithPhone:(NSString *)phone password:(NSString *)password success:(void (^)(BOOL, NSString *, NSDictionary*))success failure:(void (^)(NSError *))failure{
++(void)loginWithPhone:(NSString *)phone success:(void (^)(BOOL, NSString *, NSDictionary*))success failure:(void (^)(NSError *))failure{
     NSString* _url = kUrlUserLogin;
-    NSString* _password = [password MD5String];
     NSDictionary* _data = [NSDictionary dictionaryWithObjectsAndKeys:
                            phone, @"phone",
-                           _password ,@"password",
                            nil];
     NSDictionary* _param = [RequestPackUtil packWithData: _data];
     [[HTTPUtil sharedInstance] POST:_url parameters:_param progress:nil success:^(NSURLSessionDataTask* task, id response){

@@ -92,49 +92,90 @@
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     
-    if ([[ProfileManager sharedInstance] checkLogin]) {
-        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
-            
-            //已登录 未录入声纹模型
-            
-            if( [self netConnectAble] == NO ){
-                [self toast:@"无网络连接，无法录入声纹"];
-                return;
-            }
-            
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-                
-                
-                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
-                nvp.sst = TRAIN_SST;
-                [self presentViewController:nvp animated:YES completion:nil];
-                
-            }];
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
+    //    启动app检测是否登录，未登录弹出请登录警告。不用检测声纹，注册时训练。
+    if (![[ProfileManager sharedInstance] checkLogin]) {
+        
+        if( [self netConnectAble] == NO ){
+            [self toast:@"无网络连接，无法录入声纹"];
+            return;
         }
         
-    }else{
+        //            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+        //            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+        //
+        //
+        //                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+        //                nvp.sst = TRAIN_SST;
+        //                [self presentViewController:nvp animated:YES completion:nil];
+        //
+        //            }];
+        //            [alert addAction:defaultAction];
+        //            [self presentViewController:alert animated:YES completion:nil];
+        //
+        //    }else{
         
         //未登录
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请登录" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
             
             LogginController* loginController = [[LogginController alloc] init];
-            loginController.hidesBottomBarWhenPushed = NO;
-            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
-            
-            UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:loginController];
-            navController.hidesBottomBarWhenPushed = NO;
-            
-            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
-            
-            [self presentViewController:navController animated:YES completion:nil];
+//            loginController.hidesBottomBarWhenPushed = NO;
+//            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
+//            
+//            UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+//            navController.hidesBottomBarWhenPushed = NO;
+//            
+//            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
+//            
+//            [self presentViewController:navController animated:YES completion:nil];
+            [self.navigationController pushViewController:loginController animated:YES];
             
         }];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
+        //    if ([[ProfileManager sharedInstance] checkLogin]) {
+        //        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
+        //
+        //            //已登录 未录入声纹模型
+        //
+        //            if( [self netConnectAble] == NO ){
+        //                [self toast:@"无网络连接，无法录入声纹"];
+        //                return;
+        //            }
+        //
+        //            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请录入声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+        //            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"录入" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+        //
+        //
+        //                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+        //                nvp.sst = TRAIN_SST;
+        //                [self presentViewController:nvp animated:YES completion:nil];
+        //
+        //            }];
+        //            [alert addAction:defaultAction];
+        //            [self presentViewController:alert animated:YES completion:nil];
+        //        }
+        //
+        //    }else{
+        //
+        //        //未登录
+        //        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请登录" preferredStyle:UIAlertControllerStyleAlert];
+        //        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+        //
+        //            LogginController* loginController = [[LogginController alloc] init];
+        //            loginController.hidesBottomBarWhenPushed = NO;
+        //            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
+        //
+        //            UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+        //            navController.hidesBottomBarWhenPushed = NO;
+        //
+        //            loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismissLoginView)];
+        //
+        //            [self presentViewController:navController animated:YES completion:nil];
+        //
+        //        }];
+        //        [alert addAction:defaultAction];
+        //        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -151,7 +192,7 @@
     self.cellClass = [SDAssetsTableViewControllerCell class];
     
     
-//    voiceID = [[NSString alloc] initWithString:[[ProfileManager sharedInstance] getVoiceID]];
+    //    voiceID = [[NSString alloc] initWithString:[[ProfileManager sharedInstance] getVoiceID]];
     
     isvRec = [IFlyISVRecognizer sharedInstance];
     

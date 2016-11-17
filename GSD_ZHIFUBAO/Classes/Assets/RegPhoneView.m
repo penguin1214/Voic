@@ -24,11 +24,6 @@
     UILabel *_vCodeGridUnderline;
     UIButton *_vGetCodeBtn;
     
-    //password gred
-    UIImageView *_vPwdIcon;
-    UITextField *_vPwdText;
-    UILabel *_vPwdGridUnderline;
-    
     //button grid
     UIButton *_vNextBtn;
 }
@@ -153,37 +148,6 @@
         make.height.mas_equalTo(1);
     }];
     
-    _vPwdIcon = [[UIImageView alloc] init];
-    _vPwdIcon.image = [UIImage imageNamed:@"icon_lock"];
-    [_vPwdGrid addSubview:_vPwdIcon];
-    [_vPwdIcon mas_makeConstraints:^(MASConstraintMaker* make){
-        make.left.equalTo(_vPwdGrid);
-        make.centerY.equalTo(_vPwdGrid);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
-    }];
-    
-    _vPwdText = [[UITextField alloc] init];
-    _vPwdText.placeholder = @"密码";
-    _vPwdText.keyboardType = UIKeyboardTypePhonePad;
-    _vPwdText.secureTextEntry = YES;
-    [_vPwdGrid addSubview:_vPwdText];
-    [_vPwdText mas_makeConstraints:^(MASConstraintMaker* make){
-        make.left.equalTo(_vPwdIcon.mas_right).with.offset(10);
-        make.centerY.equalTo(_vPwdGrid);
-        make.right.equalTo(_vPwdGrid);
-    }];
-    
-    _vPwdGridUnderline = [[UILabel alloc] init];
-    _vPwdGridUnderline.backgroundColor = kColorGray;
-    [_vPwdGrid addSubview:_vPwdGridUnderline];
-    [_vPwdGridUnderline mas_makeConstraints:^(MASConstraintMaker* make){
-        make.left.equalTo(_vPwdGrid);
-        make.right.equalTo(_vPwdGrid);
-        make.top.equalTo(_vPwdGrid.mas_baseline);
-        make.height.mas_equalTo(1);
-    }];
-    
     _vNextBtn = [[UIButton alloc] init];
     [_vNextBtn setTitle:@"注册" forState:UIControlStateNormal];
     //    _vNextBtn.titleLabel.font = [UIFont systemFontOfSize:10];
@@ -195,8 +159,6 @@
         make.right.equalTo(_vButtonGrid);
         make.top.equalTo(_vButtonGrid).with.offset(20);
     }];
-    
-    
     
     //  bind event to buttons
     [_vGetCodeBtn addTarget:self action:@selector(clickGetCodeBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -235,7 +197,7 @@
             }
         }];
         NSLog(@"verification success");
-        [self.delegate didClickRegisterButtonWithPhone:_vPhoneText.text Password:_vPwdText.text];
+        [self.delegate didClickRegisterButtonWithPhone:_vPhoneText.text];
     }
     
 }

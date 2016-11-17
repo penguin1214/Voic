@@ -11,6 +11,7 @@
 #import "CommunicationManager.h"
 #import "FormatUtil.h"
 #import "ProfileManager.h"
+#import "iFlyNvpViewController.h"
 
 @interface RegisterController (){
     RegPhoneView* _vRegView;
@@ -30,6 +31,10 @@
     self.view = [[UIView alloc] initWithFrame:kScreenBound];
     _vRegView = [[RegPhoneView alloc] init];
     _vRegView.delegate = self;
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"Register" object:nil];
+    
     
     return self;
 }
@@ -52,32 +57,36 @@
 }
 
 #pragma mark - RegPhoneViewDelegate
--(void)didClickRegisterButtonWithPhone:(NSString *)phone Password:(NSString *)password{
+-(void)didClickRegisterButtonWithPhone:(NSString *)phone{
     
-    [CommunicationManager registerWithPhone:phone password:password success:^(BOOL result, NSString *message, NSDictionary* data) {
-        if (!result) {
-            NSLog(@"%@", message);
-            
-            [[ProfileManager sharedInstance] setUserPhone:phone];
-            
-            //删除模型
-            NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-            
-            NSString* notifyName = @"deleteModel";
-            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
-            
-            [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
-            
-            [self toast:@"注册成功"];
-            [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"error");
-    }];
+    iFlyNvpViewController* ivp = [[iFlyNvpViewController alloc] init];
+    ivp.sst = @"train";
+    [self.navigationController pushViewController:ivp animated:YES];
+    
+}
+
+- (void)recvNotif:(NSNotification*)notify {
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString *name = [dict objectForKey:@"NotifyName"];
+    
+    if ([name  isEqual: @"register success"]) {
+        [CommunicationManager registerWithPhone:[[ProfileManager sharedInstance] getUserPhone] success:^(BOOL result, NSString *message, NSDictionary* data) {
+            if (!result) {
+                NSLog(@"%@", message);
+                
+                [self toast:@"注册成功"];
+                [self performSelector:@selector(popUpController) withObject:nil afterDelay:2.0];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"error");
+        }];
+ 
+    }
 }
 
 - (void)popUpController{
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 @end

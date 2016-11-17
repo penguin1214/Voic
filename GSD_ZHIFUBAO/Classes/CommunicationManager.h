@@ -12,14 +12,12 @@
 @interface CommunicationManager : NSObject
 
 + (void)registerWithPhone:(NSString*)phone
-                password:(NSString*)password
                  success:(void(^)(BOOL result,
                                   NSString* message,
                                   NSDictionary* data))success
                  failure:(void(^)(NSError* error))failure;
 
 + (void)loginWithPhone:(NSString*)phone
-              password:(NSString*)password
                success:(void(^)(BOOL result, NSString* message, NSDictionary* data))success
                failure:(void(^)(NSError* error))failure;
 
