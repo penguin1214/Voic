@@ -99,16 +99,33 @@
 - (void)didFinishSetting {
 //    NSString* command = [NSString stringWithString:[self.segmentView[0].command]];
 //    NSString* commandCode = [NSString stringWithString:[self.segmentView[0].commandCode]];
+    NSMutableArray* temp = [[[ProfileManager sharedInstance] getAllCommand] mutableCopy];
     
-#warning HARD CODE
-    NSString* command = @"开灯";
-    NSString* commandCode = @"0";
-    Command* _command = [[Command alloc] init];
-    _command.command = command;
-    _command.commandCode = commandCode;
+    for (SetCommandDetailController* vc in _allVC) {
+        NSDictionary* dict = [vc collectCommand];
+        NSString* command = [dict objectForKey:@"command"];
+        NSString* commandCode = [dict objectForKey:@"commandCode"];
+        
+        Command* _command = [[Command alloc] init];
+        _command.command = command;
+        _command.commandCode = commandCode;
+        
+        NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_command];
+        [temp addObject:data];
+    }
     
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_command];
-    [[ProfileManager sharedInstance] setCommand:[NSArray arrayWithObject:data]];
+    [[ProfileManager sharedInstance] setCommand:temp];
+
+    
+//#warning HARD CODE
+//    NSString* command = @"开第一盏灯";
+//    NSString* commandCode = @"0";
+//    Command* _command = [[Command alloc] init];
+//    _command.command = command;
+//    _command.commandCode = commandCode;
+    
+//    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_command];
+//    [[ProfileManager sharedInstance] setCommand:[NSArray arrayWithObject:data]];
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }

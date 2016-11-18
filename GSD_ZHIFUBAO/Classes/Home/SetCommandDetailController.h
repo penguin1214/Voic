@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSString* command;
 @property (nonatomic, strong) NSString* commandCode;
 
+- (NSDictionary*)collectCommand;
+
 @end

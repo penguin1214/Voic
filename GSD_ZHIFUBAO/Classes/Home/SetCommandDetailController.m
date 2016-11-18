@@ -102,6 +102,11 @@
 }
 
 
+- (NSDictionary *)collectCommand {
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:_vPhoneText.text, @"command", _vPwdText.text, @"commandCode", nil];
+    return dict;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
