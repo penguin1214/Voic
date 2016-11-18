@@ -25,9 +25,10 @@
     
     [self initRecognizer];
     
-    _startRecBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 30, 20)];
+    _startRecBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 220, 30)];
     _startRecBtn.backgroundColor = kColorMainGreen;
-    _startRecBtn.titleLabel.text = @"start";
+    _startRecBtn.titleLabel.text = @"发送命令";
+    _startRecBtn.titleLabel.textColor = [UIColor blackColor];
     [self.view addSubview:_startRecBtn];
     
     [_startRecBtn addTarget:self action:@selector(startBtnHandler) forControlEvents:UIControlEventTouchUpInside];
