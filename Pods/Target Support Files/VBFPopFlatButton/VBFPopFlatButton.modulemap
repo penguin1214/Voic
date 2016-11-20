@@ -1,6 +1,0 @@
-framework module VBFPopFlatButton {
-  umbrella header "VBFPopFlatButton-umbrella.h"
-
-  export *
-  module * { export * }
-}

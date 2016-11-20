@@ -1,6 +1,0 @@
-framework module NKOColorPickerView {
-  umbrella header "NKOColorPickerView-umbrella.h"
-
-  export *
-  module * { export * }
-}
