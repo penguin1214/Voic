@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "992903521B1EBDBC00290346"
-               BuildableName = "GSD_ZHIFUBAO.app"
-               BlueprintName = "GSD_ZHIFUBAO"
-               ReferencedContainer = "container:GSD_ZHIFUBAO.xcodeproj">
+               BuildableName = "Voic.app"
+               BlueprintName = "Voic"
+               ReferencedContainer = "container:Voic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9929036B1B1EBDBC00290346"
-               BuildableName = "GSD_ZHIFUBAOTests.xctest"
-               BlueprintName = "GSD_ZHIFUBAOTests"
-               ReferencedContainer = "container:GSD_ZHIFUBAO.xcodeproj">
+               BuildableName = "Voic.xctest"
+               BlueprintName = "VoicTests"
+               ReferencedContainer = "container:Voic.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "992903521B1EBDBC00290346"
-            BuildableName = "GSD_ZHIFUBAO.app"
-            BlueprintName = "GSD_ZHIFUBAO"
-            ReferencedContainer = "container:GSD_ZHIFUBAO.xcodeproj">
+            BuildableName = "Voic.app"
+            BlueprintName = "Voic"
+            ReferencedContainer = "container:Voic.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "992903521B1EBDBC00290346"
-            BuildableName = "GSD_ZHIFUBAO.app"
-            BlueprintName = "GSD_ZHIFUBAO"
-            ReferencedContainer = "container:GSD_ZHIFUBAO.xcodeproj">
+            BuildableName = "Voic.app"
+            BlueprintName = "Voic"
+            ReferencedContainer = "container:Voic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -87,9 +87,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "992903521B1EBDBC00290346"
-            BuildableName = "GSD_ZHIFUBAO.app"
-            BlueprintName = "GSD_ZHIFUBAO"
-            ReferencedContainer = "container:GSD_ZHIFUBAO.xcodeproj">
+            BuildableName = "Voic.app"
+            BlueprintName = "Voic"
+            ReferencedContainer = "container:Voic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -338,11 +338,11 @@
 		9904C7551B1F2F3800E2717D /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		990759CF1B21F0AA0042DD52 /* SDHomeGridViewListItemViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDHomeGridViewListItemViewButton.h; sourceTree = "<group>"; };
 		990759D01B21F0AA0042DD52 /* SDHomeGridViewListItemViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDHomeGridViewListItemViewButton.m; sourceTree = "<group>"; };
-		992903531B1EBDBC00290346 /* GSD_ZHIFUBAO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSD_ZHIFUBAO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		992903531B1EBDBC00290346 /* Voic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		992903571B1EBDBC00290346 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		992903581B1EBDBC00290346 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		992903631B1EBDBC00290346 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9929036C1B1EBDBC00290346 /* GSD_ZHIFUBAOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSD_ZHIFUBAOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9929036C1B1EBDBC00290346 /* Voic.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Voic.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		992903711B1EBDBC00290346 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		992903721B1EBDBC00290346 /* GSD_ZHIFUBAOTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GSD_ZHIFUBAOTests.m; sourceTree = "<group>"; };
 		992903801B1EBED700290346 /* SDFrameTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFrameTabBarController.h; sourceTree = "<group>"; };
@@ -722,7 +722,7 @@
 			children = (
 				2F069A0C1DCCE277004215C9 /* SMS_SDK */,
 				AA3318B81CF30E3B00B73FEA /* SystemConfiguration.framework */,
-				992903551B1EBDBC00290346 /* GSD_ZHIFUBAO */,
+				992903551B1EBDBC00290346 /* Voic */,
 				9929036F1B1EBDBC00290346 /* GSD_ZHIFUBAOTests */,
 				992903541B1EBDBC00290346 /* Products */,
 				2CFC87483E9E5279A5573387 /* Pods */,
@@ -733,13 +733,13 @@
 		992903541B1EBDBC00290346 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				992903531B1EBDBC00290346 /* GSD_ZHIFUBAO.app */,
-				9929036C1B1EBDBC00290346 /* GSD_ZHIFUBAOTests.xctest */,
+				992903531B1EBDBC00290346 /* Voic.app */,
+				9929036C1B1EBDBC00290346 /* Voic.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		992903551B1EBDBC00290346 /* GSD_ZHIFUBAO */ = {
+		992903551B1EBDBC00290346 /* Voic */ = {
 			isa = PBXGroup;
 			children = (
 				2FE5CE851DD590AF0048C6B4 /* Resources */,
@@ -748,6 +748,7 @@
 				9929037C1B1EBDE500290346 /* Classes */,
 				992903561B1EBDBC00290346 /* Supporting Files */,
 			);
+			name = Voic;
 			path = GSD_ZHIFUBAO;
 			sourceTree = "<group>";
 		};
@@ -1125,9 +1126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		992903521B1EBDBC00290346 /* GSD_ZHIFUBAO */ = {
+		992903521B1EBDBC00290346 /* Voic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 992903761B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "GSD_ZHIFUBAO" */;
+			buildConfigurationList = 992903761B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "Voic" */;
 			buildPhases = (
 				A9641EEF3C73CE9E2679F179 /* [CP] Check Pods Manifest.lock */,
 				9929034F1B1EBDBC00290346 /* Sources */,
@@ -1140,14 +1141,14 @@
 			);
 			dependencies = (
 			);
-			name = GSD_ZHIFUBAO;
+			name = Voic;
 			productName = GSD_ZHIFUBAO;
-			productReference = 992903531B1EBDBC00290346 /* GSD_ZHIFUBAO.app */;
+			productReference = 992903531B1EBDBC00290346 /* Voic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9929036B1B1EBDBC00290346 /* GSD_ZHIFUBAOTests */ = {
+		9929036B1B1EBDBC00290346 /* VoicTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 992903791B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "GSD_ZHIFUBAOTests" */;
+			buildConfigurationList = 992903791B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "VoicTests" */;
 			buildPhases = (
 				992903681B1EBDBC00290346 /* Sources */,
 				992903691B1EBDBC00290346 /* Frameworks */,
@@ -1158,9 +1159,9 @@
 			dependencies = (
 				9929036E1B1EBDBC00290346 /* PBXTargetDependency */,
 			);
-			name = GSD_ZHIFUBAOTests;
+			name = VoicTests;
 			productName = GSD_ZHIFUBAOTests;
-			productReference = 9929036C1B1EBDBC00290346 /* GSD_ZHIFUBAOTests.xctest */;
+			productReference = 9929036C1B1EBDBC00290346 /* Voic.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1182,7 +1183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9929034E1B1EBDBC00290346 /* Build configuration list for PBXProject "GSD_ZHIFUBAO" */;
+			buildConfigurationList = 9929034E1B1EBDBC00290346 /* Build configuration list for PBXProject "Voic" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1195,8 +1196,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				992903521B1EBDBC00290346 /* GSD_ZHIFUBAO */,
-				9929036B1B1EBDBC00290346 /* GSD_ZHIFUBAOTests */,
+				992903521B1EBDBC00290346 /* Voic */,
+				9929036B1B1EBDBC00290346 /* VoicTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1414,7 +1415,7 @@
 /* Begin PBXTargetDependency section */
 		9929036E1B1EBDBC00290346 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 992903521B1EBDBC00290346 /* GSD_ZHIFUBAO */;
+			target = 992903521B1EBDBC00290346 /* Voic */;
 			targetProxy = 9929036D1B1EBDBC00290346 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1514,7 +1515,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.voic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Voic;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1537,7 +1538,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.voic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Voic;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1556,8 +1557,8 @@
 				);
 				INFOPLIST_FILE = GSD_ZHIFUBAOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GSD_ZHIFUBAO.app/GSD_ZHIFUBAO";
+				PRODUCT_NAME = Voic;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voic.app/Voic";
 			};
 			name = Debug;
 		};
@@ -1571,15 +1572,15 @@
 				);
 				INFOPLIST_FILE = GSD_ZHIFUBAOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GSD_ZHIFUBAO.app/GSD_ZHIFUBAO";
+				PRODUCT_NAME = Voic;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Voic.app/Voic";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9929034E1B1EBDBC00290346 /* Build configuration list for PBXProject "GSD_ZHIFUBAO" */ = {
+		9929034E1B1EBDBC00290346 /* Build configuration list for PBXProject "Voic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				992903741B1EBDBC00290346 /* Debug */,
@@ -1588,7 +1589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		992903761B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "GSD_ZHIFUBAO" */ = {
+		992903761B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "Voic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				992903771B1EBDBC00290346 /* Debug */,
@@ -1597,7 +1598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		992903791B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "GSD_ZHIFUBAOTests" */ = {
+		992903791B1EBDBC00290346 /* Build configuration list for PBXNativeTarget "VoicTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9929037A1B1EBDBC00290346 /* Debug */,
