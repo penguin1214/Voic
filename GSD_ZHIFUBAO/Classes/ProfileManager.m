@@ -78,13 +78,13 @@
 }
 
 - (NSString *)getUserID{
-    return @"1";
-    //    return [UserDefaultUtil getObjectBykey:kProfileUserID];
+//    return @"1";
+        return [UserDefaultUtil getObjectBykey:kProfileUserID];
 }
 
 -(NSString *)getUserPhone{
-    //    return [UserDefaultUtil getObjectBykey:kProfileUserPhone];
-    return @"18349201941";
+        return [UserDefaultUtil getObjectBykey:kProfileUserPhone];
+//    return @"18349201941";
 }
 
 

@@ -99,7 +99,10 @@
 - (void)didFinishSetting {
 //    NSString* command = [NSString stringWithString:[self.segmentView[0].command]];
 //    NSString* commandCode = [NSString stringWithString:[self.segmentView[0].commandCode]];
-    NSMutableArray* temp = [[[ProfileManager sharedInstance] getAllCommand] mutableCopy];
+    NSMutableArray* temp = [[NSMutableArray alloc] init];
+    if ([[ProfileManager sharedInstance] getAllCommand]) {
+        temp = [[[ProfileManager sharedInstance] getAllCommand] mutableCopy];
+    }
     
     for (SetCommandDetailController* vc in _allVC) {
         NSDictionary* dict = [vc collectCommand];

@@ -58,7 +58,7 @@
     
     _vPhoneText = [[UITextField alloc] init];
     _vPhoneText.placeholder = @"语音命令";
-    _vPhoneText.keyboardType = UIKeyboardTypePhonePad;
+    _vPhoneText.keyboardType = UIKeyboardTypeDefault;
     [_vPhoneGrid addSubview:_vPhoneText];
     [_vPhoneText mas_makeConstraints:^(MASConstraintMaker* make){
         make.left.equalTo(self.view).with.offset(20);

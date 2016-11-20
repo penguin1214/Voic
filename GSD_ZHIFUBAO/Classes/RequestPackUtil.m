@@ -16,7 +16,7 @@
     NSString* userId = [[ProfileManager sharedInstance] getUserID];
     NSString* authToken = [[ProfileManager sharedInstance] getAuthToken];
     
-    if (userId.length > 0 && authToken.length > 0) {
+    if (userId && authToken.length > 0) {
         [ret setObject:kLoggedMark forKey:kLogStatKey];
         [ret setObject:userId forKey:kUserIdKey];
         [ret setObject:authToken forKey:kAuthTokenKey];

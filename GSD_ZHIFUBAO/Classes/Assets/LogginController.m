@@ -60,12 +60,12 @@
     RegisterController* _cRegController = [[RegisterController alloc] init];
     
     //删除模型
-    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-    
-    NSString* notifyName = @"deleteModel";
-    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
-    
-    [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
+//    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+//    
+//    NSString* notifyName = @"deleteModel";
+//    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+//    
+//    [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
     
     [self.navigationController pushViewController:_cRegController animated:NO];
 }

@@ -1511,7 +1511,7 @@
 				);
 				GCC_PREFIX_HEADER = GSD_ZHIFUBAO/PrefixHeader.pch;
 				INFOPLIST_FILE = GSD_ZHIFUBAO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.voic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1534,7 +1534,7 @@
 				);
 				GCC_PREFIX_HEADER = GSD_ZHIFUBAO/PrefixHeader.pch;
 				INFOPLIST_FILE = GSD_ZHIFUBAO/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yang.voic;
 				PRODUCT_NAME = "$(TARGET_NAME)";

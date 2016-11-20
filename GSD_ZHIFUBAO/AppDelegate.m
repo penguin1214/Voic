@@ -130,8 +130,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"become active");
-//    if ([[ProfileManager sharedInstance] checkLogin]) {
-//        
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+//
 //        if (![[ProfileManager sharedInstance] checkVoicePrintExist]) {
 //            
 //            //已登录 未录入声纹模型
@@ -160,19 +160,19 @@
 //            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 //        }else {
 //            
-//            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请验证声纹模型" preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"验证" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
-//                
-//                
-//                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
-//                nvp.sst = @"verify";
-//                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
-//                
-//            }];
-//            [alert addAction:defaultAction];
-//            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-//        }
-//
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"请验证声纹模型" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"验证" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
+                
+                
+                iFlyNvpViewController * nvp = [[iFlyNvpViewController alloc] init];
+                nvp.sst = @"verify";
+                [self.window.rootViewController presentViewController:nvp animated:YES completion:nil];
+                
+            }];
+            [alert addAction:defaultAction];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }
+
 //    }
 }
 

@@ -45,9 +45,9 @@
     CGPoint _lastPoint;
     UIButton *_placeholderButton;
     SDHomeGridViewListItemView *_currentPressedView;
-//    SDCycleScrollView *_cycleScrollADView;
+    //    SDCycleScrollView *_cycleScrollADView;
     UIView *_cycleScrollADViewBackgroundView;
-//    UIButton *_moreItemButton;
+    //    UIButton *_moreItemButton;
     CGRect _currentPresssViewFrame;
 }
 
@@ -64,14 +64,17 @@
         UIView *cycleScrollADViewBackgroundView = [[UIView alloc] init];
         cycleScrollADViewBackgroundView.backgroundColor = [UIColor colorWithRed:(235 / 255.0) green:(235 / 255.0) blue:(235 / 255.0) alpha:1];
         [self addSubview:cycleScrollADViewBackgroundView];
-//        _cycleScrollADViewBackgroundView = cycleScrollADViewBackgroundView;
+        //        _cycleScrollADViewBackgroundView = cycleScrollADViewBackgroundView;
         
         SDCycleScrollView *cycleView = [[SDCycleScrollView alloc] init];
         cycleView.autoScrollTimeInterval = 2.0;
         [self addSubview:cycleView];
-//        _cycleScrollADView = cycleView;
+        //        _cycleScrollADView = cycleView;
         
     }
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(recvNotif:) name:@"HomeView" object:nil];
+    
     return self;
 }
 
@@ -110,17 +113,17 @@
                 [self.gridViewDelegate homeGrideView:self selectItemAtIndex:[_itemsArray indexOfObject:view]];
             }
         };
-
+        
         [self addSubview:item];
         [_itemsArray addObject:item];
     }];
     
-//    UIButton *more = [[UIButton alloc] init];
-//    [more setImage:[UIImage imageNamed:@"tf_home_more"] forState:UIControlStateNormal];
-//    [more addTarget:self action:@selector(moreItemButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-//    [self addSubview:more];
-//    [_itemsArray addObject:more];
-//    _moreItemButton = more;
+    //    UIButton *more = [[UIButton alloc] init];
+    //    [more setImage:[UIImage imageNamed:@"tf_home_more"] forState:UIControlStateNormal];
+    //    [more addTarget:self action:@selector(moreItemButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //    [self addSubview:more];
+    //    [_itemsArray addObject:more];
+    //    _moreItemButton = more;
     
     long rowCount = [self rowCountWithItemsCount:gridModelsArray.count];
     
@@ -141,8 +144,8 @@
     
     _shouldAdjustedSeparators = YES;
     
-//    [self bringSubviewToFront:_cycleScrollADViewBackgroundView];
-//    [self bringSubviewToFront:_cycleScrollADView];
+    //    [self bringSubviewToFront:_cycleScrollADViewBackgroundView];
+    //    [self bringSubviewToFront:_cycleScrollADView];
 }
 
 #pragma mark - actions
@@ -156,15 +159,15 @@
 
 - (void)setScrollADImageURLStringsArray:(NSArray *)scrollADImageURLStringsArray
 {
-//    _scrollADImageURLStringsArray = scrollADImageURLStringsArray;
+    //    _scrollADImageURLStringsArray = scrollADImageURLStringsArray;
     
-//    _cycleScrollADView.imageURLStringsGroup = scrollADImageURLStringsArray;
+    //    _cycleScrollADView.imageURLStringsGroup = scrollADImageURLStringsArray;
 }
 
 - (NSInteger)rowCountWithItemsCount:(NSInteger)count
 {
     long rowCount = (count + kHomeGridViewPerRowItemCount - 1) / kHomeGridViewPerRowItemCount;
-//    rowCount = (rowCount < 4) ? 4 : ++rowCount;
+    //    rowCount = (rowCount < 4) ? 4 : ++rowCount;
     return rowCount;
 }
 
@@ -226,7 +229,7 @@
     
     
     [_itemsArray enumerateObjectsUsingBlock:^(UIButton *button, NSUInteger idx, BOOL *stop) {
-//        if (button == _moreItemButton) return;
+        //        if (button == _moreItemButton) return;
         if (CGRectContainsPoint(button.frame, point) && button != longPressed.view) {
             [_itemsArray removeObject:_placeholderButton];
             [_itemsArray insertObject:_placeholderButton atIndex:idx];
@@ -265,7 +268,7 @@
 
 - (void)deleteView:(SDHomeGridViewListItemView *)view
 {
-
+    
     //处理删除设备
     NSArray *itemsArray = [SDGridItemCacheTool itemsArray];
     NSMutableArray *temp = [itemsArray mutableCopy];
@@ -288,7 +291,7 @@
     
     
     
-//    _dataArray = [temp copy];
+    //    _dataArray = [temp copy];
     
     [_itemsArray removeObject:view];
     [view removeFromSuperview];
@@ -309,28 +312,28 @@
         }
     }];
     
-//    [SDGridItemCacheTool saveItemsArray:[tempItemsContainer copy]];
+    //    [SDGridItemCacheTool saveItemsArray:[tempItemsContainer copy]];
     if ([self.gridViewDelegate respondsToSelector:@selector(homeGrideViewDidChangeItems:)]) {
         [self.gridViewDelegate homeGrideViewDidChangeItems:self];
     }
 }
 
 /*
-
-- (void)moveToValue
-{
-    static CGFloat now = 0;
-    if (now >= value) {
-        _isMoving = NO;
-        now = 0;
-        [_timer invalidate];
-        _timer = nil;
-        return;
-    }
-    self.contentOffset = CGPointMake(0, self.contentOffset.y + 1);
-    now++;
-    
-}
+ 
+ - (void)moveToValue
+ {
+ static CGFloat now = 0;
+ if (now >= value) {
+ _isMoving = NO;
+ now = 0;
+ [_timer invalidate];
+ _timer = nil;
+ return;
+ }
+ self.contentOffset = CGPointMake(0, self.contentOffset.y + 1);
+ now++;
+ 
+ }
  
  */
 
@@ -387,8 +390,8 @@
         _shouldAdjustedSeparators = NO;
     }
     
-//    _cycleScrollADViewBackgroundView.frame = CGRectMake(0, itemH * kHomeGridViewTopSectionRowCount, self.sd_width, itemH);
-//    _cycleScrollADView.frame = CGRectMake(0, _cycleScrollADViewBackgroundView.sd_y + 10, self.sd_width, itemH - 10 * 2);
+    //    _cycleScrollADViewBackgroundView.frame = CGRectMake(0, itemH * kHomeGridViewTopSectionRowCount, self.sd_width, itemH);
+    //    _cycleScrollADView.frame = CGRectMake(0, _cycleScrollADViewBackgroundView.sd_y + 10, self.sd_width, itemH - 10 * 2);
 }
 
 #pragma mark - scroll view delegate
@@ -398,5 +401,14 @@
     _currentPressedView.hidenIcon = YES;
 }
 
+- (void)recvNotif:(NSNotification*)notify {
+    // 取得广播内容
+    NSDictionary *dict = [notify userInfo];
+    NSString *name = [dict objectForKey:@"NotifyName"];
+    
+    if ([name  isEqual: @"refresh home view"]) {
+        [self setupSubViewsFrame];
+    }
+}
 
 @end

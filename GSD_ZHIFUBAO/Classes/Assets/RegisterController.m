@@ -59,6 +59,14 @@
 #pragma mark - RegPhoneViewDelegate
 -(void)didClickRegisterButtonWithPhone:(NSString *)phone{
     
+    [[ProfileManager sharedInstance] setUserPhone:phone];
+
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    NSString* notifyName = @"deleteModel";
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName", nil];
+    
+    [nc postNotificationName:@"VoiceModelController" object:self userInfo:dict];
+
     iFlyNvpViewController* ivp = [[iFlyNvpViewController alloc] init];
     ivp.sst = @"train";
     [self.navigationController pushViewController:ivp animated:YES];

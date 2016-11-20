@@ -9,8 +9,8 @@
 #ifndef UrlMacro_h
 #define UrlMacro_h
 
-#define kUrlBase        @"http://localhost:5000/api/"
-//#define kUrlBase          @"http://penguin-penpen.com/api/"
+//#define kUrlBase        @"http://localhost:5000/api/"
+#define kUrlBase          @"http://penguin-penpen.com/api/"
 
 #define kUrlUserLogin              kUrlBase@"user/login"
 #define kUrlCheckUsablePhone       kUrlBase@"user/usable_phone"

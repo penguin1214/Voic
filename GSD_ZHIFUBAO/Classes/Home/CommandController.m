@@ -27,8 +27,8 @@
     
     _startRecBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 220, 30)];
     _startRecBtn.backgroundColor = kColorMainGreen;
-    _startRecBtn.titleLabel.text = @"发送命令";
-    _startRecBtn.titleLabel.textColor = [UIColor blackColor];
+    [_startRecBtn setTitle:@"发送命令" forState:UIControlStateNormal];
+    [_startRecBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:_startRecBtn];
     
     [_startRecBtn addTarget:self action:@selector(startBtnHandler) forControlEvents:UIControlEventTouchUpInside];
@@ -347,7 +347,7 @@
 - (void)sendCommand:(NSString*)commandCode {
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     
-    NSString* notifyName = @"send cammand";
+    NSString* notifyName = @"send command";
     NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:notifyName, @"NotifyName",commandCode, @"Data", nil];
     
     

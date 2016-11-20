@@ -26,6 +26,8 @@
 #import "SDHomeViewController.h"
 #import "SDAssetsTableViewController.h"
 #import "MBProgressHUD.h"
+#import "SDGridItemCacheTool.h"
+#import "DeviceInfo.h"
 
 
 #define HOST @"127.0.0.1"
@@ -139,16 +141,34 @@
     NSLog(@"didReadData");
     NSData *strData = [data subdataWithRange:NSMakeRange(0, [data length])];
     NSString *msg = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
-    if(msg)
-    {
-        NSLog(@"%@",msg);
-        //处理接收数据
-        
+    NSDictionary* msg_dict = [NSJSONSerialization JSONObjectWithData:[msg dataUsingEncoding:NSUTF8StringEncoding] options:nil error:nil];
+//    if(msg)
+//    {
+//        NSLog(@"%@",msg);
+//        //处理接收数据
+//        
+//    }
+//    else
+//    {
+//        NSLog(@"错误");
+//    }
+    
+    NSString* title = [msg_dict objectForKey:@"title"];
+    NSString* refresh_stat = [msg_dict objectForKey:@"refresh_stat"];
+    
+    NSArray* itemsArray = [SDGridItemCacheTool itemsArray];
+    NSMutableArray* temp = [NSMutableArray new];
+    
+    for (int i = 0; i<[itemsArray count]; i++) {
+        DeviceInfo* _device = [NSKeyedUnarchiver unarchiveObjectWithData:[itemsArray objectAtIndex:i]];
+        if ([_device.title isEqualToString:title]) {
+            _device.currentStat = @([refresh_stat integerValue]);
+
+        }
+        [temp addObject:[NSKeyedArchiver archivedDataWithRootObject:_device]];
     }
-    else
-    {
-        NSLog(@"错误");
-    }
+    [SDGridItemCacheTool saveItemsArray:temp];
+    
     
     [sock readDataWithTimeout:-1 tag:0]; //一直监听网络
     
@@ -166,7 +186,7 @@
     NSString* data= [dict objectForKey:@"Data"];
     NSData* sended = [data dataUsingEncoding:NSUTF8StringEncoding];
     
-    if ([name isEqualToString:@"send cammand"]) {
+    if ([name isEqualToString:@"send command"]) {
         //发送命令
         [_asyncSocket writeData:sended withTimeout:1 tag:1];
     }else if ([name isEqualToString:@"receive data"]) {
