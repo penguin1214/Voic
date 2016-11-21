@@ -96,7 +96,8 @@
     _vTitleText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"设备名称" attributes:@{NSForegroundColorAttributeName: kColorGray}];
 
 //    _vTitleText.placeholder = @"设备名称（将用于语音控制）";
-    _vTitleText.keyboardType = UIKeyboardTypePhonePad;
+    _vTitleText.keyboardType = UIKeyboardTypeDefault;
+    [_vTitleText reloadInputViews];
     [_vTitleGrid addSubview:_vTitleText];
     [_vTitleText mas_makeConstraints:^(MASConstraintMaker* make){
         make.left.equalTo(_vTitleGrid);

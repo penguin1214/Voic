@@ -119,6 +119,8 @@
         [self toast:@"启动识别服务失败，请稍后重试"];
     }
     
+    _startRecBtn.enabled = NO;
+    
 }
 
 /**
@@ -248,6 +250,8 @@
         }
     }
     [self sendCommand:_code];
+    
+    _startRecBtn.enabled = YES;
     
 }
 

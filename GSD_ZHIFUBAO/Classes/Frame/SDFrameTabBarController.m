@@ -30,7 +30,7 @@
 #import "DeviceInfo.h"
 
 
-#define HOST @"127.0.0.1"
+#define HOST @"115.28.1.78"
 #define PORT  8808
 
 @interface SDFrameTabBarController ()
@@ -113,9 +113,9 @@
     //    [sock writeData:writeData withTimeout:-1 tag:0];
     
     // 每隔30s像服务器发送心跳包
-    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];// 在longConnectToSocket方法中进行长连接需要向服务器发送的讯息
-    
-    [self.connectTimer fire];//    [sock readDataWithTimeout:0.5 tag:0];
+//    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];// 在longConnectToSocket方法中进行长连接需要向服务器发送的讯息
+//    
+//    [self.connectTimer fire];//    [sock readDataWithTimeout:0.5 tag:0];
     
     [_asyncSocket readDataWithTimeout:-1 tag:0];
 
