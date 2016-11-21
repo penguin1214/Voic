@@ -124,9 +124,38 @@
     
     for (SetDetailTableViewController* tableVC in _allVC) {
         if ([tableVC check]) {
-            NSArray* arr = [tableVC collectDetail];
-            [self.colorStatPair setObject:arr forKey:tableVC.tag];
-            [self.sendedPair setObject:arr forKey:[tableVC.tag stringValue]];
+            NSArray* tabArr = [tableVC collectDetail];
+            [self.colorStatPair setObject:tabArr forKey:tableVC.tag];
+            [self.sendedPair setObject:tabArr forKey:[tableVC.tag stringValue]];
+            
+            _deviceInfo.colorStatPair = _colorStatPair;
+            
+            //发送设备信息到服务器并获取id
+            [CommunicationManager addDeviceWithTitle:_deviceInfo.title image:_deviceInfo.imageResString currentStat:_deviceInfo.currentStat colorStatPair:self.sendedPair success:^(BOOL result, NSString *message, NSDictionary *data) {
+                if (!result) {
+                    NSLog(@"%@", message);
+                    //data
+                    NSString* _device_id = [data objectForKey:kResponseDeviceID];
+                    
+                    //store device id
+                    _deviceInfo.deviceID = @([_device_id integerValue]);
+                }
+            } failure:^(NSError *error) {
+                NSLog(@"%@", error);
+            }];
+            
+            
+            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
+            
+            NSMutableArray *temp = [NSMutableArray new];
+            temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
+            [temp addObject:data];
+            NSArray* arr = [NSArray new];
+            arr = [temp copy];
+            [SDGridItemCacheTool saveItemsArray:arr];
+            
+            [self toast:@"添加成功" seconds:2];
+            [self.navigationController performSelector:@selector(popToRootViewControllerAnimated:) withObject:nil afterDelay:2.0];
         }else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"设置未完成" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
@@ -137,34 +166,7 @@
         }
     }
     
-    _deviceInfo.colorStatPair = _colorStatPair;
-    
-    //发送设备信息到服务器并获取id
-    [CommunicationManager addDeviceWithTitle:_deviceInfo.title image:_deviceInfo.imageResString currentStat:_deviceInfo.currentStat colorStatPair:self.sendedPair success:^(BOOL result, NSString *message, NSDictionary *data) {
-        if (!result) {
-            NSLog(@"%@", message);
-            //data
-            NSString* _device_id = [data objectForKey:kResponseDeviceID];
-            
-            //store device id
-            _deviceInfo.deviceID = @([_device_id integerValue]);
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
-    
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
-    
-    NSMutableArray *temp = [NSMutableArray new];
-    temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
-    [temp addObject:data];
-    NSArray* arr = [NSArray new];
-    arr = [temp copy];
-    [SDGridItemCacheTool saveItemsArray:arr];
-    
-    [self toast:@"添加成功" seconds:2];
-    [self.navigationController performSelector:@selector(popToRootViewControllerAnimated:) withObject:nil afterDelay:2.0];
+
 }
 
 #pragma mark - delegate

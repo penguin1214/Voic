@@ -195,7 +195,7 @@
     
 }
 
-#pragma mark - Other Methods
+#pragma mark -                                               Other Methods
 
 -(void)toast:(NSString *)title
 {
