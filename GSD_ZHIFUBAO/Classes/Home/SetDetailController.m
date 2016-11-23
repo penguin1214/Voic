@@ -145,17 +145,6 @@
             }];
             
             
-            NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
-            
-            NSMutableArray *temp = [NSMutableArray new];
-            temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
-            [temp addObject:data];
-            NSArray* arr = [NSArray new];
-            arr = [temp copy];
-            [SDGridItemCacheTool saveItemsArray:arr];
-            
-            [self toast:@"添加成功" seconds:2];
-            [self.navigationController performSelector:@selector(popToRootViewControllerAnimated:) withObject:nil afterDelay:2.0];
         }else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"设置未完成" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){
@@ -163,10 +152,22 @@
             }];
             [alert addAction:defaultAction];
             [self presentViewController:alert animated:YES completion:nil];
+            return;
         }
     }
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_deviceInfo];
     
-
+    NSMutableArray *temp = [NSMutableArray new];
+    temp = [[SDGridItemCacheTool itemsArray] mutableCopy];
+    [temp addObject:data];
+    NSArray* arr = [NSArray new];
+    arr = [temp copy];
+    [SDGridItemCacheTool saveItemsArray:arr];
+    
+    [self toast:@"添加成功" seconds:2];
+    [self.navigationController performSelector:@selector(popToRootViewControllerAnimated:) withObject:nil afterDelay:2.0];
+    
+    
 }
 
 #pragma mark - delegate
@@ -185,7 +186,7 @@
 }
 
 - (void)didChangeColor:(UIColor*)color {
-//    self.statColor = color;
+    //    self.statColor = color;
     NSLog(@"change");
 }
 
