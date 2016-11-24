@@ -61,4 +61,8 @@
     }];
 }
 
++ (void)deleteAccountofPhone:(NSString *)phone {
+    
+}
+
 @end

@@ -89,6 +89,7 @@
 		2F4651A51DD896DB004637C5 /* speekDone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4651811DD896DB004637C5 /* speekDone@2x.png */; };
 		2F4651A61DD896DB004637C5 /* speekNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4651821DD896DB004637C5 /* speekNormal.png */; };
 		2F4651A71DD896DB004637C5 /* speekNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4651831DD896DB004637C5 /* speekNormal@2x.png */; };
+		2F7760E21DE5CE720037099F /* PersonalSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7760E11DE5CE720037099F /* PersonalSettingController.m */; };
 		2F7D0EE01DD0A8B3001C3351 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */; };
 		2F7D0EE31DD0AB04001C3351 /* AddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7D0EE21DD0AB04001C3351 /* AddItemView.m */; };
 		2F9B892E1DD6B79B00B68A0C /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B892B1DD6B79B00B68A0C /* UIViewAdditions.m */; };
@@ -284,6 +285,8 @@
 		2F4651811DD896DB004637C5 /* speekDone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "speekDone@2x.png"; path = "../../../XFView/MSCDemo/img/speekDone@2x.png"; sourceTree = "<group>"; };
 		2F4651821DD896DB004637C5 /* speekNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speekNormal.png; path = ../../../XFView/MSCDemo/img/speekNormal.png; sourceTree = "<group>"; };
 		2F4651831DD896DB004637C5 /* speekNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "speekNormal@2x.png"; path = "../../../XFView/MSCDemo/img/speekNormal@2x.png"; sourceTree = "<group>"; };
+		2F7760E01DE5CE720037099F /* PersonalSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalSettingController.h; sourceTree = "<group>"; };
+		2F7760E11DE5CE720037099F /* PersonalSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalSettingController.m; sourceTree = "<group>"; };
 		2F7D0EDE1DD0A8B3001C3351 /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
 		2F7D0EDF1DD0A8B3001C3351 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 		2F7D0EE11DD0AB04001C3351 /* AddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemView.h; sourceTree = "<group>"; };
@@ -626,6 +629,15 @@
 				2F3013E91DCDCAFF00E8B5F7 /* UIPopoverListView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		2F7760DF1DE5CCEA0037099F /* PersonalSetting */ = {
+			isa = PBXGroup;
+			children = (
+				2F7760E01DE5CE720037099F /* PersonalSettingController.h */,
+				2F7760E11DE5CE720037099F /* PersonalSettingController.m */,
+			);
+			name = PersonalSetting;
 			sourceTree = "<group>";
 		};
 		2F8D46681DCF717500E613E3 /* Command */ = {
@@ -992,6 +1004,7 @@
 		99AFE9CB1B200CC10049E73B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2F7760DF1DE5CCEA0037099F /* PersonalSetting */,
 				2F1D91451DCE0A7400EA1601 /* VoiceModel */,
 				2F3013DF1DCDCA1700E8B5F7 /* XFVoice */,
 				990759DB1B2217870042DD52 /* Host */,
@@ -1332,6 +1345,7 @@
 				2F9B89321DD6B7ED00B68A0C /* SetDetailController.m in Sources */,
 				99AFE9E21B2033660049E73B /* SDAssetsTableViewHeader.m in Sources */,
 				9969DE441B1ED60400723888 /* SDWebImagePrefetcher.m in Sources */,
+				2F7760E21DE5CE720037099F /* PersonalSettingController.m in Sources */,
 				2F9B892F1DD6B79B00B68A0C /* SMPagerTabView.m in Sources */,
 				9969DE431B1ED60400723888 /* SDWebImageManager.m in Sources */,
 				9904C75D1B1F2F3800E2717D /* UIView+SDExtension.m in Sources */,

@@ -28,4 +28,6 @@
                   success:(void(^)(BOOL result, NSString* message, NSDictionary* data))success
                   failure:(void(^)(NSError* error))failure;
 
++ (void)deleteAccountofPhone:(NSString*)phone;
+
 @end

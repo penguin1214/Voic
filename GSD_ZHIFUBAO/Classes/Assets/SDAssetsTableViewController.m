@@ -216,9 +216,20 @@
 }
 
 - (void)setUpFooter{
-    LogoutCell* footer = [[LogoutCell alloc] init];
-    footer.delegate = self;
+    UIButton* footer = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    footer.backgroundColor = kColorMainGreen;
+    footer.titleLabel.text = @"退出账号";
+    footer.titleLabel.textColor = [UIColor whiteColor];
+    
+    [footer addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+//    footer.delegate = self;
     self.tableView.tableFooterView = footer;
+}
+
+- (void)logout {
+    NSLog(@"logout.");
+    [[ProfileManager sharedInstance] logOut];
+    [self reloadView];
 }
 
 - (void)setupModel
